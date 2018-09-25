@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--&lt;!&ndash;<item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<bitmap&ndash;&gt;-->
+            <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:src="@drawable/ic_close_black_24dp"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</item>&ndash;&gt;-->
+
+    <!--<item>-->
+        <!--<shape android:shape="rectangle">-->
+            <!--<solid android:color="@color/colorPrimary"/>-->
+        <!--</shape>-->
+    <!--</item>-->
+
+
+
+    <!--<item-->
+        <!--android:bottom="-100dp"-->
+        <!--android:left="0dp"-->
+        <!--android:right="-260dp"-->
+        <!--android:top="260dp">-->
+        <!--<rotate-->
+            <!--android:fromDegrees="-10"-->
+            <!--android:pivotX="0%"-->
+            <!--android:pivotY="100%">-->
+            <!--<shape-->
+                <!--android:shape="rectangle">-->
+                <!--<solid-->
+                    <!--android:color="@android:color/white"/>-->
+            <!--</shape>-->
+        <!--</rotate>-->
+    <!--</item>-->
+
+    <item android:drawable="@color/colorPrimary"/>
+    <item>
+
+        <!--android:drawable="@drawable/bus"-->
+
+
+        <bitmap android:src="@drawable/bus"
+            android:gravity="center"
+            android:alpha="0.1"
+            android:top="50dp"
+            android:bottom="50dp"
+            android:right="50dp"
+            android:left="50dp"/>
+
+    </item>
+
+    <item android:top="300dp"
+        android:bottom="-100dp"
+        android:left="0dp"
+        android:right="-300dp">
+        <rotate
+            android:fromDegrees="-10"
+            android:pivotX="0%"
+            android:pivotY="100%">
+            <shape
+                android:shape="rectangle">
+                <solid
+                    android:color="#ffffff"
+ />
+            </shape>
+        </rotate>
+    </item>
+
+</layer-list>
+

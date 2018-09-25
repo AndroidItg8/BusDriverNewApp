@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:weightSum="3">
+
+
+    <itg8.com.busdriverapp.widget.CircularImageView
+        android:id="@+id/img_profile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_8"
+        app:srcCompat="@drawable/ic_person_black_24dp" />
+
+    <TextView
+            android:id="@+id/lbl_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_4"
+            android:layout_marginTop="@dimen/margin_8"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_medium"
+            android:lines="1"
+            android:maxLines="1"
+            android:text="STUDENT NAME "
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textSize_14"
+            android:layout_toStartOf="@+id/img_status"
+            android:layout_toEndOf="@+id/img_profile"
+            android:layout_toLeftOf="@+id/img_status"
+            android:layout_toRightOf="@+id/img_profile" />
+    <TextView
+            android:id="@+id/lbl_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/lbl_name"
+            android:layout_alignStart="@+id/lbl_name"
+            android:layout_below="@+id/lbl_name"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:fontFamily="@font/roboto"
+            android:text="Plot No. 8 and 9,Parsodi, Subhash Nagar, Trimurtee Nagar, Nagpur, Maharashtra 440022"
+            android:textAllCaps="false"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textSize_12"
+            android:layout_toStartOf="@+id/img_status"
+            android:layout_toEndOf="@+id/img_profile"
+            android:layout_toLeftOf="@+id/img_status"
+            android:layout_toRightOf="@+id/img_profile"/>
+    <ImageView
+        android:id="@+id/img_status"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/margin_8"
+        android:src="@drawable/img_status_green" />
+
+
+
+
+
+</RelativeLayout>

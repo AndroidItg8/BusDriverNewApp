@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Bus Driver App</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_drawer">DrawerActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_login">login</string>
+    <string name="phone_number">Contact Number</string>
+    <string name="password">Password</string>
+    <string name="invalid_mobile">Invalid Mobile Number</string>
+    <string name="url_login">/Token</string>
+
+    <string name="empty_mobile">Please insert your mobile number</string>
+    <string name="empty_password">Please insert your password</string>
+    <string name="invalid_email">Invalid Email</string>
+    <string name="invalid_pass">Password must be minimum 6 characters</string>
+    <string name="bad_credentials">The user name or password is incorrect.</string>
+    <string name="url_route">/api/AppAccount/GetRouteListBusDriver</string>
+    <string name="url_token">/api/AppAccount/SaveMobileAppToken</string>
+    <string name="msg_send_to_admin">Children not present? Would you like to inform bus admin about that?</string>
+    <string name="app_token">634475897</string>
+    <string name="menu1">menu1</string>
+    <string name="logout">Logout</string>
+</resources>

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:padding="@dimen/margin_16"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".notification.NotificationDashboardFragment">
+
+    <LinearLayout
+        android:id="@+id/layoutMenu1"
+        android:layout_below="@+id/layoutMenu3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardPreventCornerOverlap="true"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="4dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/custom_badge" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorWhite" />
+                </FrameLayout>
+                <ImageView
+                    android:id="@+id/img_menu1"
+                    android:layout_above="@+id/txt_menu1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@string/menu1"
+                    />
+                <TextView
+                    android:id="@+id/txt_menu1"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:text="Attendance"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:cardBackgroundColor="@color/transparent"
+
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="true"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="4dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/custom_badge" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorWhite" />
+                </FrameLayout>
+                <ImageView
+                    android:id="@+id/img_menu2"
+                    android:layout_above="@+id/txt_menu2"
+                    android:contentDescription="@string/menu1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:layout_centerInParent="true"/>
+                <TextView
+                    android:id="@+id/txt_menu2"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:text="Result"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutMenu2"
+        android:layout_below="@+id/layoutMenu1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardPreventCornerOverlap="true"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="4dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/custom_badge" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorWhite" />
+                </FrameLayout>
+                <ImageView
+                    android:id="@+id/img_menu3"
+                    android:layout_above="@+id/txt_menu3"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/menu1"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:layout_centerInParent="true"/>
+                <TextView
+                    android:id="@+id/txt_menu3"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:text="Homework"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+
+            app:cardBackgroundColor="@color/transparent"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="true"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="4dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/custom_badge" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorWhite" />
+                </FrameLayout>
+                <ImageView
+                    android:id="@+id/img_menu4"
+                    android:layout_above="@+id/txt_menu4"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/menu1"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:layout_centerInParent="true"/>
+                <TextView
+                    android:id="@+id/txt_menu4"
+                    android:gravity="center"
+                    android:text="Payment"
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutMenu3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardPreventCornerOverlap="true"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="4dp"
+                    android:layout_alignParentRight="true"
+                    >
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/custom_badge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorWhite"/>
+                </FrameLayout>
+                <ImageView
+                    android:id="@+id/img_menu5"
+                    android:layout_above="@+id/txt_menu5"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/menu1"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:layout_centerInParent="true"/>
+                <TextView
+                    android:id="@+id/txt_menu5"
+                    android:gravity="center"
+                    android:text="High Alert"
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="true"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    >
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/custom_badge" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorWhite"/>
+                </FrameLayout>
+                <ImageView
+                    android:id="@+id/img_menu6"
+                    android:layout_above="@+id/txt_menu6"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/menu1"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:layout_centerInParent="true"/>
+                <TextView
+                    android:id="@+id/txt_menu6"
+                    android:gravity="center"
+                    android:text="Normal"
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</RelativeLayout>

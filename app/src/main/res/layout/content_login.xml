@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="itg8.com.busdriverapp.login.LoginActivity"
+    tools:showIn="@layout/activity_login">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_custom"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/custom_layout">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="50dp"
+                android:src="@drawable/custom_float"
+                android:visibility="visible" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:fontFamily="@font/roboto_medium"
+                android:text="ISTEP LOGIN"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/textSize_16" />
+
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_custom"
+        android:background="@color/colorWhite">
+
+        <RelativeLayout
+            android:id="@+id/rl_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16">
+
+
+            <TextView
+                android:id="@+id/lbl_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margin_16"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Login"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/textSize_16" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lbl_login"
+                android:layout_marginTop="@dimen/margin_8"
+                android:paddingBottom="@dimen/margin_8"
+                android:textColorHint="@color/colorPrimary"
+                app:hintAnimationEnabled="true"
+                app:hintTextAppearance="@style/TextLabel">
+
+                <EditText
+                    android:id="@+id/input_number"
+                    style="@style/StyledTilEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_person_outline_black_24dp"
+                    android:drawablePadding="@dimen/margin_8"
+                    android:hint="@string/phone_number"
+                    android:inputType="number" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_layout_number"
+                android:layout_marginTop="@dimen/margin_8"
+                android:paddingBottom="@dimen/margin_8"
+                android:textColorHint="@color/colorPrimary"
+                app:hintAnimationEnabled="true"
+                app:hintTextAppearance="@style/TextLabel">
+
+                <EditText
+                    android:id="@+id/input_password"
+                    style="@style/StyledTilEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:drawableLeft="@drawable/ic_lock_outline_primary_24dp"
+                    android:drawableStart="@drawable/ic_lock_outline_primary_24dp"
+                    android:drawablePadding="@dimen/margin_4"
+                    android:hint="@string/password"
+                    android:inputType="textPassword" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/lbl_forget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_8"
+                android:text="Forget Password"
+                android:textColor="@color/colorGray" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/input_layout_password"
+                android:layout_margin="@dimen/margin_16"
+                android:background="@drawable/btn_login"
+                android:text="Login"
+                android:onClick="onClick"
+                android:id="@+id/btn_login"
+                android:textColor="@color/colorWhite" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

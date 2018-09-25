@@ -1,0 +1,210 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+
+    tools:context="itg8.com.busdriverapp.admin_map.AdminMapFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        map:cameraTilt="30"
+        android:layout_height="match_parent"/>
+
+        <!--<RadioGroup-->
+            <!--android:id="@+id/rbg_status"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:gravity="bottom"-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_margin="@dimen/margin_16"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/rgb_children"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/selection_item"-->
+                <!--android:button="@null"-->
+                <!--android:checked="true"-->
+                <!--android:gravity="center"-->
+                <!--android:padding="@dimen/margin_16"-->
+                <!--android:text="Today "-->
+
+                <!--android:textColor="@drawable/rbtn_text_color" />-->
+            <!--<TextView-->
+                <!--android:id="@+id/lbl_haltss"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:fontFamily="@font/roboto"-->
+                <!--android:text="Halts"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginTop="@dimen/margin_8"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textColor="@color/colorBlack"-->
+                <!--android:textSize="@dimen/textSize_10" />-->
+
+
+
+
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/rgb_skip"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/selection_item"-->
+                <!--android:button="@null"-->
+                <!--android:gravity="center"-->
+                <!--android:padding="@dimen/margin_16"-->
+
+                <!--android:text="History"-->
+                <!--android:textColor="@drawable/rbtn_text_color" />-->
+            <!--<RadioButton-->
+                <!--android:id="@+id/rgb_halt"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/selection_item"-->
+                <!--android:button="@null"-->
+                <!--android:gravity="center"-->
+                <!--android:padding="@dimen/margin_16"-->
+
+                <!--android:text="History"-->
+                <!--android:textColor="@drawable/rbtn_text_color" />-->
+        <!--</RadioGroup>-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_childrenList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@color/colorWhite"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:visibility="visible"
+
+        android:weightSum="3"
+        android:layout_margin="@dimen/margin_16"
+        android:background="@drawable/custom_outline">
+        <!--android:background="@drawable/selection_item"-->
+
+        <LinearLayout
+            android:id="@+id/ll_halts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selection_layout"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/lbl_halts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/selection_text"
+                android:text="Halts"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_8"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textSize_10" />
+            <TextView
+                android:id="@+id/lbl_halts_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:textColor="@color/selection_text"
+                android:text="4"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textSize_16" />
+        </LinearLayout>
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/colorGray"/>
+        <LinearLayout
+            android:id="@+id/ll_skip"
+            android:layout_width="0dp"
+            android:background="@drawable/selection_layout"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lbl_skip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="To skip"
+                android:layout_marginTop="@dimen/margin_8"
+                android:textColor="@color/selection_text"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textSize_10" />
+
+
+            <TextView
+                android:id="@+id/lbl_skip_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:textColor="@color/selection_text"
+
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:text="4"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textSize_16" />
+        </LinearLayout>
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/colorGray"/>
+        <LinearLayout
+            android:id="@+id/ll_children"
+            android:layout_width="0dp"
+            android:background="@drawable/selection_layout"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lbl_children"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:layout_marginTop="@dimen/margin_8"
+                android:text="Children"
+                android:textAllCaps="false"
+                android:layout_gravity="center"
+                android:textColor="@color/selection_text"
+                android:textSize="@dimen/textSize_10" />
+
+            <TextView
+                android:id="@+id/lbl_children_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:text="24"
+                android:textAllCaps="false"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:textColor="@color/selection_text"
+                android:textSize="@dimen/textSize_16" />
+        </LinearLayout>
+    </LinearLayout>
+    </FrameLayout>
+</RelativeLayout>

@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="itg8.com.busdriverapp.home.HomeActivity">
+    <item
+        android:id="@+id/action_child_notify_badge"
+        android:title="notification"
+        app:actionLayout="@layout/badge_layout"
+        android:visible="true"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="100"
+        android:title="@string/logout"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_power_settings_new_white_24dp"/>
+
+
+
+    <!--<item-->
+        <!--android:id="@+id/action_child_notify"-->
+        <!--android:icon="@drawable/ic_notifications_24dp"-->
+        <!--android:visible="false"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="notification"-->
+        <!--app:showAsAction="always" />-->
+</menu>

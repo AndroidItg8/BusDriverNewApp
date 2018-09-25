@@ -1,0 +1,378 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context="itg8.com.busdriverapp.home.HomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/lbl_admin_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_16"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Welcome(Admin Name),"
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textSize_14" />
+
+        <TextView
+            android:id="@+id/lbl_admin_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/lbl_admin_name"
+            android:layout_alignStart="@+id/lbl_admin_name"
+            android:layout_below="@+id/lbl_admin_name"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_8"
+            android:fontFamily="@font/roboto"
+            android:text="You have to pick 30 children from the location.Following are the complete details."
+            android:textAllCaps="false"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textSize_12" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/lbl_admin_detail"
+            >
+
+        <RelativeLayout
+            android:id="@+id/rl_location"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_8"
+            android:background="@color/colorBlueLight">
+
+            <TextView
+                android:id="@+id/lbl_pick_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginRight="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Pick-up"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/textSize_14" />
+
+            <RelativeLayout
+                android:id="@+id/rl_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lbl_pick_up"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/img_direction"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/margin_16"
+
+                    android:layout_marginTop="@dimen/margin_16"
+                    app:srcCompat="@drawable/ic_right_arrow" />
+
+                <!--android:layout_marginEnd="@dimen/margin_16"-->
+                <!--android:layout_marginLeft="@dimen/margin_16"-->
+                <!--android:layout_marginRight="@dimen/margin_16"-->
+                <!--android:layout_marginStart="@dimen/margin_16"-->
+                <TextView
+                    android:id="@+id/lbl_source_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="end"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginRight="@dimen/margin_16"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_toLeftOf="@+id/img_direction"
+                    android:layout_toStartOf="@+id/img_direction"
+                    android:lines="3"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto"
+                    android:text="( from location )"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/textSize_12" />
+
+                <TextView
+                    android:id="@+id/lbl_designation_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="start"
+                    android:lines="3"
+                    android:ellipsize="end"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginRight="@dimen/margin_16"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_toEndOf="@+id/img_direction"
+                    android:layout_toRightOf="@+id/img_direction"
+                    android:fontFamily="@font/roboto"
+                    android:text="( to location )"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/textSize_12" />
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/lbl_time_remaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_address"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginRight="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:fontFamily="@font/roboto"
+                android:text="around 30 min remaining"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/textSize_14" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="175dp">
+
+
+            <ImageView
+                android:id="@+id/img_bus"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/back_bus"
+                android:elevation="@dimen/margin_8"
+                android:layout_centerHorizontal="true" />
+
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/margin_8"
+            app:cardPreventCornerOverlap="true"
+            android:layout_margin="@dimen/margin_16"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/lbl_bus_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="center"
+                    android:text="mh 34 j 2121"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="@dimen/margin_16"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/textSize_16" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lbl_bus_number"
+                    android:layout_margin="@dimen/margin_16"
+                    android:background="@drawable/custom_outline">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/margin_16"
+                        android:layout_marginEnd="@dimen/margin_16"
+                        android:layout_marginLeft="@dimen/margin_16"
+                        android:layout_marginRight="@dimen/margin_16"
+                        android:layout_marginStart="@dimen/margin_16"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/lbl_halts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            android:text="Halts"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorGray"
+                            android:textSize="@dimen/textSize_10" />
+
+                        <TextView
+                            android:id="@+id/lbl_halts_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="4"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/textSize_16" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/margin_16"
+                        android:layout_marginEnd="@dimen/margin_16"
+                        android:layout_marginLeft="@dimen/margin_16"
+                        android:layout_marginRight="@dimen/margin_16"
+                        android:layout_marginStart="@dimen/margin_16"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/lbl_skip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            android:text="To skip"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorGray"
+                            android:textSize="@dimen/textSize_10" />
+
+
+                        <TextView
+                            android:id="@+id/lbl_skip_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="4"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/textSize_16" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_children"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/margin_16"
+                        android:layout_marginEnd="@dimen/margin_16"
+                        android:layout_marginLeft="@dimen/margin_16"
+                        android:layout_marginRight="@dimen/margin_16"
+                        android:layout_marginStart="@dimen/margin_16"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/lbl_children"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            android:text="Children"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorGray"
+                            android:textSize="@dimen/textSize_10" />
+
+                        <TextView
+                            android:id="@+id/lbl_children_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+
+                            android:text="24"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/textSize_16" />
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/lbl_let_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ll_children"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:layout_marginBottom="@dimen/margin_8"
+                        android:background="@drawable/custom_text_back"
+                        android:fontFamily="@font/roboto"
+                        android:gravity="center|center_horizontal"
+                        android:padding="@dimen/margin_8"
+                        android:text="Let's start"
+
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/textSize_12" />
+                </RelativeLayout>
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/margin_16"
+                    android:layout_below="@+id/rl_card"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:fontFamily="@font/roboto"
+                    android:text="Import Notification will be here"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/textSize_12" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+        </FrameLayout>
+
+    </RelativeLayout>
+
+
+</ScrollView>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<selector xmlns:android="http://schemas.android.com/apk/res/android">-->
+    <!--<item android:color="@color/colorBlack" />-->
+    <!--<item android:color="@color/colorWhite" android:state_selected="true" />-->
+<!--</selector>-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Focused and not pressed -->
+    <item android:state_focused="false"
+        android:state_pressed="false"
+        android:state_selected="true"
+        android:color="#ffffff" />
+    <!-- Focused and not pressed -->
+    <item android:state_focused="true"
+        android:state_pressed="true"
+        android:state_selected="true"
+        android:color="#ffffff" />
+
+    <!-- Focused and pressed -->
+    <item android:state_focused="false"
+        android:state_pressed="false"
+        android:state_selected="false"
+        android:color="#000000" />
+
+    <!-- Unfocused and pressed -->
+    <item android:state_focused="false"
+        android:state_pressed="true"
+        android:state_selected="false"
+        android:color="#000000" />
+
+    <!-- Default color -->
+    <item android:color="#000000" />
+
+</selector>
