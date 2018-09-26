@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8"
+            android:gravity="center"
+            android:id="@+id/rl">
+
+        <TextView
+            android:id="@+id/lbl_routeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+            android:gravity="center"
+
+            android:fontFamily="@font/roboto"
+            android:text="@string/route_name"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/textSize_10"
+            android:textStyle="normal" />
+
+
+
+        <TextView
+            android:id="@+id/lbl_start_routeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/lbl_routeName"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto"
+            android:text="Sadar -> Kalmeshwar "
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="normal"
+           />
+
+
+
+    </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:layout_below="@+id/rl"
+            android:weightSum="2"
+            android:layout_margin="@dimen/margin_16"
+
+     >
+            <!--android:background="@drawable/selection_item"-->
+
+            <LinearLayout
+                android:id="@+id/ll_child_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_childCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:fontFamily="@font/jura_medium"
+                    android:padding="@dimen/margin_8"
+                    android:text="4"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:textColor="@color/selection_text"
+                    android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/lbl_childCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/selection_text"
+                    android:text="@string/child_count"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:padding="@dimen/margin_8"
+
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/textSize_10" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/colorGray"/>
+            <LinearLayout
+                android:id="@+id/ll_check_point"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+
+
+                <TextView
+                    android:id="@+id/txt_checkCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:textColor="@color/selection_text"
+                    android:fontFamily="@font/jura_medium"
+                    android:gravity="center"
+                    android:text="4"
+                    android:padding="@dimen/margin_8"
+                    android:textStyle="bold"
+
+                    android:textAllCaps="false"
+                    android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/lbl_checkCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:padding="@dimen/margin_8"
+
+                    android:text="@string/check_count"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:textColor="@color/selection_text"
+                    android:layout_gravity="center"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/textSize_10" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</android.support.design.card.MaterialCardView>

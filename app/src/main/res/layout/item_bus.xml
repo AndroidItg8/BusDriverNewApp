@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="08dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_bus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lbl_busName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginLeft="@dimen/margin_8"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/bus_number"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/textSize_10" />
+
+                <TextView
+                    android:id="@+id/txt_busName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_horizontal"
+                    android:maxLines="1"
+                    android:text="MH-31-2009"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/textSize_14"
+                    android:textStyle="normal" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_8"
+                android:background="@color/colorGray" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lbl_BusNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_8"
+
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_horizontal"
+                    android:text="@string/bus_name"
+
+
+                    android:textAllCaps="true"
+
+                    android:textColor="@color/colorBlack"
+
+                    android:textSize="@dimen/textSize_10" />
+
+                <TextView
+                    android:id="@+id/txt_busNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_horizontal"
+
+
+                    android:maxLines="1"
+                    android:text="Bus Number 1"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/textSize_14"
+
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/ll_bus"
+            android:visibility="invisible"
+
+            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginStart="@dimen/textSize_16"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:background="@color/colorGray"
+            android:layout_marginLeft="@dimen/textSize_16"
+            android:layout_marginRight="@dimen/margin_16" />
+
+
+        <LinearLayout
+            android:id="@+id/lldriver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view"
+            android:layout_marginTop="@dimen/margin_8"
+            android:orientation="horizontal"
+
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lbl_driver_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/roboto"
+
+                    android:gravity="center_horizontal"
+                    android:text="@string/driver_number"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/textSize_10" />
+
+                <TextView
+                    android:id="@+id/txt_driver_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+
+
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginBottom="@dimen/margin_8"
+
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_horizontal"
+                    android:maxLines="1"
+                    android:text="9823111222"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/textSize_14"
+                    android:textStyle="normal"
+
+                    />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_8"
+                android:background="@color/colorGray" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lbl_driver_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_horizontal"
+                    android:text="@string/driver_name"
+                    android:textAllCaps="true"
+
+                    android:textColor="@color/colorGray"
+
+
+                    android:textSize="@dimen/textSize_10" />
+
+                <TextView
+                    android:id="@+id/driverName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_8"
+
+
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:drawablePadding="08dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto"
+
+                    android:gravity="center_horizontal"
+                    android:maxLines="1"
+                    android:text="Kuljeet  Kumar Signh"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/textSize_14"
+                    android:textStyle="normal"
+
+
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</android.support.design.card.MaterialCardView>
