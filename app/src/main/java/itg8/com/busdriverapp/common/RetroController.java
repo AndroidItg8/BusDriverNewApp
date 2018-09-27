@@ -39,4 +39,6 @@ public interface RetroController {
     @POST
     Observable<ResponseBody> sendToken(@Url String url, @Field("Token") String token);
 
+    @POST("WS.ashx?op=getBusAdmin")
+    Observable<ResponseBody> getBus();
 }

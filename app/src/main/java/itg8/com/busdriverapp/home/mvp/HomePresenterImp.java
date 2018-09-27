@@ -6,6 +6,7 @@ import java.util.List;
 
 import itg8.com.busdriverapp.common.BaseWeakPresenter;
 import itg8.com.busdriverapp.home.model.RouteModel;
+import itg8.com.busdriverapp.utils.UserType;
 
 public class HomePresenterImp extends BaseWeakPresenter<HomeMvp.HomeView> implements HomeMvp.HomePresenter,HomeMvp.HomeListener{
     private static final String TAG = "HomePresenterImp";
@@ -50,9 +51,27 @@ public class HomePresenterImp extends BaseWeakPresenter<HomeMvp.HomeView> implem
     }
 
     @Override
+    public void startGettingBusInfo() {
+        Log.i(TAG, "startGettingRouteInfo: ");
+        if(hasView()){
+            getView().showProgress();
+            module.onStartGettingBusInfo();
+        }
+    }
+
+    @Override
     public void sendToken(String url, String token) {
         module.sendTokenToServer(url,token);
     }
 
+    @Override
+    public void setFragmentAsPerUser() {
+        if(!hasView())
+            return;
+        if(UserType.isAdmin())
+            getView().showBusAdminDetails();
+        else
+            getView().showBusDriverDetails();
 
+    }
 }

@@ -8,6 +8,7 @@ import java.util.Set;
 
 import itg8.com.busdriverapp.R;
 import itg8.com.busdriverapp.db.AppDatabase;
+import itg8.com.busdriverapp.utils.UserType;
 
 
 /**
@@ -33,6 +34,7 @@ public class MyApplication extends Application {
 
         mInstance=this;
         mInstance.initPref();
+        initUserType();
 
     }
 
@@ -47,6 +49,11 @@ public class MyApplication extends Application {
                 .setPrefsName(PREF_NAME)
                 .setUseDefaultSharedPreference(false)
                 .build();
+    }
+
+
+    public void initUserType(){
+        new UserType.Builder().setType().build();
     }
 
 

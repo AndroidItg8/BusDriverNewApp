@@ -25,6 +25,7 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -89,11 +90,11 @@ public  class NetworkUtility {
                 });
     }
 
-    private JSONObject getResponse(String json) {
+    private JSONObject getResponseOnly(String json){
         try {
             JSONObject object = new JSONObject(json);
             if (object.has("WSResponse") && !object.isNull("WSResponse")) {
-                return object.getJSONObject("WSResponse");
+                    return object.getJSONObject("WSResponse");
             } else if (object.has("WSError")) {
                 return new JSONObject();
             }
@@ -101,6 +102,34 @@ public  class NetworkUtility {
             e.printStackTrace();
         }
         return new JSONObject();
+    }
+
+    private JSONObject getResponse(String json) {
+        try {
+            JSONObject object = new JSONObject(json);
+            if (object.has("WSResponse") && !object.isNull("WSResponse")) {
+                JSONObject wsResponse=object.getJSONObject("WSResponse");
+                JSONObject dataTemp = wsResponse.getJSONObject("data");
+                if(dataTemp.has("LoginInfo")){
+                    JSONObject data = dataTemp.getJSONObject("LoginInfo");
+                    if (data.has("RoleName")) {
+                        JSONObject roleName = data.getJSONObject("RoleName");
+                        if (roleName.has("RoleName")) {
+                            String mRoleName = roleName.getString("RoleName");
+                            if (mRoleName != null) {
+                                Prefs.putString(CommonMethod.TYPE_DATA, mRoleName);
+                                return wsResponse;
+                            }
+                        }
+                    }
+                }
+            } else if (object.has("WSError")) {
+                return null;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
@@ -116,6 +145,7 @@ public  class NetworkUtility {
                         if (response.has("WSResponse")) {
                             JSONObject responseMain = response.getJSONObject("WSResponse");
                             if (responseMain.has("UserRequestToken")) {
+                                MyApplication.getInstance().initUserType();
                                 Prefs.putString(CommonMethod.TOKEN, responseMain.getString("UserRequestToken"));
                                 return s;
                             }
@@ -243,7 +273,7 @@ public  class NetworkUtility {
         responseBodyObservable.flatMap(new Function<ResponseBody, Observable<RouteModel>>() {
             @Override
             public Observable<RouteModel> apply(ResponseBody responseBody) throws Exception {
-                JSONObject s= getResponse(responseBody.string());
+                JSONObject s= getResponseOnly(responseBody.string());
                 Log.i(TAG, "apply: "+s);
                 RouteModel models=new RouteModel();
                 List<CheckpointData> checkpointData=new ArrayList<>();
@@ -379,6 +409,42 @@ public  class NetworkUtility {
 
                     }
                 });
+    }
+
+    public void getBuses(ResponseListener responseListener) {
+        Observable<ResponseBody> observable=controller.getBus();
+        observable.flatMap(new Function<ResponseBody, Observable<Void>>() {
+            @Override
+            public Observable<Void> apply(ResponseBody responseBody) throws Exception {
+                String response=responseBody.string();
+                Log.d(TAG, "apply: "+response);
+                return null;
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Void>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Void aVoid) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+
     }
 
     public interface ResponseListener{

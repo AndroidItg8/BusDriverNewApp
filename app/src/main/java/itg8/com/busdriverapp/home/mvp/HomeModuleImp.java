@@ -44,6 +44,29 @@ class HomeModuleImp implements HomeMvp.HomeModule {
     }
 
     @Override
+    public void onStartGettingBusInfo() {
+        new NetworkUtility.NetworkBuilder().setHeader().build().getBuses(
+                new NetworkUtility.ResponseListener(){
+
+                    @Override
+                    public void onSuccess(Object message) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Object err) {
+
+                    }
+
+                    @Override
+                    public void onSomethingWrong(Object e) {
+
+                    }
+                }
+        );
+    }
+
+    @Override
     public void sendTokenToServer(String url, String token) {
         new NetworkUtility.NetworkBuilder().setHeader().build().sendToken(url,token, new NetworkUtility.ResponseListener() {
             @Override
