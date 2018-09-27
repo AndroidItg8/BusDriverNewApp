@@ -53,6 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         createLocationRequest();
+        MyApplication.getInstance().initUserType();
         initGoogleAPIClient();//Init Google API Client
     }
 

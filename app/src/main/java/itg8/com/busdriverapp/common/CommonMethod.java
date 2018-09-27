@@ -34,6 +34,8 @@ import itg8.com.busdriverapp.map.Step;
  */
 
 public class CommonMethod {
+    public static final String TYPE_DATA = "commonMethodUserType";
+
     private static final String TAG = "CommonMethod";
 
     public static final String TOKEN = "TOKEN";

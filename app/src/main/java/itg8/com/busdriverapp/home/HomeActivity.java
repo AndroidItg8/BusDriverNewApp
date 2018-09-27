@@ -8,6 +8,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -68,6 +69,7 @@ import itg8.com.busdriverapp.admin_map.ChildCheckinDialogFragment;
 import itg8.com.busdriverapp.admin_map.Type;
 import itg8.com.busdriverapp.common.BaseActivity;
 import itg8.com.busdriverapp.common.CommonMethod;
+import itg8.com.busdriverapp.common.MyApplication;
 import itg8.com.busdriverapp.common.Prefs;
 import itg8.com.busdriverapp.common.UtilSnackbar;
 import itg8.com.busdriverapp.home.model.Checkpoint;
@@ -113,6 +115,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     RelativeLayout rlTop;
     @BindView(R.id.progress)
     ProgressBar progress;
+    @BindView(R.id.navigation)
+    BottomNavigationView navigation;
     private Type type;
     private String currentFragment = "";
 
@@ -141,6 +145,17 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private FragmentManager fm;
 
 
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+            }
+            return false;
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,8 +166,11 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         getSupportActionBar().setHomeButtonEnabled(true);
         setListener(this);
         loadMap();
+
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
         presenter = new HomePresenterImp(this);
-        presenter.startGettingRouteInfo();
+        presenter.setFragmentAsPerUser();
         presenter.sendToken(getString(R.string.url_token), FirebaseInstanceId.getInstance().getToken());
         init();
 
@@ -212,7 +230,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     public void callFragment(Fragment fragment) {
-        if(fm==null)
+        if (fm == null)
             fm = getSupportFragmentManager();
         FragmentTransaction ft = fm
                 .beginTransaction();
@@ -330,7 +348,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void onStartMapFragment(String children, String halt, String skip, CheckpointData mCheckpointData) throws JSONException {
-        if (this.mCheckpointData != null){
+        if (this.mCheckpointData != null) {
             if (mCheckpointData.getCheckpoints().getCheckpoint().get(0) != null) {
                 Checkpoint checkpoint = ((List<Checkpoint>) mCheckpointData.getCheckpoints().getCheckpoint()).get(0);
                 mLastKnownLocation = new Location("");
@@ -508,6 +526,16 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
+    public void showBusAdminDetails() {
+        presenter.startGettingBusInfo();
+    }
+
+    @Override
+    public void showBusDriverDetails() {
+        presenter.startGettingRouteInfo();
+    }
+
+    @Override
     public void onRouteDownloadFail(Object e) {
         UtilSnackbar.showSnakbarTypeFail(recyclerView, e.toString(), new UtilSnackbar.OnSnackbarActionClickListener() {
             @Override
@@ -582,7 +610,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     }.getType());
                     users.addAll(users1);
                 }
-            }catch (JSONException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
