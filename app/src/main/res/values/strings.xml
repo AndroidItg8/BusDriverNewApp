@@ -26,4 +26,15 @@
     <string name="app_token">634475897</string>
     <string name="menu1">menu1</string>
     <string name="logout">Logout</string>
+
+
+    <string name="bus_name">Bus Name</string>
+    <string name="driverName">DriverName</string>
+    <string name="route_name">Route Name </string>
+    <string name="child_count">  Child Count</string>
+    <string name="check_count"> Check Point</string>
+    <string name="title_activity_route">Route</string>
+    <string name="bus_number">Bus No</string>
+    <string name="driver_number">Driver Number</string>
+    <string name="driver_name">Driver Name </string>
 </resources>

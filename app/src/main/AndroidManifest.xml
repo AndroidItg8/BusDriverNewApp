@@ -55,6 +55,7 @@
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar">
 
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -62,6 +63,10 @@
             </intent-filter>
 
         </activity>
+
+        <activity
+            android:name=".bus.RouteActivity"
+            android:label="@string/title_activity_route"></activity>
 
         <service android:name=".notification.FirebaseTokenService">
             <intent-filter>
