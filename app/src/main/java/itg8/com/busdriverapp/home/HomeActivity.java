@@ -67,6 +67,8 @@ import itg8.com.busdriverapp.R;
 import itg8.com.busdriverapp.admin_map.AdminMapFragment;
 import itg8.com.busdriverapp.admin_map.ChildCheckinDialogFragment;
 import itg8.com.busdriverapp.admin_map.Type;
+import itg8.com.busdriverapp.bus.fragment.BusFragment;
+import itg8.com.busdriverapp.bus.fragment.RequestFragment;
 import itg8.com.busdriverapp.common.BaseActivity;
 import itg8.com.busdriverapp.common.CommonMethod;
 import itg8.com.busdriverapp.common.MyApplication;
@@ -143,6 +145,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private ChildCheckinDialogFragment dialog;
     private RouteStatusAdapter routeStatusAdapter;
     private FragmentManager fm;
+    String title;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -151,7 +154,25 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
+                case R.id.nav_bottom_home:
+                    title= "Home";
+                    presenter.setFragmentAsPerUser();
+                    return true;
+                case R.id.nav_bottom_request:
+                    title= "Request";
+                    callFragment(RequestFragment.newInstance("",""));
+
+                    return true;
+                case R.id.nav_bottom_track:
+                    title= "Track";
+                   callFragment(BusFragment.newInstance("",""));
+                    return true;
+
+
+
             }
+
+
             return false;
         }
     };
@@ -161,7 +182,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
         ButterKnife.bind(this);
-        toolbar.setTitle(getString(R.string.app_name));
+        toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         setListener(this);
@@ -173,8 +194,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         presenter.setFragmentAsPerUser();
         presenter.sendToken(getString(R.string.url_token), FirebaseInstanceId.getInstance().getToken());
         init();
-
-//        callFragment(HomeFragment.newInstance(null));
+        //        callFragment(HomeFragment.newInstance(null));
         askForPermission();
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -236,9 +256,11 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 .beginTransaction();
         ft.replace(R.id.frame_container, fragment, fragment.getClass().getSimpleName());
         if (!fragment.getClass().getSimpleName().equalsIgnoreCase(RouteListFragment.TAG))
-            ft.addToBackStack(RouteListFragment.class.getSimpleName());
+            ft.addToBackStack(fragment.getClass().getSimpleName());
         ft.commit();
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -528,11 +550,13 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void showBusAdminDetails() {
         presenter.startGettingBusInfo();
+        navigation.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showBusDriverDetails() {
         presenter.startGettingRouteInfo();
+        navigation.setVisibility(View.GONE);
     }
 
     @Override

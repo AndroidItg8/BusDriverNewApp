@@ -7,7 +7,7 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -15,7 +15,108 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="573ff410-04f1-45c7-939f-dfdff8360f4b" name="Default" comment="" />
+    <list default="true" id="573ff410-04f1-45c7-939f-dfdff8360f4b" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/RouteActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/adapter/BusAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/adapter/ChildListAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/adapter/RouteAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/BusFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RequestFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RouteFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RouteMapFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/model/BusCheckPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/model/BusModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/model/BusRouteModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_request.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskJars.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskJars.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle____local_aars____Users_swapnilmeshram_swappy_d_drive_javed_sir_app_BusDriverNewApp_app_libs_java_websocket_1_3_1_jar_unspecified_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle____local_aars____Users_swapnilmeshram_swappy_d_drive_javed_sir_app_BusDriverNewApp_app_libs_signalr_client_sdk_android_jar_unspecified_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle____local_aars____Users_swapnilmeshram_swappy_d_drive_javed_sir_app_BusDriverNewApp_app_libs_signalr_client_sdk_jar_unspecified_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_runtime_1_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_runtime_1_1_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_1_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_1_1_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_1_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_viewmodel_1_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_viewmodel_1_1_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_persistence_db_1_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_persistence_db_1_1_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_persistence_db_framework_1_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_persistence_db_framework_1_1_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_persistence_room_runtime_1_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_persistence_room_runtime_1_1_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_asynclayoutinflater_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_asynclayoutinflater_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_cardview_v7_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_cardview_v7_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_1_1_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_1_1_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_coordinatorlayout_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_coordinatorlayout_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_cursoradapter_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_cursoradapter_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_customview_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_customview_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_design_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_design_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_documentfile_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_documentfile_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_drawerlayout_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_drawerlayout_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_interpolator_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_interpolator_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_loader_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_loader_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_localbroadcastmanager_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_localbroadcastmanager_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_print_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_print_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_recyclerview_v7_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_recyclerview_v7_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_slidingpanelayout_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_slidingpanelayout_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_compat_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_compat_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_ui_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_ui_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_utils_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_utils_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_fragment_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_fragment_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_media_compat_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_media_compat_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_swiperefreshlayout_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_swiperefreshlayout_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_3_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_3_0_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_3_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_3_0_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_monitor_1_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_monitor_1_0_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_1_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_1_0_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_transition_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_transition_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_versionedparcelable_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_versionedparcelable_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_base_15_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_base_15_0_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_basement_15_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_basement_15_0_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_location_15_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_location_15_0_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_maps_15_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_maps_15_0_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_places_15_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_places_15_0_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_places_placereport_15_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_places_placereport_15_0_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_stats_15_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_stats_15_0_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_tasks_15_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_tasks_15_0_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_common_16_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_common_16_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_iid_16_2_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_iid_16_2_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_iid_interop_16_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_iid_interop_16_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_measurement_connector_16_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_measurement_connector_16_0_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_messaging_17_1_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_messaging_17_1_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_9_0_0_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_9_0_0_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_annotations_9_0_0_SNAPSHOT_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_annotations_9_0_0_SNAPSHOT_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_runtime_9_0_0_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_runtime_9_0_0_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_reactivex_rxjava2_rxandroid_2_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_reactivex_rxjava2_rxandroid_2_0_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__pub_devrel_easypermissions_1_2_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__pub_devrel_easypermissions_1_2_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/admin_map/ChildrenAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/admin_map/ChildrenAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/NetworkUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/NetworkUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/RetroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/RetroController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/HomeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/model/Checkpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/model/Checkpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_bottomsheet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_bottomsheet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_route.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_route.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/navigation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/preloaded_fonts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/preloaded_fonts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <ignored path="$PROJECT_DIR$/app/build/intermediates/assets/" />
@@ -57,69 +158,69 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="fragment_request.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_request.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="NetworkUtility.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/NetworkUtility.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1040">
-              <caret line="104" selection-start-line="104" selection-end-line="104" />
+            <state relative-caret-position="126">
+              <caret line="414" column="58" selection-start-line="414" selection-start-column="58" selection-end-line="414" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2082#2353#0" expanded="true" />
+                <element signature="e#2352#2353#0" expanded="true" />
+                <element signature="e#5182#6200#0" expanded="true" />
+                <element signature="e#6199#6200#0" expanded="true" />
+                <element signature="e#17016#17330#0" expanded="true" />
+                <element signature="e#17329#17330#0" expanded="true" />
+                <element signature="e#17774#17775#0" expanded="true" />
+                <element signature="e#17841#17842#0" expanded="true" />
+                <element signature="e#18622#18623#0" expanded="true" />
+                <element signature="e#18677#18678#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="back_bus.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/back_bus.xml">
+      <file leaf-file-name="RouteModel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/model/RouteModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state />
+            <state relative-caret-position="160">
+              <caret line="15" column="61" lean-forward="true" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CheckpointData.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/model/CheckpointData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Checkpoints.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/model/Checkpoints.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="20" column="24" lean-forward="true" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Checkpoint.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/model/Checkpoint.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="37" selection-start-line="37" selection-end-line="37" />
+            </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="HomeActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/HomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="163" lean-forward="true" selection-start-line="163" selection-end-line="163" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4665#4797#0" expanded="true" />
-                <element signature="e#4796#4797#0" expanded="true" />
-                <element signature="e#5696#5724#0" expanded="true" />
-                <element signature="e#5988#6017#0" expanded="true" />
-                <element signature="e#6409#6770#0" expanded="true" />
-                <element signature="e#6769#6770#0" expanded="true" />
-                <element signature="e#6925#6956#0" expanded="true" />
-                <element signature="e#6958#6990#0" expanded="true" />
-                <element signature="e#9523#10272#0" expanded="true" />
-                <element signature="e#10271#10272#0" expanded="true" />
-                <element signature="e#13974#14374#0" expanded="true" />
-                <element signature="e#14373#14374#0" expanded="true" />
-                <element signature="e#15309#15931#0" expanded="true" />
-                <element signature="e#15930#15931#0" expanded="true" />
-                <element signature="e#19263#19453#0" expanded="true" />
-                <element signature="e#19452#19453#0" expanded="true" />
-                <element signature="e#19566#19756#0" expanded="true" />
-                <element signature="e#19755#19756#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RouteMapFragment.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RouteMapFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="175" column="30" lean-forward="true" selection-start-line="175" selection-start-column="30" selection-end-line="175" selection-end-column="30" />
+            <state relative-caret-position="-2185">
+              <caret line="251" column="23" lean-forward="true" selection-start-line="251" selection-start-column="23" selection-end-line="251" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -127,54 +228,38 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BusFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/BusFragment.java">
+      <file leaf-file-name="HomeModuleImp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/mvp/HomeModuleImp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1280">
-              <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="110">
+              <caret line="47" column="67" selection-start-line="47" selection-start-column="67" selection-end-line="47" selection-end-column="67" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RouteFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RouteFragment.java">
+      <file leaf-file-name="Retro.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/Retro.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="102" selection-start-line="102" selection-end-line="102" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="184">
+              <caret line="52" column="32" lean-forward="true" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="custom_text_back.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/custom_text_back.xml">
+      <file leaf-file-name="RetroController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/RetroController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RequestFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RequestFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+            <state relative-caret-position="236">
+              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommonMethod.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/CommonMethod.java">
+      <file leaf-file-name="LoginModuleImp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/login/mvp/LoginModuleImp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3152">
-              <caret line="232" selection-start-line="232" selection-end-line="232" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="64">
+              <caret line="8" column="66" lean-forward="true" selection-start-line="8" selection-start-column="66" selection-end-line="8" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -195,6 +280,8 @@
       <find>textSize_12</find>
       <find>getres</find>
       <find>callFra</find>
+      <find>jur</find>
+      <find>Fragment</find>
     </findStrings>
     <replaceStrings>
       <replace>layout_marginTop</replace>
@@ -230,14 +317,14 @@
         <entry>
           <key>
             <ExternalProjectPojo>
-              <option name="name" value="BusDriverNewApp Latest" />
+              <option name="name" value="BusDriverNewApp" />
               <option name="path" value="$PROJECT_DIR$" />
             </ExternalProjectPojo>
           </key>
           <value>
             <list>
               <ExternalProjectPojo>
-                <option name="name" value="BusDriverNewApp Latest" />
+                <option name="name" value="BusDriverNewApp" />
                 <option name="path" value="$PROJECT_DIR$" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
@@ -255,7 +342,7 @@
           <value>
             <list>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of root project 'BusDriverNewApp Latest'." />
+                <option name="description" value="Displays the sub-projects of root project 'BusDriverNewApp'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="projects" />
               </ExternalTaskPojo>
@@ -343,7 +430,7 @@
                 <option name="name" value="compileDebugAndroidTestJavaWithJavac" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by root project 'BusDriverNewApp Latest'. [incubating]" />
+                <option name="description" value="Displays the components produced by root project 'BusDriverNewApp'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="components" />
               </ExternalTaskPojo>
@@ -621,12 +708,12 @@
                 <option name="name" value="generateDebugAssets" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the dependent components of components in root project 'BusDriverNewApp Latest'. [incubating]" />
+                <option name="description" value="Displays the dependent components of components in root project 'BusDriverNewApp'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependentComponents" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in root project 'BusDriverNewApp Latest'." />
+                <option name="description" value="Displays all buildscript dependencies declared in root project 'BusDriverNewApp'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="buildEnvironment" />
               </ExternalTaskPojo>
@@ -746,7 +833,7 @@
                 <option name="name" value="bundleRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of root project 'BusDriverNewApp Latest'. [incubating]" />
+                <option name="description" value="Displays the configuration model of root project 'BusDriverNewApp'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="model" />
               </ExternalTaskPojo>
@@ -759,7 +846,7 @@
                 <option name="name" value="reportSourceSetTransformAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from root project 'BusDriverNewApp Latest' (some of the displayed tasks may belong to subprojects)." />
+                <option name="description" value="Displays the tasks runnable from root project 'BusDriverNewApp' (some of the displayed tasks may belong to subprojects)." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="tasks" />
               </ExternalTaskPojo>
@@ -777,7 +864,7 @@
                 <option name="name" value="bundleDebugAndroidTestResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in root project 'BusDriverNewApp Latest'." />
+                <option name="description" value="Displays all dependencies declared in root project 'BusDriverNewApp'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependencies" />
               </ExternalTaskPojo>
@@ -877,7 +964,7 @@
                 <option name="name" value="packageAppClassesReleaseUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in root project 'BusDriverNewApp Latest'." />
+                <option name="description" value="Displays the insight into a specific dependency in root project 'BusDriverNewApp'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependencyInsight" />
               </ExternalTaskPojo>
@@ -1131,7 +1218,7 @@
                 <option name="name" value="processReleaseGoogleServices" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of root project 'BusDriverNewApp Latest'." />
+                <option name="description" value="Displays the properties of root project 'BusDriverNewApp'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="properties" />
               </ExternalTaskPojo>
@@ -2373,7 +2460,7 @@
                   </entry>
                 </map>
               </option>
-              <option name="name" value="BusDriverNewApp Latest" />
+              <option name="name" value="BusDriverNewApp" />
               <option name="projectBuildClasspath">
                 <list>
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/announce" />
@@ -2548,8 +2635,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/adapter/ChildListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/adapter/RouteAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_route.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_route.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_bus.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_sms.xml" />
@@ -2562,15 +2647,22 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_route_map.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/RouteActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_bottomsheet.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RouteMapFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/NetworkUtility.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_request.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RequestFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/CommonMethod.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/HomeActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_route.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_bottomsheet.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RouteMapFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/navigation.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/BusFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RouteFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_home.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_request.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RequestFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/RetroController.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/admin_map/ChildrenAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/HomeActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/model/Checkpoint.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/NetworkUtility.java" />
       </list>
     </option>
   </component>
@@ -2585,48 +2677,59 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
             <path>
-              <item name="BusDriverNewApp Latest" type="1abcf292:AndroidViewProjectNode" />
+              <item name="BusDriverNewApp" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
             </path>
             <path>
-              <item name="BusDriverNewApp Latest" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="BusDriverNewApp Latest" type="1abcf292:AndroidViewProjectNode" />
+              <item name="BusDriverNewApp" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="busdriverapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
             </path>
             <path>
-              <item name="BusDriverNewApp Latest" type="1abcf292:AndroidViewProjectNode" />
+              <item name="BusDriverNewApp" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="busdriverapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="BusDriverNewApp Latest" type="1abcf292:AndroidViewProjectNode" />
+              <item name="BusDriverNewApp" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="busdriverapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="admin_map" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="BusDriverNewApp Latest" type="1abcf292:AndroidViewProjectNode" />
+              <item name="BusDriverNewApp" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="drawable" type="ddeffd01:AndroidResFolderTypeNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="busdriverapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="bus" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="BusDriverNewApp Latest" type="1abcf292:AndroidViewProjectNode" />
+              <item name="BusDriverNewApp" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="busdriverapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BusDriverNewApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="busdriverapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+              <item name="mvp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BusDriverNewApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="busdriverapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="login" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -2634,11 +2737,70 @@
       </pane>
       <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="BusDriverNewApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BusDriverNewApp" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="BusDriverNewApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BusDriverNewApp" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="BusDriverNewApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BusDriverNewApp" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BusDriverNewApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BusDriverNewApp" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BusDriverNewApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BusDriverNewApp" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BusDriverNewApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BusDriverNewApp" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="busdriverapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BusDriverNewApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BusDriverNewApp" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="Home&#9;FILE&#9;file://D:/swappy data/gitProject/BusDriverNewApp Latest/app/src/main/java/itg8/com/busdriverapp/home/HomeActivity.java&#10;Comm&#9;FILE&#9;file://D:/swappy data/gitProject/BusDriverNewApp Latest/app/src/main/java/itg8/com/busdriverapp/common/CommonMethod.java&#10;MAp&#9;FILE&#9;file://D:/swappy data/gitProject/BusDriverNewApp Latest/app/src/main/java/itg8/com/busdriverapp/admin_map/AdminMapFragment.java&#10;Map&#9;FILE&#9;file://D:/swappy data/gitProject/BusDriverNewApp Latest/app/src/main/java/itg8/com/busdriverapp/admin_map/AdminMapFragment.java&#10;MapFra&#9;FILE&#9;file://D:/swappy data/gitProject/BusDriverNewApp Latest/app/src/main/java/itg8/com/busdriverapp/admin_map/AdminMapFragment.java&#10;map&#9;FILE&#9;file://D:/swappy data/gitProject/BusDriverNewApp Latest/app/src/main/java/itg8/com/busdriverapp/admin_map/AdminMapFragment.java" />
-    <property name="device.picker.selection" value="89b798d8" />
+    <property name="DEBUGGABLE_DEVICE" value="oneplus-a0001-192.168.1.66:5555" />
+    <property name="DEBUGGABLE_PROCESS" value="itg8.com.busdriverapp" />
+    <property name="DEBUGGER_ID" value="Auto" />
+    <property name="SHOW_ALL_PROCESSES" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="HomeA&#9;FILE&#9;file://D:/swappy data/gitProject/request/BusDriverNewApp/app/src/main/java/itg8/com/busdriverapp/home/HomeActivity.java&#10;Retro&#9;PSI&#9;JAVA://itg8.com.busdriverapp.common.Retro&#10;Home&#9;FILE&#9;file://D:/swappy data/gitProject/request/BusDriverNewApp/app/src/main/java/itg8/com/busdriverapp/home/mvp/HomeModuleImp.java&#10;Hom&#9;FILE&#9;file://D:/swappy data/gitProject/request/BusDriverNewApp/app/src/main/java/itg8/com/busdriverapp/home/HomeActivity.java&#10;Request&#9;FILE&#9;file://D:/swappy data/gitProject/request/BusDriverNewApp/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RequestFragment.java&#10;HomeAct&#9;FILE&#9;file://D:/swappy data/gitProject/request/BusDriverNewApp/app/src/main/java/itg8/com/busdriverapp/home/HomeActivity.java&#10;HOmeAct&#9;FILE&#9;file://D:/swappy data/gitProject/request/BusDriverNewApp/app/src/main/java/itg8/com/busdriverapp/home/HomeActivity.java&#10;Comm&#9;FILE&#9;file://D:/swappy data/gitProject/BusDriverNewApp Latest/app/src/main/java/itg8/com/busdriverapp/common/CommonMethod.java&#10;MAp&#9;FILE&#9;file://D:/swappy data/gitProject/BusDriverNewApp Latest/app/src/main/java/itg8/com/busdriverapp/admin_map/AdminMapFragment.java&#10;Map&#9;FILE&#9;file://D:/swappy data/gitProject/BusDriverNewApp Latest/app/src/main/java/itg8/com/busdriverapp/admin_map/AdminMapFragment.java&#10;MapFra&#9;FILE&#9;file://D:/swappy data/gitProject/BusDriverNewApp Latest/app/src/main/java/itg8/com/busdriverapp/admin_map/AdminMapFragment.java&#10;map&#9;FILE&#9;file://D:/swappy data/gitProject/BusDriverNewApp Latest/app/src/main/java/itg8/com/busdriverapp/admin_map/AdminMapFragment.java" />
+    <property name="device.picker.selection" value="192.168.1.66:5555" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="sync.plugin.last.upgrade.timestamp" value="1537951630921" />
   </component>
   <component name="RecentsManager">
@@ -2646,6 +2808,8 @@
       <recent name="itg8.com.busdriverapp.bus" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\swappy data\gitProject\request\BusDriverNewApp\app\src\main\res\layout" />
+      <recent name="D:\swappy data\gitProject\request\BusDriverNewApp\app\src\main\java\itg8\com\busdriverapp" />
       <recent name="D:\swappy data\gitProject\BusDriverNewApp Latest\app\src\main\res\layout" />
       <recent name="D:\swappy data\gitProject\BusDriverNewApp Latest\app\src\main\java\itg8\com\busdriverapp" />
     </key>
@@ -2801,42 +2965,68 @@
     <frame x="-4" y="1" width="1370" height="728" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="Android Profiler" order="13" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Android Profiler" order="13" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="9" sideWeight="0.49694657" weight="0.329806" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5068702" side_tool="true" weight="0.7037037" />
+      <window_info anchor="right" id="Preview" order="5" weight="0.24656488" />
+      <window_info anchor="bottom" id="Version Control" order="10" visible="true" weight="0.329806" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.329806" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.329806" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4923664" visible="true" weight="0.29276896" />
-      <window_info anchor="bottom" id="Logcat" order="13" sideWeight="0.49312976" weight="0.5097002" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4923664" weight="0.29276896" />
+      <window_info anchor="bottom" id="Logcat" order="13" sideWeight="0.49312976" weight="0.36507937" />
       <window_info id="Captures" order="2" weight="0.25" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Designer" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24885496" />
-      <window_info anchor="bottom" id="Build" order="13" weight="0.53791887" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24885496" />
+      <window_info anchor="bottom" id="Build" order="13" weight="0.4479718" />
       <window_info anchor="right" id="Gradle" order="6" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4923664" weight="0.5719298" />
       <window_info anchor="right" id="Device File Explorer" order="9" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4923664" weight="0.07054674" />
       <window_info anchor="right" id="Android Model" order="3" side_tool="true" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Preview" order="5" weight="0.24656488" />
-      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" id="Dynamic Properties" order="8" />
+      <window_info anchor="bottom" id="Messages" order="9" sideWeight="0.49694657" weight="0.329806" />
       <window_info anchor="bottom" id="Gradle Console" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Android Monitor" order="8" sideWeight="0.48778626" weight="0.078947365" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49694657" weight="0.32982457" />
     </layout>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -2846,254 +3036,50 @@
     <MESSAGE value="requst" />
     <option name="LAST_COMMIT_MESSAGE" value="requst" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/mvp/HomePresenterImp.java</url>
+          <line>70</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/mvp/HomePresenterImp.java</url>
+          <line>55</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/mvp/HomeModuleImp.java</url>
+          <line>47</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/NetworkUtility.java</url>
+          <line>414</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/NetworkUtility.java</url>
+          <line>418</line>
+          <properties />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/NetworkUtility.java</url>
+          <line>437</line>
+          <properties />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="8" />
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/GenericAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/PermissionActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/rout_status/RouteStatusFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/rout_status/RouteStatusAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_route.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="60" column="31" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10">
-          <caret line="49" column="40" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/test/DrawerActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="23" column="45" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/adapter/BusAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="47" column="19" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/layout_bg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-hdpi/dimens.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_phone.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_sms.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/HomeFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="216" column="29" selection-start-line="216" selection-start-column="29" selection-end-line="216" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/widget/CircularImageView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_insert_emoticon_black_24dp.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="46" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/adapter/ChildListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12">
-          <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-xxxhdpi/dimens.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-xxhdpi/dimens.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_route.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_route.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="40" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="40" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_drawer.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_home.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="25" column="38" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/RouteActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/map/MapLatLngAddressModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
-          <folding>
-            <element signature="e#399#400#0" expanded="true" />
-            <element signature="e#428#429#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_bottomsheet.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/fed42e88a6677b56a6cb7a6393a0fe70/jars/classes.jar!/com/google/android/gms/maps/model/Polyline.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_bus.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/mvp/HomeModuleImp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_school.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -3106,51 +3092,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/admin_map/AdminMapFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="486" column="70" selection-start-line="486" selection-start-column="70" selection-end-line="486" selection-end-column="70" />
-          <folding>
-            <element signature="e#18500#18535#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/map/MapDirectionModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
           <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_route_map.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_bus.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="133" column="8" lean-forward="true" selection-start-line="133" selection-start-column="8" selection-end-line="150" selection-end-column="41" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_rv_child.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/custom_layout.xml">
@@ -3178,100 +3124,384 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/custom_text_back.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/NetworkUtility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1040">
-          <caret line="104" selection-start-line="104" selection-end-line="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RequestFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/CommonMethod.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3152">
+        <state relative-caret-position="3184">
           <caret line="232" selection-start-line="232" selection-end-line="232" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#9211#9212#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_request.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_bottomsheet.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/BusFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1280">
-          <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="672">
+          <caret line="42" column="44" selection-start-line="42" selection-start-column="44" selection-end-line="42" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RouteFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_route.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="102" selection-start-line="102" selection-end-line="102" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="2176">
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/HomeActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/model/BusModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="163" lean-forward="true" selection-start-line="163" selection-end-line="163" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4665#4797#0" expanded="true" />
-            <element signature="e#4796#4797#0" expanded="true" />
-            <element signature="e#5696#5724#0" expanded="true" />
-            <element signature="e#5988#6017#0" expanded="true" />
-            <element signature="e#6409#6770#0" expanded="true" />
-            <element signature="e#6769#6770#0" expanded="true" />
-            <element signature="e#6925#6956#0" expanded="true" />
-            <element signature="e#6958#6990#0" expanded="true" />
-            <element signature="e#9523#10272#0" expanded="true" />
-            <element signature="e#10271#10272#0" expanded="true" />
-            <element signature="e#13974#14374#0" expanded="true" />
-            <element signature="e#14373#14374#0" expanded="true" />
-            <element signature="e#15309#15931#0" expanded="true" />
-            <element signature="e#15930#15931#0" expanded="true" />
-            <element signature="e#19263#19453#0" expanded="true" />
-            <element signature="e#19452#19453#0" expanded="true" />
-            <element signature="e#19566#19756#0" expanded="true" />
-            <element signature="e#19755#19756#0" expanded="true" />
-          </folding>
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/adapter/ChildListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="26" column="85" selection-start-line="26" selection-start-column="85" selection-end-line="26" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_rv_child.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_route_map.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/navigation.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RouteMapFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="175" column="30" lean-forward="true" selection-start-line="175" selection-start-column="30" selection-end-line="175" selection-end-column="30" />
+        <state relative-caret-position="88">
+          <caret line="43" column="19" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/HomeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="39" column="23" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/RouteListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="92" column="49" selection-start-line="92" selection-start-column="49" selection-end-line="92" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RouteFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="102" column="1" selection-start-line="102" selection-start-column="1" selection-end-line="102" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/BusFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="83" column="38" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/adapter/BusAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="28" column="83" selection-start-line="28" selection-start-column="83" selection-end-line="28" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_bus.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="136" column="44" selection-start-line="136" selection-start-column="44" selection-end-line="136" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_drawer.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_home.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/custom_text_back.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" selection-start-line="1" selection-end-line="6" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_request.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+          <folding>
+            <element signature="e#275#293#0" expanded="true" />
+            <element signature="e#538#555#0" expanded="true" />
+            <element signature="e#831#856#0" expanded="true" />
+            <element signature="e#878#898#0" expanded="true" />
+            <element signature="e#1533#1554#0" expanded="true" />
+            <element signature="e#2077#2094#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/bus/fragment/RequestFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="123" selection-start-line="123" selection-end-line="123" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3779#4116#0" expanded="true" />
+            <element signature="e#4115#4116#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/BaseWeakPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="e#421#422#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/content/Context.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="556" selection-start-line="556" selection-end-line="556" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/2e24ae28806e6ec0e9b7042b3c6a5c59/jars/classes.jar!/android/support/v7/app/AppCompatActivity.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="285" selection-start-line="285" selection-end-line="285" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/mvp/HomePresenterImp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/admin_map/ChildrenAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="16" column="28" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/admin_map/AdminMapFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7275">
+          <caret line="544" column="5" lean-forward="true" selection-start-line="544" selection-start-column="5" selection-end-line="544" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/login/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="74" column="35" lean-forward="true" selection-start-line="74" selection-start-column="35" selection-end-line="74" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/login/mvp/LoginPresenterImp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="67" column="18" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
+          <folding>
+            <element signature="e#2194#2195#0" expanded="true" />
+            <element signature="e#2247#2248#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/utils/UserType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/login/LoginModelLoginInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/MyApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="60" column="40" lean-forward="true" selection-start-line="60" selection-start-column="40" selection-end-line="60" selection-end-column="40" />
+          <folding>
+            <element signature="e#1310#1311#0" expanded="true" />
+            <element signature="e#1366#1367#0" expanded="true" />
+            <element signature="e#1402#1403#0" expanded="true" />
+            <element signature="e#1454#1455#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/Retro.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="52" column="32" lean-forward="true" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/login/mvp/LoginModuleImp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="8" column="66" lean-forward="true" selection-start-line="8" selection-start-column="66" selection-end-line="8" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2185">
+          <caret line="251" column="23" lean-forward="true" selection-start-line="251" selection-start-column="23" selection-end-line="251" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/model/RouteModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="15" column="61" lean-forward="true" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/model/CheckpointData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/model/Checkpoints.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="20" column="24" lean-forward="true" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/model/Checkpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/home/mvp/HomeModuleImp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="47" column="67" selection-start-line="47" selection-start-column="67" selection-end-line="47" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/NetworkUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="414" column="58" selection-start-line="414" selection-start-column="58" selection-end-line="414" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2082#2353#0" expanded="true" />
+            <element signature="e#2352#2353#0" expanded="true" />
+            <element signature="e#5182#6200#0" expanded="true" />
+            <element signature="e#6199#6200#0" expanded="true" />
+            <element signature="e#17016#17330#0" expanded="true" />
+            <element signature="e#17329#17330#0" expanded="true" />
+            <element signature="e#17774#17775#0" expanded="true" />
+            <element signature="e#17841#17842#0" expanded="true" />
+            <element signature="e#18622#18623#0" expanded="true" />
+            <element signature="e#18677#18678#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/itg8/com/busdriverapp/common/RetroController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
         </state>
       </provider>
     </entry>

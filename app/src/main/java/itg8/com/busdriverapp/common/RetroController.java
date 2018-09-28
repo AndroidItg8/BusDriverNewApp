@@ -24,13 +24,11 @@ public interface RetroController {
     @POST("WS.ashx?op=GetRequestToken")
     Observable<ResponseBody> getRequestToken(@Body JSONObject object);
 
-
     @GET
-    Observable<ResponseBody> downloadMapRoute(@Url String s, @Query("origin") String source,@Query("destination") String destination,@Query("waypoints") StringBuilder addresLines, @Query("key") String key,@Query("mode") String mode);
+    Observable<ResponseBody> downloadMapRoute(@Url String s, @Query("origin") String source,@Query("destination") String destination,  @Query("waypoints") StringBuilder addresLines, @Query("key") String key,@Query("mode") String mode);
 
     @POST("WS.ashx?op=NotificationMSG")
     Observable<ResponseBody> mapNotificationToLog(@Body NotificationModel model);
-
 
     @POST("WS.ashx?op=AllCheckPointForDriver")
     Observable<ResponseBody> getRoute(@Body JSONObject object);

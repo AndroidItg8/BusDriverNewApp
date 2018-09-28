@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import itg8.com.busdriverapp.R;
 import itg8.com.busdriverapp.home.model.StudentList;
 
-public class ChildrenAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class ChildrenAdapter extends RecyclerView.Adapter<ChildrenAdapter.ViewHolder> {
 
 
     private List<StudentList> value;
@@ -34,22 +34,25 @@ public class ChildrenAdapter extends RecyclerView.Adapter<ViewHolder> {
         holder.textView.setText(value.get(position).getFname());
     }
 
+
     @Override
     public int getItemCount() {
         return value.size();
     }
-}
 
-class ViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.imgProfilePic)
-    ImageView imgProfilePic;
-    @BindView(R.id.img_status)
-    ImageView imgStatus;
-    @BindView(R.id.txtStudent)
-    TextView textView;
-    public ViewHolder(View itemView) {
-        super(itemView);
-        ButterKnife.bind(this,itemView);
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.imgProfilePic)
+        ImageView imgProfilePic;
+        @BindView(R.id.img_status)
+        ImageView imgStatus;
+        @BindView(R.id.txtStudent)
+        TextView textView;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
     }
 }
