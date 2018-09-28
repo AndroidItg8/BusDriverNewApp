@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_16"
+    tools:context=".bus.fragment.RequestFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/custom_text_back"
+        android:layout_margin="@dimen/margin_8"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto"
+        android:id="@+id/lbl_category"
+        android:maxLines="1"
+        android:padding="12dp"
+        android:textAllCaps="false"
+        android:hint="@string/select_category"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/textSize_12"
+        android:textColorHint="@color/colorGray"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/lbl_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbl_category"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:background="@drawable/custom_text_back"
+        android:padding="12dp"
+        android:layout_margin="@dimen/margin_8"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto"
+        android:hint="@string/select_user"
+        android:maxLines="1"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/textSize_12"
+        android:textColorHint="@color/colorGray"
+        android:textStyle="normal" />
+
+    <EditText
+        android:id="@+id/txt_message"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/lbl_user"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="top|left"
+        android:layout_margin="@dimen/margin_8"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto"
+        android:hint="Message"
+        android:maxLines="5"
+        android:textColorHint="@color/colorGray"
+        android:backgroundTint="@color/colorPrimary"
+
+
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/textSize_12"
+        android:textStyle="normal" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/btnSave"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
+            android:text="Save"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/btnClear"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite_400"
+            android:textColor="@color/colorGray"
+            android:text="Clear"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

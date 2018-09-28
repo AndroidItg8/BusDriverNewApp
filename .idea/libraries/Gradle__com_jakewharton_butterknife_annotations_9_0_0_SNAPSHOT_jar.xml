@@ -1,15 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.jakewharton:butterknife-annotations:9.0.0-SNAPSHOT@jar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/9.0.0-SNAPSHOT/62cd686072786eaa7cadd541cc7f5aaa0b21f4a2/butterknife-annotations-9.0.0-SNAPSHOT.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/9.0.0-SNAPSHOT/373f11c62e11c8aa1c80def3c4acf06aa52f7268/butterknife-annotations-9.0.0-SNAPSHOT.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-<<<<<<< HEAD
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/9.0.0-SNAPSHOT/4ab84d566cc9aaaaa55d72eb20a27fe7369a5275/butterknife-annotations-9.0.0-SNAPSHOT-sources.jar!/" />
-=======
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/9.0.0-SNAPSHOT/f73368969adcc15d41e6d4855b8966812b9c525a/butterknife-annotations-9.0.0-SNAPSHOT-sources.jar!/" />
->>>>>>> parent of 122b396... requst
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/9.0.0-SNAPSHOT/c536026139e12fbbbdeb48400c81023bd798920f/butterknife-annotations-9.0.0-SNAPSHOT-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

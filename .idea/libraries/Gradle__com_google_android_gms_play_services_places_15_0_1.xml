@@ -1,13 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.gms:play-services-places-15.0.1">
     <CLASSES>
-<<<<<<< HEAD
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-places-15.0.1.aar/36c542b74d08155e67ea97804e9eeb5b/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-places-15.0.1.aar/36c542b74d08155e67ea97804e9eeb5b/res" />
-=======
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-places-15.0.1.aar/794b6a1c27db58cb85e8c47b7ca31301/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-places-15.0.1.aar/794b6a1c27db58cb85e8c47b7ca31301/jars/classes.jar!/" />
->>>>>>> parent of 122b396... requst
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-places-15.0.1.aar/1f2d149738cf1702d351970d71c56f9a/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-places-15.0.1.aar/1f2d149738cf1702d351970d71c56f9a/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

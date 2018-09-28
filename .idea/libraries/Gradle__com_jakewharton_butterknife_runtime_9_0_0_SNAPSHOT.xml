@@ -1,17 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: com.jakewharton:butterknife-runtime-9.0.0-SNAPSHOT">
     <CLASSES>
-<<<<<<< HEAD
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/butterknife-runtime-9.0.0-SNAPSHOT.aar/08a14fe688957c71f50d251a35ef3720/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/butterknife-runtime-9.0.0-SNAPSHOT.aar/08a14fe688957c71f50d251a35ef3720/res" />
-=======
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/butterknife-runtime-9.0.0-SNAPSHOT.aar/d33878a5a62868ff778f419ca8fa78ff/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/butterknife-runtime-9.0.0-SNAPSHOT.aar/d33878a5a62868ff778f419ca8fa78ff/jars/classes.jar!/" />
->>>>>>> parent of 122b396... requst
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/butterknife-runtime-9.0.0-SNAPSHOT.aar/53c828ada502120c8bb70c6d44f62184/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/butterknife-runtime-9.0.0-SNAPSHOT.aar/53c828ada502120c8bb70c6d44f62184/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-runtime/9.0.0-SNAPSHOT/649885fa751fc34a276a3e495c090b8e10bb15d/butterknife-runtime-9.0.0-SNAPSHOT-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-runtime/9.0.0-SNAPSHOT/9d39dc92ae469804165c48714fb0c37fabd897c/butterknife-runtime-9.0.0-SNAPSHOT-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

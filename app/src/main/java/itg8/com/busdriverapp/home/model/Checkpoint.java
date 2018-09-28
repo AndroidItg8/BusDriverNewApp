@@ -37,6 +37,7 @@ public class Checkpoint implements Parcelable
     private Object users;
 
 
+
     public Object getUsers() {
         return users;
     }
