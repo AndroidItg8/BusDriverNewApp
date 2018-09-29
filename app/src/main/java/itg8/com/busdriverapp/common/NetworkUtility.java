@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -17,6 +18,7 @@ import org.json.JSONTokener;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +33,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import itg8.com.busdriverapp.home.busModel.BusModel;
 import itg8.com.busdriverapp.home.model.Checkpoint;
 import itg8.com.busdriverapp.home.model.CheckpointData;
 import itg8.com.busdriverapp.home.model.RouteModel;
@@ -384,6 +387,8 @@ public  class NetworkUtility {
 
 
     public void sendToken(String url, String token, final ResponseListener listener) {
+        if(listener!=null)
+            return;
         Observable<ResponseBody> bodyObservable=controller.sendToken(url,token);
         bodyObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -412,12 +417,22 @@ public  class NetworkUtility {
     }
 
     public void getBuses(ResponseListener responseListener) {
-        Observable<ResponseBody> observable=controller.getBus();
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("type",1);
+        Log.d(TAG, "getBuses: "+jsonObject.toString());
+        Observable<ResponseBody> observable=controller.getBus(jsonObject);
         observable.flatMap(new Function<ResponseBody, Observable<Void>>() {
             @Override
             public Observable<Void> apply(ResponseBody responseBody) throws Exception {
                 String response=responseBody.string();
                 Log.d(TAG, "apply: "+response);
+                if(response.contains("WSResponse")){
+                    BusModel busModel=new Gson().fromJson(response,BusModel.class);
+                    if(busModel!=null)
+                    {
+                        Log.d(TAG, "apply: "+new Gson().toJson(busModel));
+                    }
+                }
                 return null;
             }
         }).subscribeOn(Schedulers.io())

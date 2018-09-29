@@ -1,5 +1,7 @@
 package itg8.com.busdriverapp.common;
 
+import com.google.gson.JsonObject;
+
 import org.json.JSONObject;
 
 import io.reactivex.Observable;
@@ -37,6 +39,6 @@ public interface RetroController {
     @POST
     Observable<ResponseBody> sendToken(@Url String url, @Field("Token") String token);
 
-    @POST("WS.ashx?op=getBusAdmin")
-    Observable<ResponseBody> getBus();
+    @POST("WS.ashx?op=GetBusAdmin")
+    Observable<ResponseBody> getBus(@Body JsonObject object);
 }

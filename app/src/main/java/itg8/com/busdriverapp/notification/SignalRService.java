@@ -103,7 +103,7 @@ public class SignalRService extends Service {
         mHubConnection = new HubConnection(serverUrl, "userName=" + Prefs.getString(CommonMethod.TOKEN), false, new Logger() {
             @Override
             public void log(String s, LogLevel logLevel) {
-                Log.d(TAG, "logTTT: "+s+" LgLvl:"+logLevel.name());
+               // Log.d(TAG, "logTTT: "+s+" LgLvl:"+logLevel.name());
                 if(s.contains("Invoking event: notifyuser with arguments")){
 
                 }
@@ -112,7 +112,7 @@ public class SignalRService extends Service {
         mHubConnection.error(new ErrorCallback() {
             @Override
             public void onError(Throwable throwable) {
-                Log.d(TAG, "logTTT onError: "+throwable.getMessage());
+               // Log.d(TAG, "logTTT onError: "+throwable.getMessage());
                 throwable.printStackTrace();
             }
         });
@@ -149,7 +149,7 @@ public class SignalRService extends Service {
         mHubProxy.on("notify", new SubscriptionHandler2<Object, Object>() {
             @Override
             public void run(Object msg,Object msg2) {
-                Log.d(TAG, "run: notificationHub Bus Driver: "+msg2.toString());
+               // Log.d(TAG, "run: notificationHub Bus Driver: "+msg2.toString());
 
                 String notificationBody=msg2.toString();
                 try {
@@ -190,7 +190,7 @@ public class SignalRService extends Service {
             @Override
             public void onMessageReceived(final JsonElement json) {
 
-                Log.d(TAG, "run: notificationHub: "+json.toString());
+              //  Log.d(TAG, "run: notificationHub: "+json.toString());
                 return;
 
 //                sendBroadcastAndNotification(json.getAsJsonObject().getAsJsonArray("A").get(0).getAsString());
@@ -233,7 +233,7 @@ public class SignalRService extends Service {
 
 
     private void sendBroadcastAndNotification(String msg) {
-        Log.d(TAG, "MyMessageFromServer :  "+msg);
+      //  Log.d(TAG, "MyMessageFromServer :  "+msg);
 
         Intent intent = new Intent(BROADCAST_ACTION);
         intent.putExtra("message", msg);
