@@ -12,52 +12,117 @@ import com.google.gson.annotations.SerializedName;
 public class Buses implements Parcelable
 {
 
+    @SerializedName("busName")
+    @Expose
+    private String busName;
+
+    @SerializedName("fullName")
+    @Expose
+    private String driverName;
+
+    public String getDriverName() {
+        return driverName;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
+    }
+
+    public String getDriverNumber() {
+        return driverNumber;
+    }
+
+    public void setDriverNumber(String driverNumber) {
+        this.driverNumber = driverNumber;
+    }
+
+    @SerializedName("mobileNumber")
+    @Expose
+    private String driverNumber;
+    @SerializedName("busNumber")
+    @Expose
+    private String busNumber;
+
     @SerializedName("users")
     @Expose
-    private List<User> users = new ArrayList<User>();
-    public final static Parcelable.Creator<Buses> CREATOR = new Creator<Buses>() {
+
+    private Object  user ;
 
 
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Buses createFromParcel(Parcel in) {
-            Buses instance = new Buses();
-            in.readList(instance.users, (itg8.com.busdriverapp.home.busModel.User.class.getClassLoader()));
-            return instance;
-        }
-
-        public Buses[] newArray(int size) {
-            return (new Buses[size]);
-        }
-
-    }
-    ;
-
-    /**
-     * 
-     * @return
-     *     The users
-     */
-    public List<User> getUsers() {
-        return users;
+    public String getBusName() {
+        return busName;
     }
 
-    /**
-     * 
-     * @param users
-     *     The users
-     */
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setBusName(String busName) {
+        busName = busName;
     }
 
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeList(users);
+    public String getBusNumber() {
+        return busNumber;
     }
 
+    public void setBusNumber(String busNumber) {
+        this.busNumber = busNumber;
+    }
+
+
+    public Object getUser() {
+        return user;
+    }
+
+    public void setUser(Object user) {
+        this.user = user;
+    }
+
+
+
+
+
+
+
+    public static Creator<Buses> getCREATOR() {
+        return CREATOR;
+    }
+
+
+
+
+
+
+    public Buses() {
+    }
+
+    @Override
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.busName);
+        dest.writeString(this.driverName);
+        dest.writeString(this.driverNumber);
+        dest.writeString(this.busNumber);
+        dest.writeParcelable((Parcelable) this.user, flags);
+    }
+
+    protected Buses(Parcel in) {
+        this.busName = in.readString();
+        this.driverName = in.readString();
+        this.driverNumber = in.readString();
+        this.busNumber = in.readString();
+        this.user = in.readParcelable(Object.class.getClassLoader());
+    }
+
+    public static final Creator<Buses> CREATOR = new Creator<Buses>() {
+        @Override
+        public Buses createFromParcel(Parcel source) {
+            return new Buses(source);
+        }
+
+        @Override
+        public Buses[] newArray(int size) {
+            return new Buses[size];
+        }
+    };
 }

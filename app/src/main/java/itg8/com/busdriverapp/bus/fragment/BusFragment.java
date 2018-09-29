@@ -5,18 +5,29 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import itg8.com.busdriverapp.R;
 import itg8.com.busdriverapp.bus.adapter.BusAdapter;
-import itg8.com.busdriverapp.common.CommonMethod;
 import itg8.com.busdriverapp.home.HomeActivity;
+import itg8.com.busdriverapp.home.busModel.BusModel;
+import itg8.com.busdriverapp.home.busModel.Buses;
+import itg8.com.busdriverapp.home.busModel.User;
+
+import static itg8.com.busdriverapp.home.RouteListFragment.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +46,8 @@ public class BusFragment extends Fragment implements BusAdapter.OnBusItemClicked
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private BusModel busModel;
+
 
 
     public BusFragment() {
@@ -45,16 +58,14 @@ public class BusFragment extends Fragment implements BusAdapter.OnBusItemClicked
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+
      * @return A new instance of fragment BusFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BusFragment newInstance(String param1, String param2) {
+    public static BusFragment newInstance(BusModel busModel) {
         BusFragment fragment = new BusFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putParcelable(ARG_PARAM1, busModel);
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,8 +74,7 @@ public class BusFragment extends Fragment implements BusAdapter.OnBusItemClicked
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            busModel = getArguments().getParcelable(ARG_PARAM1);
         }
     }
 
@@ -74,14 +84,27 @@ public class BusFragment extends Fragment implements BusAdapter.OnBusItemClicked
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_bus, container, false);
         unbinder = ButterKnife.bind(this, view);
-        callRecyclerView();
+     getBusData(busModel);
         return view;
     }
 
-    private void callRecyclerView() {
+    private void getBusData(BusModel busModel) {
+
+        if(busModel.getWSResponse().getBuses()!=null) {
+             List<Buses> list = (List<Buses>) busModel.getWSResponse().getBuses();
+            callRecyclerView(list);
+
+            }
+
+
+    }
+
+    private void callRecyclerView(List<Buses> users) {
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
     mRecyclerView.setLayoutManager(manager);
-    mRecyclerView.setAdapter(new BusAdapter(getActivity(), this));
+
+
+    mRecyclerView.setAdapter(new BusAdapter(getActivity(), this,users));
     }
 
     @Override
@@ -91,7 +114,22 @@ public class BusFragment extends Fragment implements BusAdapter.OnBusItemClicked
     }
 
     @Override
-    public void onBusItemClicked(int position) {
-        ((HomeActivity)getActivity()).callFragment(RouteFragment.newInstance("",""));
+    public void onBusItemClicked(int position, Object object) {
+        List<User> list = new ArrayList<>();
+      //  Log.d(TAG, "onBusItemClicked: "+userModel.size());
+
+         if(object instanceof JSONObject){
+             User user = (User) object;
+             list.add(user);
+         }
+         else if(object instanceof JSONArray){
+             List<User> users = (List<User>) object;
+             list.addAll(users);
+         }
+
+//        ((HomeActivity)getActivity()).callFragment(RouteFragment.newInstance(list));
     }
 }
+
+
+

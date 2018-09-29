@@ -5,10 +5,11 @@ import android.util.Log;
 import java.util.List;
 
 import itg8.com.busdriverapp.common.BaseWeakPresenter;
+import itg8.com.busdriverapp.home.busModel.BusModel;
 import itg8.com.busdriverapp.home.model.RouteModel;
 import itg8.com.busdriverapp.utils.UserType;
 
-public class HomePresenterImp extends BaseWeakPresenter<HomeMvp.HomeView> implements HomeMvp.HomePresenter,HomeMvp.HomeListener{
+public class HomePresenterImp extends BaseWeakPresenter<HomeMvp.HomeView> implements HomeMvp.HomePresenter,HomeMvp.HomeListener {
     private static final String TAG = "HomePresenterImp";
     HomeMvp.HomeModule module;
     public HomePresenterImp(HomeMvp.HomeView homeView) {
@@ -39,6 +40,24 @@ public class HomePresenterImp extends BaseWeakPresenter<HomeMvp.HomeView> implem
             getView().hideProgress();
             getView().onNoInternet();
         }
+    }
+
+    @Override
+    public void onBusesAvailable(BusModel busModel) {
+        if(hasView()) {
+            getView().hideProgress();
+            Log.i(TAG, "onBusesAvailable: ");
+            getView().onBusesAvailable(busModel);
+        }
+    }
+
+    @Override
+    public void onFailToGetBuses(Object e) {
+        if(hasView()) {
+            getView().hideProgress();
+            getView().onRetroError(e);
+        }
+
     }
 
     @Override

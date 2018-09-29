@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -13,27 +14,24 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
 import org.json.JSONTokener;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import itg8.com.busdriverapp.home.busModel.BusModel;
+import itg8.com.busdriverapp.home.busModel.Buses;
+import itg8.com.busdriverapp.home.busModel.WSResponse;
 import itg8.com.busdriverapp.home.model.Checkpoint;
 import itg8.com.busdriverapp.home.model.CheckpointData;
 import itg8.com.busdriverapp.home.model.RouteModel;
@@ -46,10 +44,15 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public  class NetworkUtility {
+public class NetworkUtility {
 
     private static final String TAG = "NetworkUtility";
     private static final String STATUS = "status";
+    private static RetroController controller;
+
+    public NetworkUtility(NetworkBuilder builder) {
+        controller = Retro.getInstance().getController(builder.token);
+    }
 
     public void login(String url, String username, String password, final ResponseListener listener) {
         if (listener == null) {
@@ -93,11 +96,11 @@ public  class NetworkUtility {
                 });
     }
 
-    private JSONObject getResponseOnly(String json){
+    private JSONObject getResponseOnly(String json) {
         try {
             JSONObject object = new JSONObject(json);
             if (object.has("WSResponse") && !object.isNull("WSResponse")) {
-                    return object.getJSONObject("WSResponse");
+                return object.getJSONObject("WSResponse");
             } else if (object.has("WSError")) {
                 return new JSONObject();
             }
@@ -111,9 +114,9 @@ public  class NetworkUtility {
         try {
             JSONObject object = new JSONObject(json);
             if (object.has("WSResponse") && !object.isNull("WSResponse")) {
-                JSONObject wsResponse=object.getJSONObject("WSResponse");
+                JSONObject wsResponse = object.getJSONObject("WSResponse");
                 JSONObject dataTemp = wsResponse.getJSONObject("data");
-                if(dataTemp.has("LoginInfo")){
+                if (dataTemp.has("LoginInfo")) {
                     JSONObject data = dataTemp.getJSONObject("LoginInfo");
                     if (data.has("RoleName")) {
                         JSONObject roleName = data.getJSONObject("RoleName");
@@ -134,7 +137,6 @@ public  class NetworkUtility {
         }
         return null;
     }
-
 
     public void getRequestToken(final ResponseListener listener) {
         Observable<ResponseBody> responseBodyObservable = controller.getRequestToken(new JSONObject());
@@ -186,10 +188,7 @@ public  class NetworkUtility {
                 });
     }
 
-
-
-
-    public void downloadAddresses(String source, String destination, String[] addresses, String key, final ResponseListener listener){
+    public void downloadAddresses(String source, String destination, String[] addresses, String key, final ResponseListener listener) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -197,7 +196,7 @@ public  class NetworkUtility {
         builder.addInterceptor(interceptor);
         builder.readTimeout(5, TimeUnit.MINUTES);
 
-        OkHttpClient client=builder.build();
+        OkHttpClient client = builder.build();
         Gson gson = new GsonBuilder().setLenient().create();
 
 
@@ -213,25 +212,25 @@ public  class NetworkUtility {
 
 
         RetroController controllerTemp = retrofit.create(RetroController.class);
-        StringBuilder addresLines= new StringBuilder();
+        StringBuilder addresLines = new StringBuilder();
         for (String address :
                 addresses) {
             addresLines.append("|").append(address);
         }
-        Observable<ResponseBody> responseBodyObservable=controllerTemp.downloadMapRoute("/maps/api/directions/json",source,destination,addresLines,key,"Transit");
+        Observable<ResponseBody> responseBodyObservable = controllerTemp.downloadMapRoute("/maps/api/directions/json", source, destination, addresLines, key, "Transit");
         responseBodyObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ResponseBody>() {
                     @Override
                     public void accept(ResponseBody responseBody) throws Exception {
-                        String response=responseBody.string();
+                        String response = responseBody.string();
                         listener.onSuccess(response);
                     }
                 });
     }
 
     public void mapNotificationToLog(NotificationModel model, ResponseListener listener) {
-        Observable<ResponseBody> responseBodyObservable=controller.mapNotificationToLog(model);
+        Observable<ResponseBody> responseBodyObservable = controller.mapNotificationToLog(model);
         responseBodyObservable.subscribeOn(Schedulers.io())
                 .map(new Function<ResponseBody, Boolean>() {
                     @Override
@@ -265,59 +264,59 @@ public  class NetworkUtility {
     }
 
     private Boolean checkResponseBody(String respnse) {
-        Log.d(TAG, "checkResponseBody: "+respnse);
+        Log.d(TAG, "checkResponseBody: " + respnse);
         return true;
     }
 
-
-
-    public void getRoute(String url,final ResponseListener listener){
-        Observable<ResponseBody> responseBodyObservable=controller.getRoute(new JSONObject());
+    public void getRoute(String url, final ResponseListener listener) {
+        Observable<ResponseBody> responseBodyObservable = controller.getRoute(new JSONObject());
         responseBodyObservable.flatMap(new Function<ResponseBody, Observable<RouteModel>>() {
             @Override
             public Observable<RouteModel> apply(ResponseBody responseBody) throws Exception {
-                JSONObject s= getResponseOnly(responseBody.string());
-                Log.i(TAG, "apply: "+s);
-                RouteModel models=new RouteModel();
-                List<CheckpointData> checkpointData=new ArrayList<>();
+                JSONObject s = getResponseOnly(responseBody.string());
+                Log.i(TAG, "apply: " + s);
+                RouteModel models = new RouteModel();
+                List<CheckpointData> checkpointData = new ArrayList<>();
                 models.setCheckpointData(checkpointData);
-                if(s.get("CheckpointData") instanceof JSONArray){
-                    JSONArray arr=s.getJSONArray("CheckpointData");
-                    for(int i=0; i<arr.length(); i++) {
+                if (s.get("CheckpointData") instanceof JSONArray) {
+                    JSONArray arr = s.getJSONArray("CheckpointData");
+                    for (int i = 0; i < arr.length(); i++) {
                         JSONObject so = arr.getJSONObject(i);
                         CheckpointData model = new Gson().fromJson(so.toString(), CheckpointData.class);
 //                        if(model.getCheckpoints().checkpoint instanceof List){
-                            String jsonString = new Gson().toJson(model.getCheckpoints().checkpoint);
-                            Object json = new JSONTokener(jsonString).nextValue();
-                            List<Checkpoint> checkpoints=new ArrayList<>();
-                            if(json instanceof JSONObject){
-                                Checkpoint checkpoint=new Gson().fromJson(json.toString(),Checkpoint.class);
-                                checkpoints.add(checkpoint);
-                            }else if(json instanceof JSONArray){
-                                List<Checkpoint> checkpointList=new Gson().fromJson(json.toString(),new TypeToken<List<Checkpoint>>(){}.getType());
-                                checkpoints.addAll(checkpointList);
-                            }
-                            model.getCheckpoints().setCheckpoints(checkpoints);
+                        String jsonString = new Gson().toJson(model.getCheckpoints().checkpoint);
+                        Object json = new JSONTokener(jsonString).nextValue();
+                        List<Checkpoint> checkpoints = new ArrayList<>();
+                        if (json instanceof JSONObject) {
+                            Checkpoint checkpoint = new Gson().fromJson(json.toString(), Checkpoint.class);
+                            checkpoints.add(checkpoint);
+                        } else if (json instanceof JSONArray) {
+                            List<Checkpoint> checkpointList = new Gson().fromJson(json.toString(), new TypeToken<List<Checkpoint>>() {
+                            }.getType());
+                            checkpoints.addAll(checkpointList);
+                        }
+                        model.getCheckpoints().setCheckpoints(checkpoints);
 //                        }else{
 
 //                        }
                         checkpointData.add(model);
                     }
-                }else if(s.get("CheckpointData") instanceof JSONObject){
-                    JSONObject so=s.getJSONObject("CheckpointData");
-                    CheckpointData model=new Gson().fromJson(so.toString(),CheckpointData.class);
+                } else if (s.get("CheckpointData") instanceof JSONObject) {
+                    JSONObject so = s.getJSONObject("CheckpointData");
+                    CheckpointData model = new Gson().fromJson(so.toString(), CheckpointData.class);
 //                    if(model.getCheckpoints().checkpoint instanceof List){
-                        String jsonString = new Gson().toJson(model.getCheckpoints().checkpoint);
-                        Object json = new JSONTokener(jsonString).nextValue();
-                        List<Checkpoint> checkpoints=new ArrayList<>();
-                        if(json instanceof JSONObject){
-                            Checkpoint checkpoint=new Gson().fromJson(json.toString(),Checkpoint.class);
-                            checkpoints.add(checkpoint);
-                        }else if(json instanceof JSONArray){
-                            List<Checkpoint> checkpointList=new Gson().fromJson(json.toString(),new TypeToken<List<Checkpoint>>(){}.getType());
-                            checkpoints.addAll(checkpointList);
-                        }
-                        model.getCheckpoints().setCheckpoints(checkpoints);
+                    String jsonString = new Gson().toJson(model.getCheckpoints().checkpoint);
+                    Object json = new JSONTokener(jsonString).nextValue();
+                    List<Checkpoint> checkpoints = new ArrayList<>();
+                    if (json instanceof JSONObject) {
+                        Checkpoint checkpoint = new Gson().fromJson(json.toString(), Checkpoint.class);
+                        checkpoints.add(checkpoint);
+                    } else if (json instanceof JSONArray) {
+                        List<Checkpoint> checkpointList = new Gson().fromJson(json.toString(), new TypeToken<List<Checkpoint>>() {
+                        }.getType());
+                        checkpoints.addAll(checkpointList);
+                    }
+                    model.getCheckpoints().setCheckpoints(checkpoints);
 //                    }
                     checkpointData.add(model);
                 }
@@ -352,7 +351,7 @@ public  class NetworkUtility {
     }
 
     private String checkAvail(String busName, JSONObject so) throws JSONException {
-        if(so.has(busName))
+        if (so.has(busName))
             return (String) so.get(busName);
         return null;
     }
@@ -361,19 +360,19 @@ public  class NetworkUtility {
         return Observable.create(new ObservableOnSubscribe<RouteModel>() {
             @Override
             public void subscribe(ObservableEmitter<RouteModel> e) throws Exception {
-                String response=responseBody.string();
-                JSONObject jsonObject=new JSONObject(response);
-                if(jsonObject.has(STATUS)){
-                    if(jsonObject.getInt(STATUS)==200){
-                        String data=jsonObject.getJSONObject("data").toString();
-                        RouteModel model=new Gson().fromJson(data,RouteModel.class);
-                        if(model==null){
-                            e.onError(new Exception("Fail to get data",new Throwable("Cannot convert to RouteModel")));
-                        }else{
+                String response = responseBody.string();
+                JSONObject jsonObject = new JSONObject(response);
+                if (jsonObject.has(STATUS)) {
+                    if (jsonObject.getInt(STATUS) == 200) {
+                        String data = jsonObject.getJSONObject("data").toString();
+                        RouteModel model = new Gson().fromJson(data, RouteModel.class);
+                        if (model == null) {
+                            e.onError(new Exception("Fail to get data", new Throwable("Cannot convert to RouteModel")));
+                        } else {
                             e.onNext(model);
                             e.onComplete();
                         }
-                    }else{
+                    } else {
                         e.onError(new Exception("Fail to fetch route"));
                     }
                 }
@@ -385,11 +384,10 @@ public  class NetworkUtility {
         throw new NullPointerException("null provided in NetworkUtility listner");
     }
 
-
     public void sendToken(String url, String token, final ResponseListener listener) {
-        if(listener!=null)
+        if (listener != null)
             return;
-        Observable<ResponseBody> bodyObservable=controller.sendToken(url,token);
+        Observable<ResponseBody> bodyObservable = controller.sendToken(url, token);
         bodyObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
@@ -416,41 +414,83 @@ public  class NetworkUtility {
                 });
     }
 
-    public void getBuses(ResponseListener responseListener) {
-        JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("type",1);
-        Log.d(TAG, "getBuses: "+jsonObject.toString());
-        Observable<ResponseBody> observable=controller.getBus(jsonObject);
-        observable.flatMap(new Function<ResponseBody, Observable<Void>>() {
+    public void getBuses(final ResponseListener responseListener) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("type", 1);
+        Log.d(TAG, "getBuses: " + jsonObject.toString());
+        final Observable<ResponseBody> observable = controller.getBus(jsonObject);
+        observable.flatMap(new Function<ResponseBody, Observable<BusModel>>() {
             @Override
-            public Observable<Void> apply(ResponseBody responseBody) throws Exception {
-                String response=responseBody.string();
-                Log.d(TAG, "apply: "+response);
-                if(response.contains("WSResponse")){
-                    BusModel busModel=new Gson().fromJson(response,BusModel.class);
-                    if(busModel!=null)
-                    {
-                        Log.d(TAG, "apply: "+new Gson().toJson(busModel));
+            public Observable<BusModel> apply(ResponseBody responseBody) throws Exception {
+                String response = responseBody.string();
+                BusModel busModel=null;
+                Log.d(TAG, "apply outer: " + response);
+                if (response.contains("WSResponse")) {
+                  busModel = new Gson().fromJson(response, BusModel.class);
+                    if (busModel != null) {
+                        Log.d(TAG, "apply inner : " + new Gson().toJson(busModel));
                     }
                 }
-                return null;
+                return Observable.just(busModel);
+            }
+        }).flatMap(new Function<BusModel, Observable<BusModel>>() {
+            @Override
+            public Observable<BusModel> apply(BusModel busModel) throws Exception {
+                BusModel mNewBusModel=new BusModel();
+                WSResponse model = new WSResponse();
+                mNewBusModel.setWSResponse(model);
+                List<Buses> listBuses = new ArrayList<>();
+
+
+                String jsonString = new Gson().toJson(busModel.getWSResponse().getBuses());
+                Object json = new JSONTokener(jsonString).nextValue();
+
+                if (json instanceof JSONObject) {
+                    Buses bus = new Gson().fromJson(json.toString(), Buses.class);
+                    listBuses.add(bus);
+
+                }
+                else if (json instanceof JSONArray) {
+                    List<Buses> bus = new Gson().fromJson(json.toString(), new TypeToken<List<Buses>>() {
+                    }.getType());
+                    listBuses.addAll(bus);
+                    Log.d(TAG, "apply: listBuses"+listBuses.size());
+                }
+
+//                if (json instanceof JsonObject) {
+//                    itg8.com.busdriverapp.home.busModel.User busUser = new Gson().fromJson(json.toString(), itg8.com.busdriverapp.home.busModel.User.class);
+//                    busesModel.setUser(busUser);
+//
+//                } else if (json instanceof JsonArray) {
+//                    List<itg8.com.busdriverapp.home.busModel.User> userList = new Gson().fromJson(json.toString(), new TypeToken<List<itg8.com.busdriverapp.home.busModel.User>>() {
+//                    }.getType());
+//
+//                    busesModel.setUser(userList);
+//                }
+//                busModel.setWSResponse(model);
+                model.setBuses(listBuses);
+                return Observable.just(mNewBusModel);
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Void>() {
+                .subscribe(new Observer <BusModel>() {
+
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(Void aVoid) {
+                    public void onNext(BusModel busModel) {
+                        responseListener.onSuccess(busModel);
+
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        e.printStackTrace();
+                        responseListener.onFailure(e);
+
                     }
 
                     @Override
@@ -462,20 +502,13 @@ public  class NetworkUtility {
 
     }
 
-    public interface ResponseListener{
+
+    public interface ResponseListener {
         void onSuccess(Object message);
+
         void onFailure(Object err);
+
         void onSomethingWrong(Object e);
-    }
-
-
-
-
-    private static RetroController controller;
-
-
-    public NetworkUtility(NetworkBuilder builder) {
-        controller = Retro.getInstance().getController(builder.token);
     }
 
     public static final class NetworkBuilder {

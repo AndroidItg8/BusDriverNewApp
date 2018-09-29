@@ -7,6 +7,7 @@ import java.util.List;
 import itg8.com.busdriverapp.R;
 import itg8.com.busdriverapp.common.MyApplication;
 import itg8.com.busdriverapp.common.NetworkUtility;
+import itg8.com.busdriverapp.home.busModel.BusModel;
 import itg8.com.busdriverapp.home.model.RouteModel;
 
 class HomeModuleImp implements HomeMvp.HomeModule {
@@ -50,16 +51,22 @@ class HomeModuleImp implements HomeMvp.HomeModule {
 
                     @Override
                     public void onSuccess(Object message) {
+                        Log.d(TAG, "onSuccess: "+message.toString());
+                        listener.onBusesAvailable((BusModel) message);
+
 
                     }
 
                     @Override
                     public void onFailure(Object err) {
-
+                        Log.d(TAG, "onFailure: "+err.toString());
+                        listener.onFailToGetBuses(err);
                     }
 
                     @Override
                     public void onSomethingWrong(Object e) {
+
+                        Log.d(TAG, "onSomethingWrong: "+e.toString());
 
                     }
                 }

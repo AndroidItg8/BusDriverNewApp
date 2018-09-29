@@ -17,6 +17,20 @@ public class Checkpoints implements Parcelable
     private Object checkpoint;
     private List<Checkpoint> checkpointList=new ArrayList<>();
 
+    public List<Checkpoint> getCheckpointList() {
+        return checkpointList;
+    }
+
+    public void setCheckpointList(List<Checkpoint> checkpointList) {
+        this.checkpointList = checkpointList;
+    }
+
+    public static Creator<Checkpoints> getCREATOR() {
+        return CREATOR;
+    }
+
+
+
 
     /**
      * 

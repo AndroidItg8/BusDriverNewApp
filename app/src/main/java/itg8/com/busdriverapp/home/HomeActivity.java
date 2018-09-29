@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -69,11 +70,12 @@ import itg8.com.busdriverapp.admin_map.ChildCheckinDialogFragment;
 import itg8.com.busdriverapp.admin_map.Type;
 import itg8.com.busdriverapp.bus.fragment.BusFragment;
 import itg8.com.busdriverapp.bus.fragment.RequestFragment;
+import itg8.com.busdriverapp.bus.fragment.RouteMapFragment;
 import itg8.com.busdriverapp.common.BaseActivity;
 import itg8.com.busdriverapp.common.CommonMethod;
-import itg8.com.busdriverapp.common.MyApplication;
 import itg8.com.busdriverapp.common.Prefs;
 import itg8.com.busdriverapp.common.UtilSnackbar;
+import itg8.com.busdriverapp.home.busModel.BusModel;
 import itg8.com.busdriverapp.home.model.Checkpoint;
 import itg8.com.busdriverapp.home.model.CheckpointData;
 import itg8.com.busdriverapp.home.model.RouteModel;
@@ -146,6 +148,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private RouteStatusAdapter routeStatusAdapter;
     private FragmentManager fm;
     String title;
+    sendBusesInfoListener listener;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -165,7 +168,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     return true;
                 case R.id.nav_bottom_track:
                     title= "Track";
-                   callFragment(BusFragment.newInstance("",""));
+                   callFragment(RouteMapFragment.newInstance("",""));
                     return true;
 
 
@@ -200,6 +203,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
+
+
     private void loadMap() {
         // Fixing Later Map loading Delay
         new Thread(new Runnable() {
@@ -216,7 +221,10 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             }
         }).start();
     }
+   public void  removeUPButton(){
+       getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
+    }
     private void init() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -615,6 +623,13 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     }
 
+    @Override
+    public void onBusesAvailable(BusModel busModel) {
+
+   callFragment(BusFragment.newInstance(busModel));
+
+    }
+
     public void setListOfChildrens(List<Checkpoint> listOfChildrens) {
         this.listOfChildrens = listOfChildrens;
         List<User> users = new ArrayList<>();
@@ -661,11 +676,19 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         routeStatusAdapter.setUserIDs(userIDS);
     }
 
+    public void attachedListener(RouteMapFragment routeMapFragment) {
+
+    }
+
     public interface MarkerAvailableListener {
         void onAllLatlangAvail(MapLatLngAddressModel model);
 
         void onLatlangAvail(MapLatLngAddressModel latLng);
 
         void onListComplete();
+    }
+
+    public interface sendBusesInfoListener{
+        void onBusesAvailable(BusModel busModel);
     }
 }
