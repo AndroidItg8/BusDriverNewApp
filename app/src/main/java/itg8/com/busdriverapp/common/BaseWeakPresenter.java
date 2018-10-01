@@ -10,6 +10,9 @@ public class BaseWeakPresenter<T> {
         this.weakReference=new WeakReference<T>(t);
     }
 
+    public void weakViewCreated(T t){ this.weakReference=new WeakReference<T>(t);};
+
+
     public boolean hasView(){
         return weakReference!=null && weakReference.get() != null;
     }

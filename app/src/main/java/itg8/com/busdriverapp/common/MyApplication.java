@@ -3,6 +3,9 @@ package itg8.com.busdriverapp.common;
 import android.app.Application;
 import android.arch.persistence.room.Room;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,6 +24,7 @@ public class MyApplication extends Application {
     private static MyApplication mInstance;
     public boolean isLoggingNeeded;
     Set<Integer> notificationIDS=new HashSet<>();
+    WeakReference<GoogleApiClient> googleApiClientWeakReference;
 
     public static MyApplication getInstance() {
         return mInstance;
@@ -71,6 +75,18 @@ public class MyApplication extends Application {
 
     public boolean hasNotificationID(int id){
         return notificationIDS.contains(id);
+    }
+
+    public void setGoogleApiClient(GoogleApiClient googleClient) {
+        googleApiClientWeakReference=new WeakReference<GoogleApiClient>(googleClient);
+    }
+
+    public GoogleApiClient getGoogleApiClient(){
+        if(googleApiClientWeakReference!=null)
+            if(googleApiClientWeakReference.get()!=null){
+                return googleApiClientWeakReference.get();
+            }
+            return null;
     }
 
 }
