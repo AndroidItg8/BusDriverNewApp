@@ -164,16 +164,25 @@ public class SignalRService extends Service {
                             modelList=new Gson().fromJson(object.getJSONArray("FullData").toString(),new TypeToken<List<NotificationModel>>(){}.getType());
                         }
                         createBroadcastNotification(modelList);
-                    }else if(object.has("ttp")){
-                        JSONObject array=object.getJSONObject("ttp").getJSONObject("tt");
-//                        if(array.length()>0){
-                            JSONObject tt=array.getJSONObject("row");
-                            if(tt!=null){
-                                if(tt.has("Latitude")){
-                                    EventBus.getDefault().post(new MessageEvent(tt.toString()));
-                                }
-                            }
-//                        }
+                    }else if(object.has("LocationInfo")){
+
+                        JSONObject array=object.getJSONObject("LocationInfo");
+
+                        if(array.get("ttp") instanceof JSONObject){
+                            passLatLngData(array.getJSONObject("ttp"));
+                        }else {
+                            JSONObject arr=array.getJSONArray("ttp").getJSONObject(0);
+                            passLatLngData(arr);
+                        }
+//                        .getJSONObject("ttp").getJSONObject("tt");
+////                        if(array.length()>0){
+//                            JSONObject tt=array.getJSONObject("row");
+//                            if(tt!=null){
+//                                if(tt.has("Latitude")){
+//                                    EventBus.getDefault().post(new MessageEvent(tt.toString()));
+//                                }
+//                            }
+////                        }
 
                     }
 
@@ -214,6 +223,16 @@ public class SignalRService extends Service {
 //
 //            }
 //        }, Object.class);
+    }
+
+    private void passLatLngData(JSONObject array1) throws JSONException {
+        JSONObject array=array1.getJSONObject("tt");
+        JSONObject tt=array.getJSONObject("row");
+        if(tt!=null){
+            if(tt.has("Latitude")){
+                EventBus.getDefault().post(new MessageEvent(tt.toString()));
+            }
+        }
     }
 
     private void createBroadcastNotification(List<NotificationModel> modelList) {

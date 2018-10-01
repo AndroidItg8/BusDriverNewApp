@@ -73,6 +73,7 @@ import itg8.com.busdriverapp.bus.fragment.RequestFragment;
 import itg8.com.busdriverapp.bus.fragment.RouteMapFragment;
 import itg8.com.busdriverapp.common.BaseActivity;
 import itg8.com.busdriverapp.common.CommonMethod;
+import itg8.com.busdriverapp.common.MyApplication;
 import itg8.com.busdriverapp.common.Prefs;
 import itg8.com.busdriverapp.common.UtilSnackbar;
 import itg8.com.busdriverapp.home.busModel.BusModel;
@@ -616,6 +617,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         isGCConnected = true;
+        MyApplication.getInstance().setGoogleApiClient(getGoogleClient());
     }
 
     @Override
@@ -652,10 +654,10 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            checkpoint.setUsers(users);
         }
+
         routeStatusAdapter.setAllUsers(users);
-
-
     }
 
     public void setAndOpenChildrenList() {
