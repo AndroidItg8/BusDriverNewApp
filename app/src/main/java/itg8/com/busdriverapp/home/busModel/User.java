@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class User implements Parcelable
 {
 
@@ -24,28 +26,7 @@ public class User implements Parcelable
     @SerializedName("busPhoto")
     @Expose
     private Object busPhoto;
-    public final static Parcelable.Creator<User> CREATOR = new Creator<User>() {
-
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public User createFromParcel(Parcel in) {
-            User instance = new User();
-            instance.routeName = ((String) in.readValue((String.class.getClassLoader())));
-            instance.busName = ((String) in.readValue((String.class.getClassLoader())));
-            instance.busNumber = ((String) in.readValue((String.class.getClassLoader())));
-            instance.checkpoints = ((Checkpoints) in.readValue((Checkpoints.class.getClassLoader())));
-            instance.busPhoto = ((Object) in.readValue((Object.class.getClassLoader())));
-            return instance;
-        }
-
-        public User[] newArray(int size) {
-            return (new User[size]);
-        }
-
-    }
-    ;
+    private List<Checkpoint> listCheckPoints;
 
     /**
      * 
@@ -137,16 +118,56 @@ public class User implements Parcelable
         this.busPhoto = busPhoto;
     }
 
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(routeName);
-        dest.writeValue(busName);
-        dest.writeValue(busNumber);
-        dest.writeValue(checkpoints);
-        dest.writeValue(busPhoto);
+
+    public static Creator<User> getCREATOR() {
+        return CREATOR;
     }
 
+    public List<Checkpoint> getListCheckPoints() {
+        return listCheckPoints;
+    }
+
+    public void setCheckPointList(List<Checkpoint> listCheckPoints) {
+
+        this.listCheckPoints = listCheckPoints;
+    }
+
+    @Override
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.routeName);
+        dest.writeString(this.busName);
+        dest.writeString(this.busNumber);
+        dest.writeParcelable(this.checkpoints, flags);
+        dest.writeParcelable((Parcelable) this.busPhoto, flags);
+        dest.writeTypedList(this.listCheckPoints);
+    }
+
+    public User() {
+    }
+
+    protected User(Parcel in) {
+        this.routeName = in.readString();
+        this.busName = in.readString();
+        this.busNumber = in.readString();
+        this.checkpoints = in.readParcelable(Checkpoints.class.getClassLoader());
+        this.busPhoto = in.readParcelable(Object.class.getClassLoader());
+        this.listCheckPoints = in.createTypedArrayList(Checkpoint.CREATOR);
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

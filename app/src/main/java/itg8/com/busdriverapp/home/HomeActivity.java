@@ -64,18 +64,27 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import itg8.com.busdriverapp.R;
 import itg8.com.busdriverapp.admin_map.AdminMapFragment;
 import itg8.com.busdriverapp.admin_map.ChildCheckinDialogFragment;
 import itg8.com.busdriverapp.admin_map.Type;
 import itg8.com.busdriverapp.bus.fragment.BusFragment;
 import itg8.com.busdriverapp.bus.fragment.RequestFragment;
+import itg8.com.busdriverapp.bus.fragment.RouteFragment;
 import itg8.com.busdriverapp.bus.fragment.RouteMapFragment;
 import itg8.com.busdriverapp.common.BaseActivity;
 import itg8.com.busdriverapp.common.CommonMethod;
 import itg8.com.busdriverapp.common.Prefs;
 import itg8.com.busdriverapp.common.UtilSnackbar;
 import itg8.com.busdriverapp.home.busModel.BusModel;
+import itg8.com.busdriverapp.home.busModel.Buses;
 import itg8.com.busdriverapp.home.model.Checkpoint;
 import itg8.com.busdriverapp.home.model.CheckpointData;
 import itg8.com.busdriverapp.home.model.RouteModel;
@@ -87,6 +96,7 @@ import itg8.com.busdriverapp.map.GeocodedWaypoint;
 import itg8.com.busdriverapp.map.MapDirectionModel;
 import itg8.com.busdriverapp.map.MapLatLngAddressModel;
 import itg8.com.busdriverapp.rout_status.RouteStatusAdapter;
+import okhttp3.ResponseBody;
 
 import static android.view.Gravity.RIGHT;
 import static itg8.com.busdriverapp.common.CommonMethod.IS_LOGIN;
@@ -168,7 +178,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     return true;
                 case R.id.nav_bottom_track:
                     title= "Track";
-                   callFragment(RouteMapFragment.newInstance("",""));
+                 presenter.setFragmentAsPerUser();
                     return true;
 
 
@@ -679,6 +689,63 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     public void attachedListener(RouteMapFragment routeMapFragment) {
 
     }
+
+    public void getUserList(final Object object) {
+
+         Observable.just(object).flatMap(new Function<Object, Observable<List<itg8.com.busdriverapp.home.busModel.User>>>() {
+            @Override
+            public Observable<List<itg8.com.busdriverapp.home.busModel.User>> apply(Object o) throws Exception {
+
+                List<itg8.com.busdriverapp.home.busModel.User> list = new ArrayList<>();
+
+                //  Log.d(TAG, "onBusItemClicked: "+userModel.size());
+
+//                if(object instanceof itg8.com.busdriverapp.home.busModel.User){
+//                    itg8.com.busdriverapp.home.busModel.User user = (itg8.com.busdriverapp.home.busModel.User) object;
+//                    list.add(user);
+//                }
+//                else if(object instanceof  ArrayList<?>){
+                    List<itg8.com.busdriverapp.home.busModel.User> users = (List<itg8.com.busdriverapp.home.busModel.User>) object;
+                    list.addAll(users);
+//                }
+                return Observable.just(list);
+            }
+
+
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<itg8.com.busdriverapp.home.busModel.User>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<itg8.com.busdriverapp.home.busModel.User> users) {
+                        callFragment(RouteFragment.newInstance(users));
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                       e.printStackTrace();
+                       Log.d(TAG,"OnError"+e.toString());
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+
+//
+//callFragment(RouteFragment.newInstance(list));
+
+
+
 
     public interface MarkerAvailableListener {
         void onAllLatlangAvail(MapLatLngAddressModel model);

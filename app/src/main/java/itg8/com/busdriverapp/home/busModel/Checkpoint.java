@@ -35,31 +35,7 @@ public class Checkpoint implements Parcelable
     @SerializedName("users")
     @Expose
     private List<User_> users = new ArrayList<User_>();
-    public final static Parcelable.Creator<Checkpoint> CREATOR = new Creator<Checkpoint>() {
-
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Checkpoint createFromParcel(Parcel in) {
-            Checkpoint instance = new Checkpoint();
-            instance.CheckpointID = ((String) in.readValue((String.class.getClassLoader())));
-            instance.CheckpointAddress = ((String) in.readValue((String.class.getClassLoader())));
-            instance.CreatedBy = ((String) in.readValue((String.class.getClassLoader())));
-            instance.CreatedAt = ((String) in.readValue((String.class.getClassLoader())));
-            instance.IsActive = ((String) in.readValue((String.class.getClassLoader())));
-            instance.Longitude = ((String) in.readValue((String.class.getClassLoader())));
-            instance.Latitude = ((String) in.readValue((String.class.getClassLoader())));
-            in.readList(instance.users, (itg8.com.busdriverapp.home.busModel.User_.class.getClassLoader()));
-            return instance;
-        }
-
-        public Checkpoint[] newArray(int size) {
-            return (new Checkpoint[size]);
-        }
-
-    }
-    ;
+    private List<User_> usersChild;
 
     /**
      * 
@@ -205,19 +181,61 @@ public class Checkpoint implements Parcelable
         this.users = users;
     }
 
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(CheckpointID);
-        dest.writeValue(CheckpointAddress);
-        dest.writeValue(CreatedBy);
-        dest.writeValue(CreatedAt);
-        dest.writeValue(IsActive);
-        dest.writeValue(Longitude);
-        dest.writeValue(Latitude);
-        dest.writeList(users);
+    public static Creator<Checkpoint> getCREATOR() {
+        return CREATOR;
     }
 
+    public List<User_> getUsersChild() {
+        return usersChild;
+    }
+
+    public void setChildUser(List<User_> usersChild) {
+
+        this.usersChild = usersChild;
+    }
+
+    @Override
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.CheckpointID);
+        dest.writeString(this.CheckpointAddress);
+        dest.writeString(this.CreatedBy);
+        dest.writeString(this.CreatedAt);
+        dest.writeString(this.IsActive);
+        dest.writeString(this.Longitude);
+        dest.writeString(this.Latitude);
+        dest.writeTypedList(this.users);
+        dest.writeTypedList(this.usersChild);
+    }
+
+    public Checkpoint() {
+    }
+
+    protected Checkpoint(Parcel in) {
+        this.CheckpointID = in.readString();
+        this.CheckpointAddress = in.readString();
+        this.CreatedBy = in.readString();
+        this.CreatedAt = in.readString();
+        this.IsActive = in.readString();
+        this.Longitude = in.readString();
+        this.Latitude = in.readString();
+        this.users = in.createTypedArrayList(User_.CREATOR);
+        this.usersChild = in.createTypedArrayList(User_.CREATOR);
+    }
+
+    public static final Creator<Checkpoint> CREATOR = new Creator<Checkpoint>() {
+        @Override
+        public Checkpoint createFromParcel(Parcel source) {
+            return new Checkpoint(source);
+        }
+
+        @Override
+        public Checkpoint[] newArray(int size) {
+            return new Checkpoint[size];
+        }
+    };
 }

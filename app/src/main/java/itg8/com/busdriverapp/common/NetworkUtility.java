@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -31,6 +30,8 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import itg8.com.busdriverapp.home.busModel.BusModel;
 import itg8.com.busdriverapp.home.busModel.Buses;
+import itg8.com.busdriverapp.home.busModel.User;
+import itg8.com.busdriverapp.home.busModel.User_;
 import itg8.com.busdriverapp.home.busModel.WSResponse;
 import itg8.com.busdriverapp.home.model.Checkpoint;
 import itg8.com.busdriverapp.home.model.CheckpointData;
@@ -423,10 +424,10 @@ public class NetworkUtility {
             @Override
             public Observable<BusModel> apply(ResponseBody responseBody) throws Exception {
                 String response = responseBody.string();
-                BusModel busModel=null;
+                BusModel busModel = null;
                 Log.d(TAG, "apply outer: " + response);
                 if (response.contains("WSResponse")) {
-                  busModel = new Gson().fromJson(response, BusModel.class);
+                    busModel = new Gson().fromJson(response, BusModel.class);
                     if (busModel != null) {
                         Log.d(TAG, "apply inner : " + new Gson().toJson(busModel));
                     }
@@ -436,10 +437,12 @@ public class NetworkUtility {
         }).flatMap(new Function<BusModel, Observable<BusModel>>() {
             @Override
             public Observable<BusModel> apply(BusModel busModel) throws Exception {
-                BusModel mNewBusModel=new BusModel();
+                BusModel mNewBusModel = new BusModel();
                 WSResponse model = new WSResponse();
                 mNewBusModel.setWSResponse(model);
                 List<Buses> listBuses = new ArrayList<>();
+                List<User> listUser = null;
+                List<itg8.com.busdriverapp.home.busModel.Checkpoint> listCheckPoints =null;
 
 
                 String jsonString = new Gson().toJson(busModel.getWSResponse().getBuses());
@@ -449,31 +452,79 @@ public class NetworkUtility {
                     Buses bus = new Gson().fromJson(json.toString(), Buses.class);
                     listBuses.add(bus);
 
-                }
-                else if (json instanceof JSONArray) {
+                } else if (json instanceof JSONArray) {
                     List<Buses> bus = new Gson().fromJson(json.toString(), new TypeToken<List<Buses>>() {
                     }.getType());
                     listBuses.addAll(bus);
-                    Log.d(TAG, "apply: listBuses"+listBuses.size());
+                    Log.d(TAG, "apply: listBuses" + listBuses.size());
                 }
 
-//                if (json instanceof JsonObject) {
-//                    itg8.com.busdriverapp.home.busModel.User busUser = new Gson().fromJson(json.toString(), itg8.com.busdriverapp.home.busModel.User.class);
-//                    busesModel.setUser(busUser);
-//
-//                } else if (json instanceof JsonArray) {
-//                    List<itg8.com.busdriverapp.home.busModel.User> userList = new Gson().fromJson(json.toString(), new TypeToken<List<itg8.com.busdriverapp.home.busModel.User>>() {
-//                    }.getType());
-//
-//                    busesModel.setUser(userList);
-//                }
-//                busModel.setWSResponse(model);
+                for (Buses bus : listBuses
+                        ) {
+                    listUser = new ArrayList<>();
+
+                    String jsonUserString = new Gson().toJson(bus.getUser());
+                    Object jsonUser = new JSONTokener(jsonUserString).nextValue();
+
+
+                    if (jsonUser instanceof JSONObject) {
+                        User user = new Gson().fromJson(jsonUser.toString(), User.class);
+                        listUser.add(user);
+                    } else if (json instanceof JSONArray) {
+                        List<User> users = new Gson().fromJson(json.toString(), new TypeToken<List<User>>() {
+                        }.getType());
+                        listUser.addAll(users);
+                        Log.d(TAG, "apply: listUser" + listUser.size());
+                    }
+
+                    bus.setUserList(listUser);
+                }
+
+                if(listUser!=null && listUser.size()>0) {
+
+                    for (User user : listUser
+                            ) {
+
+                        listCheckPoints = new ArrayList<>();
+
+                        String jsonCheckPointsString = new Gson().toJson(user.getCheckpoints().getCheckpoint());
+                        Object jsonCheck = new JSONTokener(jsonCheckPointsString).nextValue();
+
+
+                        if (jsonCheck instanceof JSONObject) {
+                            itg8.com.busdriverapp.home.busModel.Checkpoint checkpoints = new Gson().fromJson(jsonCheck.toString(), itg8.com.busdriverapp.home.busModel.Checkpoint.class);
+                            listCheckPoints.add(checkpoints);
+                        } else if (jsonCheck instanceof JSONArray) {
+
+                            List<itg8.com.busdriverapp.home.busModel.Checkpoint> users = new Gson().fromJson(jsonCheck.toString(), new TypeToken<List<itg8.com.busdriverapp.home.busModel.Checkpoint>>() {
+                            }.getType());
+
+
+                            listCheckPoints.addAll(users);
+                            Log.d(TAG, "apply: listCheckPoints" + listCheckPoints.size());
+                        }
+
+                        user.setCheckPointList(listCheckPoints);
+
+                    }
+                    if (listCheckPoints.size() > 0)
+                        for (itg8.com.busdriverapp.home.busModel.Checkpoint child : listCheckPoints
+                                ) {
+
+                            List<User_> userList = new ArrayList<>();
+                            userList.addAll(child.getUsers());
+                            child.setChildUser(child.getUsers());
+
+                        }
+                }
+
+
                 model.setBuses(listBuses);
                 return Observable.just(mNewBusModel);
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer <BusModel>() {
+                .subscribe(new Observer<BusModel>() {
 
                     @Override
                     public void onSubscribe(Disposable d) {
