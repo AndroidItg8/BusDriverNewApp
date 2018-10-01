@@ -19,6 +19,7 @@ public class Buses implements Parcelable
     @SerializedName("fullName")
     @Expose
     private String driverName;
+    private List<User> userList;
 
     public String getDriverName() {
         return driverName;
@@ -75,21 +76,18 @@ public class Buses implements Parcelable
     }
 
 
-
-
-
-
-
     public static Creator<Buses> getCREATOR() {
         return CREATOR;
     }
+  public Buses() {
+    }
 
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
 
-
-
-
-
-    public Buses() {
+    public List<User> getUserList() {
+        return userList;
     }
 
     @Override
@@ -101,6 +99,7 @@ public class Buses implements Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.busName);
         dest.writeString(this.driverName);
+        dest.writeTypedList(this.userList);
         dest.writeString(this.driverNumber);
         dest.writeString(this.busNumber);
         dest.writeParcelable((Parcelable) this.user, flags);
@@ -109,6 +108,7 @@ public class Buses implements Parcelable
     protected Buses(Parcel in) {
         this.busName = in.readString();
         this.driverName = in.readString();
+        this.userList = in.createTypedArrayList(User.CREATOR);
         this.driverNumber = in.readString();
         this.busNumber = in.readString();
         this.user = in.readParcelable(Object.class.getClassLoader());

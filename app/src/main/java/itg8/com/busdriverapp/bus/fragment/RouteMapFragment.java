@@ -3,6 +3,7 @@ package itg8.com.busdriverapp.bus.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 import android.support.design.widget.BottomSheetBehavior;
@@ -26,6 +27,7 @@ import java.util.List;
 
 import itg8.com.busdriverapp.R;
 import itg8.com.busdriverapp.bus.adapter.ChildListAdapter;
+import itg8.com.busdriverapp.home.busModel.Checkpoint;
 
 
 /**
@@ -45,6 +47,7 @@ public class RouteMapFragment extends Fragment implements OnMapReadyCallback, Ch
     private String mParam2;
     private GoogleMap mMap;
     private BottomSheetBehavior<LinearLayout> sheetBehavior;
+    private List<Checkpoint> checkList;
 
 
     public RouteMapFragment() {
@@ -55,16 +58,14 @@ public class RouteMapFragment extends Fragment implements OnMapReadyCallback, Ch
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     *
      * @return A new instance of fragment RouteMapFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static RouteMapFragment newInstance(String param1, String param2) {
+    public static RouteMapFragment newInstance(List<Checkpoint> checkpointList) {
         RouteMapFragment fragment = new RouteMapFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putParcelableArrayList(ARG_PARAM1, (ArrayList<? extends Parcelable>) checkpointList);
         fragment.setArguments(args);
         return fragment;
     }
@@ -73,8 +74,7 @@ public class RouteMapFragment extends Fragment implements OnMapReadyCallback, Ch
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            checkList = getArguments().getParcelableArrayList(ARG_PARAM1);
         }
     }
 
@@ -173,16 +173,17 @@ List<LatLng> location=        getLatituteAndLongitude();
 //                .geodesic(true)
 //                .clickable(true)
 //                .jointType(JointType.ROUND);
+        if(checkList!=null && checkList.size()>0){
 
-for(LatLng latLng :location) {
+for(Checkpoint latLng :checkList) {
 
-    mMap.addMarker(new MarkerOptions().position(latLng).title("Bus").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_school)));
+    mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(latLng.getLatitude()), Double.parseDouble(latLng.getLongitude()))).title(latLng.getCheckpointAddress()).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_school)));
 //    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
 
 //    options.add(latLng);
 
 
-
+}
 }
 //        mMap.addPolyline(options);
 

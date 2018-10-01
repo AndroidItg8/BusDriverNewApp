@@ -1,6 +1,8 @@
 package itg8.com.busdriverapp.bus.fragment;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,8 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +28,23 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import itg8.com.busdriverapp.R;
 import itg8.com.busdriverapp.bus.adapter.BusAdapter;
 import itg8.com.busdriverapp.home.HomeActivity;
 import itg8.com.busdriverapp.home.busModel.BusModel;
 import itg8.com.busdriverapp.home.busModel.Buses;
+import itg8.com.busdriverapp.home.busModel.Checkpoint;
+import itg8.com.busdriverapp.home.busModel.Checkpoints;
 import itg8.com.busdriverapp.home.busModel.User;
+import itg8.com.busdriverapp.home.busModel.User_;
+import itg8.com.busdriverapp.home.model.RouteModel;
 
 import static itg8.com.busdriverapp.home.RouteListFragment.TAG;
 
@@ -114,20 +133,92 @@ public class BusFragment extends Fragment implements BusAdapter.OnBusItemClicked
     }
 
     @Override
-    public void onBusItemClicked(int position, Object object) {
-        List<User> list = new ArrayList<>();
-      //  Log.d(TAG, "onBusItemClicked: "+userModel.size());
+    public void onBusItemClicked(int position, final List<User> userList) {
+        ((HomeActivity)getActivity()).callFragment(RouteFragment.newInstance(userList));
 
-         if(object instanceof JSONObject){
-             User user = (User) object;
-             list.add(user);
-         }
-         else if(object instanceof JSONArray){
-             List<User> users = (List<User>) object;
-             list.addAll(users);
-         }
 
-//        ((HomeActivity)getActivity()).callFragment(RouteFragment.newInstance(list));
+//        Observable.just(object).flatMap(new Function<Object, Observable<List<User>>>() {
+//
+//            @Override
+//            public Observable<List<User>> apply(Object o) throws Exception {
+//                List<User> userLists = new ArrayList<>();
+//
+//                if(object instanceof LinkedTreeMap<?,?>){
+//                    String jsonString = new Gson().toJson(object);
+//                    Object json = new JSONTokener(jsonString).nextValue();
+//                    itg8.com.busdriverapp.home.busModel.User busUser = new Gson().fromJson(json.toString(), itg8.com.busdriverapp.home.busModel.User.class);
+//                    userLists.add(busUser);
+//                }
+//                if(object instanceof User){
+//                    String jsonString = new Gson().toJson(object);
+//                    Object json = new JSONTokener(jsonString).nextValue();
+//                    List<User> userList = new Gson().fromJson(json.toString(), new TypeToken<List<User>>() {
+//                    }.getType());
+//                    userLists.addAll(userList);
+//                    }
+//
+//
+//                User user1 = new User();
+//
+//                for (User check:userLists) {
+//                    Checkpoints checkpoints = new Checkpoints();
+//                    String jsonStrings = new Gson().toJson(check.getCheckpoints().getCheckpoint());
+//                    Object jsons = new JSONTokener(jsonStrings).nextValue();
+//
+//                    if(checkpoints.getCheckpoint() instanceof  LinkedTreeMap<?,?>) {
+//                            List<Checkpoint> checkpoints1 = new Gson().fromJson(jsons.toString(), new TypeToken<List<Checkpoint>>() {
+//                            }.getType());
+//
+//                            checkpoints.setCheckpoint(checkpoints1);
+//                            checkpoints.setCheckpointList(checkpoints1);
+//                        }
+//                        user1.setCheckpoints(checkpoints);
+////                    userLists.add(user1);
+//                    }
+//                    return Observable.just(userLists);
+//            }
+//
+//
+//        }).subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<List<User>>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(List<User> users) {
+//
+//                    }
+//
+//
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
+
+
+    }
+
+    @Override
+    public void onBusItemCalledClicked(int position, Buses busModel) {
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + busModel.getDriverName()));
+        startActivity(intent);
+
+
+    }
+
+    @Override
+    public void onBusItemSMSClicked(int position, Buses busModel) {
+
     }
 }
 

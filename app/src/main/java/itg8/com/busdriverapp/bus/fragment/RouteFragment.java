@@ -1,28 +1,45 @@
 package itg8.com.busdriverapp.bus.fragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONTokener;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import itg8.com.busdriverapp.R;
 import itg8.com.busdriverapp.bus.adapter.RouteAdapter;
 import itg8.com.busdriverapp.home.HomeActivity;
-import itg8.com.busdriverapp.home.busModel.BusModel;
+import itg8.com.busdriverapp.home.busModel.Checkpoint;
+import itg8.com.busdriverapp.home.busModel.Checkpoints;
 import itg8.com.busdriverapp.home.busModel.User;
+import itg8.com.busdriverapp.home.busModel.User_;
+
+import static itg8.com.busdriverapp.home.RouteListFragment.TAG;
 
 
 /**
@@ -97,12 +114,57 @@ public class RouteFragment extends Fragment implements RouteAdapter.OnRouteItemC
     }
 
     @Override
-    public void onRouteItemClicked(int position) {
+    public void onRouteItemClicked(int position, List<Checkpoint> checkpoints) {
 
-        callFragment();
-    }
-    private void callFragment() {
-        ((HomeActivity)getActivity()).callFragment(RouteMapFragment.newInstance("",""));
+                                ((HomeActivity)getActivity()).callFragment(RouteMapFragment.newInstance(checkpoints));
 
+//        io.reactivex.Observable
+//                .just(checkpoints)
+//                .flatMap(new Function<Checkpoints, ObservableSource<List<Checkpoint>>>() {
+//
+//                    @Override
+//                    public ObservableSource<List<Checkpoint>> apply(Checkpoints checkpoints) throws Exception {
+//
+//                        List<Checkpoint> list= new ArrayList<>();
+//                        String jsonString = new Gson().toJson(checkpoints.getCheckpoint());
+//                        Object json = new JSONTokener(jsonString).nextValue();
+////                        if(checkpoints.getCheckpoint() instanceof  ArrayList<?>){
+// List<Checkpoint> checkpoints1 = new Gson().fromJson(json.toString(), new TypeToken<List<Checkpoint>>() {
+//                            }.getType());
+//
+//
+//                            list.addAll(checkpoints1);
+//                        Log.d(TAG, "apply: "+checkpoints1.size());
+////                        }
+//
+//
+//                        return io.reactivex.Observable.just(list);
+//                    }
+//                }).subscribeOn(Schedulers.io())
+//                .subscribeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<List<Checkpoint>>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(List<Checkpoint> checkpointList) {
+//                        ((HomeActivity)getActivity()).callFragment(RouteMapFragment.newInstance(checkpointList));
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
+//
     }
+
 }
