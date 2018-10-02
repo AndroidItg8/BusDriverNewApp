@@ -26,7 +26,7 @@ public class User implements Parcelable
     @SerializedName("busPhoto")
     @Expose
     private Object busPhoto;
-    private List<Checkpoint> listCheckPoints;
+
 
     /**
      * 
@@ -123,14 +123,9 @@ public class User implements Parcelable
         return CREATOR;
     }
 
-    public List<Checkpoint> getListCheckPoints() {
-        return listCheckPoints;
-    }
 
-    public void setCheckPointList(List<Checkpoint> listCheckPoints) {
 
-        this.listCheckPoints = listCheckPoints;
-    }
+
 
     @Override
     public int describeContents() {
@@ -144,7 +139,6 @@ public class User implements Parcelable
         dest.writeString(this.busNumber);
         dest.writeParcelable(this.checkpoints, flags);
         dest.writeParcelable((Parcelable) this.busPhoto, flags);
-        dest.writeTypedList(this.listCheckPoints);
     }
 
     public User() {
@@ -156,7 +150,6 @@ public class User implements Parcelable
         this.busNumber = in.readString();
         this.checkpoints = in.readParcelable(Checkpoints.class.getClassLoader());
         this.busPhoto = in.readParcelable(Object.class.getClassLoader());
-        this.listCheckPoints = in.createTypedArrayList(Checkpoint.CREATOR);
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {

@@ -442,7 +442,7 @@ public class NetworkUtility {
                 mNewBusModel.setWSResponse(model);
                 List<Buses> listBuses = new ArrayList<>();
                 List<User> listUser = null;
-                List<itg8.com.busdriverapp.home.busModel.Checkpoint> listCheckPoints =null;
+                List<itg8.com.busdriverapp.home.busModel.Checkpoint> listCheckPoints = null;
 
 
                 String jsonString = new Gson().toJson(busModel.getWSResponse().getBuses());
@@ -471,23 +471,19 @@ public class NetworkUtility {
                         User user = new Gson().fromJson(jsonUser.toString(), User.class);
                         listUser.add(user);
                     } else if (json instanceof JSONArray) {
-                        List<User> users = new Gson().fromJson(json.toString(), new TypeToken<List<User>>() {
+                        List<User> users = new Gson().fromJson(jsonUser.toString(), new TypeToken<List<User>>() {
                         }.getType());
                         listUser.addAll(users);
                         Log.d(TAG, "apply: listUser" + listUser.size());
                     }
 
                     bus.setUserList(listUser);
-                }
-
-                if(listUser!=null && listUser.size()>0) {
-
-                    for (User user : listUser
-                            ) {
-
+                    for (User u :
+                            listUser) {
                         listCheckPoints = new ArrayList<>();
-
-                        String jsonCheckPointsString = new Gson().toJson(user.getCheckpoints().getCheckpoint());
+                        if(u.getCheckpoints()==null || u.getCheckpoints().getCheckpoint()==null)
+                            continue;
+                        String jsonCheckPointsString = new Gson().toJson(u.getCheckpoints().getCheckpoint());
                         Object jsonCheck = new JSONTokener(jsonCheckPointsString).nextValue();
 
 
@@ -504,19 +500,66 @@ public class NetworkUtility {
                             Log.d(TAG, "apply: listCheckPoints" + listCheckPoints.size());
                         }
 
-                        user.setCheckPointList(listCheckPoints);
-
-                    }
-                    if (listCheckPoints.size() > 0)
-                        for (itg8.com.busdriverapp.home.busModel.Checkpoint child : listCheckPoints
+                        u.getCheckpoints().setCheckpointList(listCheckPoints);
+                        for (itg8.com.busdriverapp.home.busModel.Checkpoint check : listCheckPoints
                                 ) {
-
                             List<User_> userList = new ArrayList<>();
-                            userList.addAll(child.getUsers());
-                            child.setChildUser(child.getUsers());
 
+                            String jsonUsersString = new Gson().toJson(check.getUsers());
+                            Object jsonCheckUsers = new JSONTokener(jsonUsersString).nextValue();
+                            if (jsonCheckUsers instanceof JSONArray) {
+
+                                List<itg8.com.busdriverapp.home.busModel.User_> users = new Gson().fromJson(jsonCheckUsers.toString(), new TypeToken<List<itg8.com.busdriverapp.home.busModel.User_>>() {
+                                }.getType());
+
+                                userList.addAll(users);
+                            } else if (jsonCheckUsers instanceof JSONObject) {
+                                itg8.com.busdriverapp.home.busModel.User_ checkpoints = new Gson().fromJson(jsonCheckUsers.toString(), itg8.com.busdriverapp.home.busModel.User_.class);
+                                userList.add(checkpoints);
+                            }
+
+                            check.setChildUser(userList);
                         }
+                    }
                 }
+
+//                if (listUser.size() > 0) {
+//
+//                    for (User user : listUser
+//                            ) {
+//
+//                        listCheckPoints = new ArrayList<>();
+//
+//                        String jsonCheckPointsString = new Gson().toJson(user.getCheckpoints().getCheckpoint());
+//                        Object jsonCheck = new JSONTokener(jsonCheckPointsString).nextValue();
+//
+//
+//                        if (jsonCheck instanceof JSONObject) {
+//                            itg8.com.busdriverapp.home.busModel.Checkpoint checkpoints = new Gson().fromJson(jsonCheck.toString(), itg8.com.busdriverapp.home.busModel.Checkpoint.class);
+//                            listCheckPoints.add(checkpoints);
+//                        } else if (jsonCheck instanceof JSONArray) {
+//
+//                            List<itg8.com.busdriverapp.home.busModel.Checkpoint> users = new Gson().fromJson(jsonCheck.toString(), new TypeToken<List<itg8.com.busdriverapp.home.busModel.Checkpoint>>() {
+//                            }.getType());
+//
+//
+//                            listCheckPoints.addAll(users);
+//                            Log.d(TAG, "apply: listCheckPoints" + listCheckPoints.size());
+//                        }
+//
+//                        user.setCheckPointList(listCheckPoints);
+//
+//                    }
+//                    if (listCheckPoints.size() > 0)
+//                        for (itg8.com.busdriverapp.home.busModel.Checkpoint child : listCheckPoints
+//                                ) {
+//
+//                            List<User_> userList = new ArrayList<>();
+//                            userList.addAll(child.getUsers());
+//                            child.setChildUser(child.getUsers());
+//
+//                        }
+//                }
 
 
                 model.setBuses(listBuses);

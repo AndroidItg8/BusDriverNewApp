@@ -33,9 +33,7 @@ public class RouteActivity extends FragmentActivity implements ChildListAdapter.
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     private GoogleMap mMap;
-    private BottomSheetBehavior<LinearLayout> sheetBehavior;
-    @BindView(R.id.bottom_sheet)
-    LinearLayout layoutBottomSheet;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
