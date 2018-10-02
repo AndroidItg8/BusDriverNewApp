@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context="itg8.com.busdriverapp.home.HomeActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -21,6 +22,9 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_home" />
+
+    <include layout="@layout/item_bottomsheet"
+        />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

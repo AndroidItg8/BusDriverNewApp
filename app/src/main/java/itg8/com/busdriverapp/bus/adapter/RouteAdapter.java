@@ -45,13 +45,15 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
     public void onBindViewHolder(@NonNull RouteViewHolder holder, int position) {
 
 
-//        holder.mTxtCheckCount.setText(String .valueOf(list.get(position).getListCheckPoints().size()));
-//        holder.mTxtChildCount.setText(String.valueOf(list.get(position).getListCheckPoints().get(position).getUsersChild().size()));
+        holder.mTxtCheckCount.setText(String .valueOf(list.get(position).getCheckpoints().getCheckpointList().size()));
+        holder.mTxtChildCount.setText(String.valueOf(getChildCount(list.get(position).getCheckpoints().getCheckpointList())));
         holder.mLblStartRouteName.setText(list.get(position).getRouteName());
 
 
 
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -60,9 +62,7 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
 
     public class RouteViewHolder extends RecyclerView.ViewHolder {
 
-        public Checkpoints checkModel;
-        public List<User_> userModel;
-        public List<Checkpoint> checkList;
+
         @BindView(R.id.lbl_routeName)
         TextView mLblRouteName;
         @BindView(R.id.lbl_start_routeName)
@@ -88,7 +88,7 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onRouteItemClicked(getAdapterPosition(),list.get(getAdapterPosition()).getListCheckPoints());
+                    listener.onRouteItemClicked(getAdapterPosition(),list.get(getAdapterPosition()).getCheckpoints().getCheckpointList());
                 }
             });
         }
@@ -98,5 +98,14 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
         void onRouteItemClicked(int position, List<Checkpoint> checkpoints);
 
 
+    }
+
+    private int getChildCount(List<Checkpoint> checkpointList) {
+        List<User_> userList = new ArrayList<>();
+        for (Checkpoint ch:checkpointList
+                ) {
+            userList.addAll(ch.getUsersChild());
+        }
+        return userList.size();
     }
 }

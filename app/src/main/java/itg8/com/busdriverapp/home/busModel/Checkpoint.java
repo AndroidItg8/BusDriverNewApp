@@ -34,7 +34,7 @@ public class Checkpoint implements Parcelable
     private String Latitude;
     @SerializedName("users")
     @Expose
-    private List<User_> users = new ArrayList<User_>();
+    private Object users;
     private List<User_> usersChild;
 
     /**
@@ -168,7 +168,7 @@ public class Checkpoint implements Parcelable
      * @return
      *     The users
      */
-    public List<User_> getUsers() {
+    public Object getUsers() {
         return users;
     }
 
@@ -177,7 +177,7 @@ public class Checkpoint implements Parcelable
      * @param users
      *     The users
      */
-    public void setUsers(List<User_> users) {
+    public void setUsers(Object users) {
         this.users = users;
     }
 
@@ -208,9 +208,10 @@ public class Checkpoint implements Parcelable
         dest.writeString(this.IsActive);
         dest.writeString(this.Longitude);
         dest.writeString(this.Latitude);
-        dest.writeTypedList(this.users);
         dest.writeTypedList(this.usersChild);
     }
+
+
 
     public Checkpoint() {
     }
@@ -223,7 +224,6 @@ public class Checkpoint implements Parcelable
         this.IsActive = in.readString();
         this.Longitude = in.readString();
         this.Latitude = in.readString();
-        this.users = in.createTypedArrayList(User_.CREATOR);
         this.usersChild = in.createTypedArrayList(User_.CREATOR);
     }
 

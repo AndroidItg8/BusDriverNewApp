@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/margin_8"
-    app:behavior_hideable="true"
+    android:visibility="gone"
+    app:behavior_hideable="false"
     app:behavior_peekHeight="56dp"
 
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
@@ -42,25 +43,25 @@
             android:textColor="@color/colorBlack"
             android:fontFamily="@font/roboto"
             android:gravity="center_horizontal"
-
             android:text="12"
-
             android:textAllCaps="true"
-
 
             android:textStyle="bold"
             android:id="@+id/txt_childCount"
             android:ellipsize="end"
             android:maxLines="1"
-android:layout_below="@+id/lbl_childCount"
-            android:layout_marginRight="08dp"
-
-            />
+            android:layout_below="@+id/lbl_childCount"
+            android:layout_marginRight="08dp" />
 
 
 
     </RelativeLayout>
     </android.support.design.card.MaterialCardView>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView"/>
+
 
 
 

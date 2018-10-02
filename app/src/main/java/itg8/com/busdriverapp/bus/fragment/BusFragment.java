@@ -46,6 +46,7 @@ import itg8.com.busdriverapp.home.busModel.User;
 import itg8.com.busdriverapp.home.busModel.User_;
 import itg8.com.busdriverapp.home.model.RouteModel;
 
+import static itg8.com.busdriverapp.R2.id.message;
 import static itg8.com.busdriverapp.home.RouteListFragment.TAG;
 
 /**
@@ -218,6 +219,9 @@ public class BusFragment extends Fragment implements BusAdapter.OnBusItemClicked
 
     @Override
     public void onBusItemSMSClicked(int position, Buses busModel) {
+        Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "sms:" + busModel.getDriverNumber()));
+        intent.putExtra( "sms_body", message );
+        startActivity(intent);
 
     }
 }

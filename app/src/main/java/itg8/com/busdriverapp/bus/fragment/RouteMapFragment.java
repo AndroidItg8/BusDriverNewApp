@@ -1,6 +1,7 @@
 package itg8.com.busdriverapp.bus.fragment;
 
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -8,17 +9,20 @@ import android.support.annotation.NonNull;
 
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -27,7 +31,11 @@ import java.util.List;
 
 import itg8.com.busdriverapp.R;
 import itg8.com.busdriverapp.bus.adapter.ChildListAdapter;
+import itg8.com.busdriverapp.home.HomeActivity;
 import itg8.com.busdriverapp.home.busModel.Checkpoint;
+import itg8.com.busdriverapp.home.busModel.User_;
+
+import static itg8.com.busdriverapp.home.RouteListFragment.TAG;
 
 
 /**
@@ -35,7 +43,7 @@ import itg8.com.busdriverapp.home.busModel.Checkpoint;
  * Use the {@link RouteMapFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RouteMapFragment extends Fragment implements OnMapReadyCallback, ChildListAdapter.OnChildItemClickedListener {
+public class RouteMapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -48,7 +56,9 @@ public class RouteMapFragment extends Fragment implements OnMapReadyCallback, Ch
     private GoogleMap mMap;
     private BottomSheetBehavior<LinearLayout> sheetBehavior;
     private List<Checkpoint> checkList;
-
+    private Context context;
+    private Marker myMarker;
+    OnMakerClickedListener listener;
 
     public RouteMapFragment() {
         // Required empty public constructor
@@ -57,7 +67,6 @@ public class RouteMapFragment extends Fragment implements OnMapReadyCallback, Ch
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
      *
      * @return A new instance of fragment RouteMapFragment.
      */
@@ -75,6 +84,7 @@ public class RouteMapFragment extends Fragment implements OnMapReadyCallback, Ch
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             checkList = getArguments().getParcelableArrayList(ARG_PARAM1);
+
         }
     }
 
@@ -91,66 +101,32 @@ public class RouteMapFragment extends Fragment implements OnMapReadyCallback, Ch
         return view;
     }
 
-    private   List<LatLng> getLatituteAndLongitude() {
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+        listener = (OnMakerClickedListener) context;
+
+    }
+
+
+    private List<LatLng> getLatituteAndLongitude() {
         List<LatLng> latituteList = new ArrayList<>();
-        LatLng latLng = new LatLng(21.1222209,79.0405717);
+        LatLng latLng = new LatLng(21.1222209, 79.0405717);
         latituteList.add(latLng);
-        latLng = new LatLng(21.1222209,79.0405288);
+        latLng = new LatLng(21.1222209, 79.0405288);
         latituteList.add(latLng);
-       latLng = new LatLng(21.1333464,79.0579316);
+        latLng = new LatLng(21.1333464, 79.0579316);
         latituteList.add(latLng);
-        latLng = new LatLng(21.1532194,79.0614292);
+        latLng = new LatLng(21.1532194, 79.0614292);
         latituteList.add(latLng);
-        latLng = new LatLng(21.173013,79.0602705);
+        latLng = new LatLng(21.173013, 79.0602705);
         latituteList.add(latLng);
-         return latituteList;
+        return latituteList;
 
 
     }
 
-
-    private void callBottomSheet() {
-
-//        sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
-
-
-        /**
-         * bottom sheet state change listener
-         * we are changing button text when sheet changed state
-         * */
-        sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                switch (newState) {
-                    case BottomSheetBehavior.STATE_HIDDEN:
-                        break;
-                    case BottomSheetBehavior.STATE_EXPANDED: {
-
-                    }
-                    break;
-                    case BottomSheetBehavior.STATE_COLLAPSED: {
-
-                    }
-                    break;
-                    case BottomSheetBehavior.STATE_DRAGGING:
-                        break;
-                    case BottomSheetBehavior.STATE_SETTLING:
-                        break;
-                }
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-            }
-        });
-    }
-
-
-//    private void callRecyclerView() {
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        mRecyclerView.setAdapter(new ChildListAdapter(getActivity(), this));
-//    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -166,35 +142,50 @@ public class RouteMapFragment extends Fragment implements OnMapReadyCallback, Ch
     }
 
     private void onMapLocationReady() {
-List<LatLng> location=        getLatituteAndLongitude();
+        List<LatLng> location = getLatituteAndLongitude();
 //        PolylineOptions options =  new PolylineOptions()
 //                .width(10)
 //                .color(Color.RED)
 //                .geodesic(true)
 //                .clickable(true)
 //                .jointType(JointType.ROUND);
-        if(checkList!=null && checkList.size()>0){
+        Log.d(TAG, "onMapLocationReady: checkList Size" + checkList.size());
+        if (checkList != null && checkList.size() > 0) {
+            for (Checkpoint latLng : checkList) {
 
-for(Checkpoint latLng :checkList) {
+                myMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(latLng.getLatitude()), Double.parseDouble(latLng.getLongitude()))).title(latLng.getCheckpointAddress()).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_school)));
+                myMarker.setTag(latLng);
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom((new LatLng(Double.parseDouble(latLng.getLatitude()), Double.parseDouble(latLng.getLongitude()))), 12));
+            }
 
-    mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(latLng.getLatitude()), Double.parseDouble(latLng.getLongitude()))).title(latLng.getCheckpointAddress()).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_school)));
-//    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
+            mMap.setOnMarkerClickListener(this);
 
-//    options.add(latLng);
-
-
-}
-}
-//        mMap.addPolyline(options);
-
-//        callRecyclerView();
-
+        }
 
 
     }
+
 
     @Override
-    public void onChildItemClicked(int position) {
+    public boolean onMarkerClick(Marker marker) {
+
+        //Log.d(TAG, "onMarkerClick: maker  "+marker.getTag());
+        Checkpoint selectedCheckpoint= (Checkpoint) marker.getTag();
+        listener.onMakerClicked(selectedCheckpoint.getUsersChild(), selectedCheckpoint.getCheckpointAddress());
+//            for (Checkpoint ch : checkList) {
+//
+//                if (marker.getTitle().equals(ch.getCheckpointAddress())) {
+//                    return false;
+//                }
+//        }
+        return false;
 
     }
+
+    public interface OnMakerClickedListener {
+
+        void onMakerClicked(List<User_> list, String address);
+    }
+
 }
+

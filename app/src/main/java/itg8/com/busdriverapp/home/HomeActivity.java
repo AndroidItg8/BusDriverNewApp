@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -30,6 +31,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -66,7 +68,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
@@ -75,6 +76,7 @@ import itg8.com.busdriverapp.R;
 import itg8.com.busdriverapp.admin_map.AdminMapFragment;
 import itg8.com.busdriverapp.admin_map.ChildCheckinDialogFragment;
 import itg8.com.busdriverapp.admin_map.Type;
+import itg8.com.busdriverapp.bus.adapter.ChildListAdapter;
 import itg8.com.busdriverapp.bus.fragment.BusFragment;
 import itg8.com.busdriverapp.bus.fragment.RequestFragment;
 import itg8.com.busdriverapp.bus.fragment.RouteFragment;
@@ -85,7 +87,7 @@ import itg8.com.busdriverapp.common.MyApplication;
 import itg8.com.busdriverapp.common.Prefs;
 import itg8.com.busdriverapp.common.UtilSnackbar;
 import itg8.com.busdriverapp.home.busModel.BusModel;
-import itg8.com.busdriverapp.home.busModel.Buses;
+import itg8.com.busdriverapp.home.busModel.User_;
 import itg8.com.busdriverapp.home.model.Checkpoint;
 import itg8.com.busdriverapp.home.model.CheckpointData;
 import itg8.com.busdriverapp.home.model.RouteModel;
@@ -97,12 +99,11 @@ import itg8.com.busdriverapp.map.GeocodedWaypoint;
 import itg8.com.busdriverapp.map.MapDirectionModel;
 import itg8.com.busdriverapp.map.MapLatLngAddressModel;
 import itg8.com.busdriverapp.rout_status.RouteStatusAdapter;
-import okhttp3.ResponseBody;
 
 import static android.view.Gravity.RIGHT;
 import static itg8.com.busdriverapp.common.CommonMethod.IS_LOGIN;
 
-public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, HomeFragmentInteractor, BaseActivity.GrantLocationPermissionListener, HomeMvp.HomeView, GoogleApiClient.ConnectionCallbacks {
+public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, HomeFragmentInteractor, BaseActivity.GrantLocationPermissionListener, HomeMvp.HomeView, GoogleApiClient.ConnectionCallbacks, RouteMapFragment.OnMakerClickedListener {
 
     private static final String TAG = "HomeActivity";
     private static final int RC_VAL = 102;
@@ -132,8 +133,16 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     ProgressBar progress;
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
+    @BindView(R.id.lbl_childCount)
+    TextView lblChildCount;
+    @BindView(R.id.txt_childCount)
+    TextView txtChildCount;
+
     private Type type;
     private String currentFragment = "";
+    private BottomSheetBehavior<LinearLayout> sheetBehavior;
+    @BindView(R.id.bottom_sheet)
+    LinearLayout layoutBottomSheet;
 
 
     private View.OnClickListener toolbarBackListener = new View.OnClickListener() {
@@ -169,21 +178,18 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.nav_bottom_home:
-                    title= "Home";
+                    title = "Home";
                     presenter.setFragmentAsPerUser();
                     return true;
                 case R.id.nav_bottom_request:
-                    title= "Request";
-                    callFragment(RequestFragment.newInstance("",""));
+                    title = "Request";
+                    callFragment(RequestFragment.newInstance("", ""));
 
                     return true;
                 case R.id.nav_bottom_track:
-                    title= "Track";
-                 presenter.setFragmentAsPerUser();
+                    title = "Track";
+                    presenter.setFragmentAsPerUser();
                     return true;
-
-
-
             }
 
 
@@ -215,7 +221,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
 
-
     private void loadMap() {
         // Fixing Later Map loading Delay
         new Thread(new Runnable() {
@@ -232,10 +237,12 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             }
         }).start();
     }
-   public void  removeUPButton(){
-       getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+    public void removeUPButton() {
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
     }
+
     private void init() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -278,7 +285,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             ft.addToBackStack(fragment.getClass().getSimpleName());
         ft.commit();
     }
-
 
 
     @Override
@@ -637,8 +643,9 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void onBusesAvailable(BusModel busModel) {
+        layoutBottomSheet.setVisibility(View.GONE);
 
-   callFragment(BusFragment.newInstance(busModel));
+        callFragment(BusFragment.newInstance(busModel));
 
     }
 
@@ -694,7 +701,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     public void getUserList(final Object object) {
 
-         Observable.just(object).flatMap(new Function<Object, Observable<List<itg8.com.busdriverapp.home.busModel.User>>>() {
+        Observable.just(object).flatMap(new Function<Object, Observable<List<itg8.com.busdriverapp.home.busModel.User>>>() {
             @Override
             public Observable<List<itg8.com.busdriverapp.home.busModel.User>> apply(Object o) throws Exception {
 
@@ -707,8 +714,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 //                    list.add(user);
 //                }
 //                else if(object instanceof  ArrayList<?>){
-                    List<itg8.com.busdriverapp.home.busModel.User> users = (List<itg8.com.busdriverapp.home.busModel.User>) object;
-                    list.addAll(users);
+                List<itg8.com.busdriverapp.home.busModel.User> users = (List<itg8.com.busdriverapp.home.busModel.User>) object;
+                list.addAll(users);
 //                }
                 return Observable.just(list);
             }
@@ -730,8 +737,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
                     @Override
                     public void onError(Throwable e) {
-                       e.printStackTrace();
-                       Log.d(TAG,"OnError"+e.toString());
+                        e.printStackTrace();
+                        Log.d(TAG, "OnError" + e.toString());
 
                     }
 
@@ -743,10 +750,16 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
 
+    @Override
+    public void onMakerClicked(List<User_> list, String address) {
+        callBottomSheet();
+        txtChildCount.setText(String.valueOf(list.size()));
+        callRecyclerView(list, address);
+    }
+
+
 //
 //callFragment(RouteFragment.newInstance(list));
-
-
 
 
     public interface MarkerAvailableListener {
@@ -757,7 +770,51 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         void onListComplete();
     }
 
-    public interface sendBusesInfoListener{
+    public interface sendBusesInfoListener {
         void onBusesAvailable(BusModel busModel);
+    }
+
+    private void callBottomSheet() {
+        layoutBottomSheet.setVisibility(View.VISIBLE);
+
+        sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
+
+
+        /**
+         * bottom sheet state change listener
+         * we are changing button text when sheet changed state
+         * */
+        sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                switch (newState) {
+                    case BottomSheetBehavior.STATE_HIDDEN:
+                        break;
+                    case BottomSheetBehavior.STATE_EXPANDED: {
+
+                    }
+                    break;
+                    case BottomSheetBehavior.STATE_COLLAPSED: {
+
+                    }
+                    break;
+                    case BottomSheetBehavior.STATE_DRAGGING:
+                        break;
+                    case BottomSheetBehavior.STATE_SETTLING:
+                        break;
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
+    }
+
+
+    private void callRecyclerView(List<User_> list, String address) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new ChildListAdapter(this, list, address));
     }
 }
