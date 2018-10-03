@@ -43,7 +43,7 @@ import static itg8.com.busdriverapp.home.RouteListFragment.TAG;
  * Use the {@link RouteMapFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RouteMapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class RouteMapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,6 +59,9 @@ public class RouteMapFragment extends Fragment implements OnMapReadyCallback, Go
     private Context context;
     private Marker myMarker;
     OnMakerClickedListener listener;
+    BusFragment.HideBottomSheetListener listenerBottomSheet;
+
+
 
     public RouteMapFragment() {
         // Required empty public constructor
@@ -106,59 +109,52 @@ public class RouteMapFragment extends Fragment implements OnMapReadyCallback, Go
         super.onAttach(context);
         this.context = context;
         listener = (OnMakerClickedListener) context;
-
-    }
-
-
-    private List<LatLng> getLatituteAndLongitude() {
-        List<LatLng> latituteList = new ArrayList<>();
-        LatLng latLng = new LatLng(21.1222209, 79.0405717);
-        latituteList.add(latLng);
-        latLng = new LatLng(21.1222209, 79.0405288);
-        latituteList.add(latLng);
-        latLng = new LatLng(21.1333464, 79.0579316);
-        latituteList.add(latLng);
-        latLng = new LatLng(21.1532194, 79.0614292);
-        latituteList.add(latLng);
-        latLng = new LatLng(21.173013, 79.0602705);
-        latituteList.add(latLng);
-        return latituteList;
+        listenerBottomSheet = (BusFragment.HideBottomSheetListener) context;
 
 
     }
+
+    @Override
+    public void onDetach() {
+        listenerBottomSheet.onHideBottomSheet();
+        super.onDetach();
+
+    }
+
 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.getUiSettings().setMapToolbarEnabled(false);
 
-        // Add a marker in Sydney and move the camera
-
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 
 
         onMapLocationReady();
     }
 
     private void onMapLocationReady() {
-        List<LatLng> location = getLatituteAndLongitude();
+
 //        PolylineOptions options =  new PolylineOptions()
 //                .width(10)
 //                .color(Color.RED)
 //                .geodesic(true)
 //                .clickable(true)
 //                .jointType(JointType.ROUND);
+
+        mMap.setOnMarkerClickListener(this);
+        mMap.setOnMapClickListener(this);
+
         Log.d(TAG, "onMapLocationReady: checkList Size" + checkList.size());
         if (checkList != null && checkList.size() > 0) {
-            for (Checkpoint latLng : checkList) {
 
+            for (Checkpoint latLng : checkList) {
                 myMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(latLng.getLatitude()), Double.parseDouble(latLng.getLongitude()))).title(latLng.getCheckpointAddress()).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_school)));
                 myMarker.setTag(latLng);
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom((new LatLng(Double.parseDouble(latLng.getLatitude()), Double.parseDouble(latLng.getLongitude()))), 12));
             }
 
-            mMap.setOnMarkerClickListener(this);
+
 
         }
 
@@ -182,9 +178,17 @@ public class RouteMapFragment extends Fragment implements OnMapReadyCallback, Go
 
     }
 
+    @Override
+    public void onMapClick(LatLng latLng) {
+        listener.onChildCount(checkList);
+
+    }
+
     public interface OnMakerClickedListener {
 
         void onMakerClicked(List<User_> list, String address);
+        void onChildCount(List<Checkpoint> list );
+
     }
 
 }

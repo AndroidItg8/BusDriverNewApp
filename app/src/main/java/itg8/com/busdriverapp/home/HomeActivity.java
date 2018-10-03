@@ -103,7 +103,7 @@ import itg8.com.busdriverapp.rout_status.RouteStatusAdapter;
 import static android.view.Gravity.RIGHT;
 import static itg8.com.busdriverapp.common.CommonMethod.IS_LOGIN;
 
-public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, HomeFragmentInteractor, BaseActivity.GrantLocationPermissionListener, HomeMvp.HomeView, GoogleApiClient.ConnectionCallbacks, RouteMapFragment.OnMakerClickedListener {
+public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, HomeFragmentInteractor, BaseActivity.GrantLocationPermissionListener, HomeMvp.HomeView, GoogleApiClient.ConnectionCallbacks, RouteMapFragment.OnMakerClickedListener, BusFragment.HideBottomSheetListener{
 
     private static final String TAG = "HomeActivity";
     private static final int RC_VAL = 102;
@@ -117,6 +117,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.recyclerViewChild)
+    RecyclerView recyclerViewChild;
     @BindView(R.id.nav_view)
     NavigationView navView;
     @BindView(R.id.drawer_layout)
@@ -137,14 +139,13 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     TextView lblChildCount;
     @BindView(R.id.txt_childCount)
     TextView txtChildCount;
-
+    @BindView(R.id.bottom_sheet)
+    LinearLayout layoutBottomSheet;
+    String title;
+    sendBusesInfoListener listener;
     private Type type;
     private String currentFragment = "";
     private BottomSheetBehavior<LinearLayout> sheetBehavior;
-    @BindView(R.id.bottom_sheet)
-    LinearLayout layoutBottomSheet;
-
-
     private View.OnClickListener toolbarBackListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -157,8 +158,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
     private Location mLastKnownLocation;
-
-
     private HomeMvp.HomePresenter presenter;
     private CheckpointData mCheckpointData;
     private boolean isGCConnected;
@@ -167,10 +166,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private ChildCheckinDialogFragment dialog;
     private RouteStatusAdapter routeStatusAdapter;
     private FragmentManager fm;
-    String title;
-    sendBusesInfoListener listener;
-
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -642,9 +637,47 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
-    public void onBusesAvailable(BusModel busModel) {
-        layoutBottomSheet.setVisibility(View.GONE);
+    public void onChildCount(List<itg8.com.busdriverapp.home.busModel.Checkpoint> list) {
 
+        List<User_> lists = new ArrayList<>();
+
+
+        for (itg8.com.busdriverapp.home.busModel.Checkpoint checkpoint : list
+                ) {
+          if(checkpoint.getUsersChild().size()>0) {
+              User_ user = new User_();
+
+              user.setAddress(checkpoint.getCheckpointAddress());
+
+              for (User_ users : checkpoint.getUsersChild()) {
+
+                  String userName = users.getFullName();
+                  String userId = users.getUserID();
+                  String userINBus = users.getInBus();
+                  user.setFullName(userName);
+                  user.setUserID(userId);
+                  user.setInBus(userINBus);
+
+              }
+
+              lists.add(user);
+          }
+
+          }
+
+
+        txtChildCount.setText(String.valueOf(lists.size()));
+
+
+        callRecyclerView(lists, "",CommonMethod.CHILD_CLICKED);
+        callBottomSheet();
+
+
+
+    }
+
+    @Override
+    public void onBusesAvailable(BusModel busModel) {
         callFragment(BusFragment.newInstance(busModel));
 
     }
@@ -754,25 +787,15 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     public void onMakerClicked(List<User_> list, String address) {
         callBottomSheet();
         txtChildCount.setText(String.valueOf(list.size()));
-        callRecyclerView(list, address);
+        if(list.size()>0)
+        callRecyclerView(list, address, CommonMethod.MARKER_CLICKED);
+        else
+            return;
     }
 
 
 //
 //callFragment(RouteFragment.newInstance(list));
-
-
-    public interface MarkerAvailableListener {
-        void onAllLatlangAvail(MapLatLngAddressModel model);
-
-        void onLatlangAvail(MapLatLngAddressModel latLng);
-
-        void onListComplete();
-    }
-
-    public interface sendBusesInfoListener {
-        void onBusesAvailable(BusModel busModel);
-    }
 
     private void callBottomSheet() {
         layoutBottomSheet.setVisibility(View.VISIBLE);
@@ -784,6 +807,9 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
          * bottom sheet state change listener
          * we are changing button text when sheet changed state
          * */
+
+//        sheetBehavior.setPeekHeight(layoutBottomSheet.getHeight());
+
         sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -791,16 +817,26 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     case BottomSheetBehavior.STATE_HIDDEN:
                         break;
                     case BottomSheetBehavior.STATE_EXPANDED: {
+//                        sheetBehavior.setPeekHeight(layoutBottomSheet.getHeight());
+
+                        Log.d(TAG, "BottomSheetBehavior :  STATE_EXPANDED" + layoutBottomSheet.getHeight());
 
                     }
                     break;
                     case BottomSheetBehavior.STATE_COLLAPSED: {
+                        Log.d(TAG, "BottomSheetBehavior :  STATE_COLLAPSED");
+//                        sheetBehavior.setPeekHeight(56);
+
 
                     }
                     break;
                     case BottomSheetBehavior.STATE_DRAGGING:
+//                      sheetBehavior.setPeekHeight(layoutBottomSheet.getHeight());
+                        Log.d(TAG, "BottomSheetBehavior :  STATE_DRAGGING" + layoutBottomSheet.getHeight());
+
                         break;
                     case BottomSheetBehavior.STATE_SETTLING:
+                        Log.d(TAG, "BottomSheetBehavior :  STATE_SETTLING");
                         break;
                 }
             }
@@ -812,9 +848,31 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         });
     }
 
+    private void callRecyclerView(List<User_> list, String address, String onChildClicked) {
+        recyclerViewChild.setVisibility(View.VISIBLE);
+        recyclerViewChild.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewChild.setAdapter(new ChildListAdapter(this, list, address,onChildClicked));
+    }
 
-    private void callRecyclerView(List<User_> list, String address) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new ChildListAdapter(this, list, address));
+    @Override
+    public void onHideBottomSheet() {
+        layoutBottomSheet.setVisibility(View.GONE);
+        recyclerViewChild.setVisibility(View.GONE);
+
+
+    }
+
+
+    public interface MarkerAvailableListener {
+        void onAllLatlangAvail(MapLatLngAddressModel model);
+
+        void onLatlangAvail(MapLatLngAddressModel latLng);
+
+        void onListComplete();
+    }
+
+
+    public interface sendBusesInfoListener {
+        void onBusesAvailable(BusModel busModel);
     }
 }

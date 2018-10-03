@@ -35,6 +35,7 @@ import itg8.com.busdriverapp.map.Step;
 
 public class CommonMethod {
     public static final String TYPE_DATA = "commonMethodUserType";
+    public static final String MARKER_CLICKED = "0";
 
     private static final String TAG = "CommonMethod";
 
@@ -63,6 +64,7 @@ public class CommonMethod {
     public static final String NOTIFICATION_MODEL = "MyNotificationModel";
     public static final String DND = "DoNotDisturb";
     public static final String ACTION_START_STATIC_NOTIFICATION = getPackageName()+"_ACTION_START_STATIC_NOTIFICATION";
+    public static String CHILD_CLICKED="1";
 
     public static String getPackageName(){
         return MyApplication.getInstance().getPackageName();

@@ -481,7 +481,7 @@ public class NetworkUtility {
                     for (User u :
                             listUser) {
                         listCheckPoints = new ArrayList<>();
-                        if(u.getCheckpoints()==null || u.getCheckpoints().getCheckpoint()==null)
+                        if (u.getCheckpoints() == null || u.getCheckpoints().getCheckpoint() == null)
                             continue;
                         String jsonCheckPointsString = new Gson().toJson(u.getCheckpoints().getCheckpoint());
                         Object jsonCheck = new JSONTokener(jsonCheckPointsString).nextValue();
@@ -505,6 +505,7 @@ public class NetworkUtility {
                                 ) {
                             List<User_> userList = new ArrayList<>();
 
+
                             String jsonUsersString = new Gson().toJson(check.getUsers());
                             Object jsonCheckUsers = new JSONTokener(jsonUsersString).nextValue();
                             if (jsonCheckUsers instanceof JSONArray) {
@@ -512,13 +513,20 @@ public class NetworkUtility {
                                 List<itg8.com.busdriverapp.home.busModel.User_> users = new Gson().fromJson(jsonCheckUsers.toString(), new TypeToken<List<itg8.com.busdriverapp.home.busModel.User_>>() {
                                 }.getType());
 
+
+
                                 userList.addAll(users);
                             } else if (jsonCheckUsers instanceof JSONObject) {
                                 itg8.com.busdriverapp.home.busModel.User_ checkpoints = new Gson().fromJson(jsonCheckUsers.toString(), itg8.com.busdriverapp.home.busModel.User_.class);
+
+
                                 userList.add(checkpoints);
+
+
                             }
 
                             check.setChildUser(userList);
+
                         }
                     }
                 }
