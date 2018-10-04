@@ -94,6 +94,7 @@ import itg8.com.busdriverapp.home.model.RouteModel;
 import itg8.com.busdriverapp.home.model.User;
 import itg8.com.busdriverapp.home.mvp.HomeMvp;
 import itg8.com.busdriverapp.home.mvp.HomePresenterImp;
+import itg8.com.busdriverapp.leave_request.LeaveRequestFragment;
 import itg8.com.busdriverapp.login.LoginActivity;
 import itg8.com.busdriverapp.map.GeocodedWaypoint;
 import itg8.com.busdriverapp.map.MapDirectionModel;
@@ -178,7 +179,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     return true;
                 case R.id.nav_bottom_request:
                     title = "Request";
-                    callFragment(RequestFragment.newInstance("", ""));
+                    callFragment(LeaveRequestFragment.newInstance("", ""));
 
                     return true;
                 case R.id.nav_bottom_track:

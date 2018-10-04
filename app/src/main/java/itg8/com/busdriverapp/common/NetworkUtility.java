@@ -604,6 +604,51 @@ public class NetworkUtility {
 
     }
 
+    public void sendLeaveRequest(String url, String userId , int checkedItem, String startDate, String endDate, String message, int type, final ResponseListener responseListener) {
+
+        if (responseListener == null) {
+            throwNullPointer();
+            return;
+        }
+        Observable<ResponseBody> responseBodyObservable = controller.sendRequestServer( userId,checkedItem, startDate, endDate, message,type);
+        responseBodyObservable.subscribeOn(Schedulers.io())
+                .map(new Function<ResponseBody, Boolean>() {
+                    @Override
+                    public Boolean apply(ResponseBody responseBody) throws Exception {
+                        return getResponse(responseBody.string()) != null;
+                    }
+                }).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Boolean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        if(aBoolean){
+                            responseListener.onSuccess("Submit");
+                        }else
+                            responseListener.onFailure("Failed");
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        responseListener.onSomethingWrong(e.getMessage());
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+
+
+    }
+
 
     public interface ResponseListener {
         void onSuccess(Object message);
