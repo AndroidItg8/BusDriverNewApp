@@ -3,6 +3,7 @@ package itg8.com.busdriverapp.bus.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,21 +15,24 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import itg8.com.busdriverapp.R;
+import itg8.com.busdriverapp.common.CommonMethod;
 import itg8.com.busdriverapp.home.busModel.User_;
 
 public class ChildListAdapter extends RecyclerView.Adapter<ChildListAdapter.ChildViewHolder> {
 
+    private final List<User_> list;
     //    private final OnChildItemClickedListener listener;
     private Context context;
-    private final List<User_> list;
     private String address;
+    private String onChildClicked;
 
-    public ChildListAdapter(Context context, List<User_> list, String address) {
+    public ChildListAdapter(Context context, List<User_> list, String address, String onChildClicked) {
 
         this.context = context;
 //        this.listener = listener;
         this.list = list;
         this.address = address;
+        this.onChildClicked = onChildClicked;
     }
 
 
@@ -42,21 +46,38 @@ public class ChildListAdapter extends RecyclerView.Adapter<ChildListAdapter.Chil
     @Override
     public void onBindViewHolder(@NonNull ChildViewHolder holder, int position) {
 
-holder.txtStudent.setText(list.get(position).getFullName());
-holder.txtCheckpointAddress.setText(address);
-if(list.get(position).getInBus().equals("true")){
-    holder.imgStatus.setImageResource(R.drawable.ic_my_location_24dp);
 
-}else{
-    holder.imgStatus.setImageResource(R.drawable.ic_my_location_gray_24dp);
+        holder.txtStudent.setText(list.get(position).getFullName());
+        if (onChildClicked.equals(CommonMethod.CHILD_CLICKED)) {
+            holder.txtCheckpointAddress.setText((list.get(position).getAddress()));
 
-}
+        } else {
+            holder.txtCheckpointAddress.setText(address);
+
+        }
+
+        if (!TextUtils.isEmpty(list.get(position).getInBus())) {
+
+            if (list.get(position).getInBus().equals("true")) {
+                holder.imgStatus.setImageResource(R.drawable.ic_my_location_24dp);
+
+            } else {
+                holder.imgStatus.setImageResource(R.drawable.ic_my_location_gray_24dp);
+
+            }
+        }
     }
 
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public interface OnChildItemClickedListener {
+        void onChildItemClicked(int position);
+
+
     }
 
     public class ChildViewHolder extends RecyclerView.ViewHolder {
@@ -82,11 +103,5 @@ if(list.get(position).getInBus().equals("true")){
                 }
             });
         }
-    }
-
-    public interface OnChildItemClickedListener {
-        void onChildItemClicked(int position);
-
-
     }
 }

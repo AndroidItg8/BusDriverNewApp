@@ -1,6 +1,7 @@
 package itg8.com.busdriverapp.bus.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
@@ -61,6 +62,9 @@ public class RouteFragment extends Fragment implements RouteAdapter.OnRouteItemC
     private String mParam1;
     private String mParam2;
     private List<User> listUser;
+    private Context context;
+    BusFragment.HideBottomSheetListener hideBottomSheetListener;
+
 
 
     public RouteFragment() {
@@ -93,6 +97,24 @@ public class RouteFragment extends Fragment implements RouteAdapter.OnRouteItemC
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+        hideBottomSheetListener = (BusFragment.HideBottomSheetListener) context;
+        hideBottomSheetListener.onHideBottomSheet();
+
+
+
+    }
+
+    @Override
+    public void onDetach() {
+        hideBottomSheetListener.onHideBottomSheet();
+        super.onDetach();
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -116,7 +138,8 @@ public class RouteFragment extends Fragment implements RouteAdapter.OnRouteItemC
     @Override
     public void onRouteItemClicked(int position, List<Checkpoint> checkpoints) {
 
-                                ((HomeActivity)getActivity()).callFragment(RouteMapFragment.newInstance(checkpoints));
+        ((HomeActivity)getActivity()).callFragment(RouteMapFragment.newInstance(checkpoints));
+
 
 //        io.reactivex.Observable
 //                .just(checkpoints)
@@ -165,6 +188,12 @@ public class RouteFragment extends Fragment implements RouteAdapter.OnRouteItemC
 //                    }
 //                });
 //
+    }
+
+    public interface OnBottomSheetClickedListener {
+
+        void onChildCount(List<Checkpoint> list );
+
     }
 
 }

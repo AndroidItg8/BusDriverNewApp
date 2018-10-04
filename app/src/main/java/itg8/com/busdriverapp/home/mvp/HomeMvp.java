@@ -10,17 +10,13 @@ public interface HomeMvp {
     public interface HomeView extends BaseView{
         void onRouteAvail(RouteModel routeModels);
         void onRouteDownloadFail(Object e);
-
         void showBusAdminDetails();
-
         void showBusDriverDetails();
-
         void onBusesAvailable(BusModel busModel);
     }
 
     public interface HomePresenter{
         void startGettingRouteInfo();
-
         void sendToken(String url, String token);
 
         void setFragmentAsPerUser();
@@ -38,9 +34,9 @@ public interface HomeMvp {
 
     public interface HomeModule{
         void onStartGettingRouteInfo();
-
         void sendTokenToServer(String url, String token);
-
         void onStartGettingBusInfo();
     }
+
+
 }

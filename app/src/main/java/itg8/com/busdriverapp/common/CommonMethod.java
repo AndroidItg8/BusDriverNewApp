@@ -8,12 +8,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -22,7 +24,6 @@ import io.reactivex.schedulers.Schedulers;
 import itg8.com.busdriverapp.home.HomeActivity;
 import itg8.com.busdriverapp.home.model.Checkpoint;
 import itg8.com.busdriverapp.home.model.CheckpointData;
-import itg8.com.busdriverapp.home.model.RouteModel;
 import itg8.com.busdriverapp.map.Leg;
 import itg8.com.busdriverapp.map.MapDirectionModel;
 import itg8.com.busdriverapp.map.MapLatLngAddressModel;
@@ -35,6 +36,7 @@ import itg8.com.busdriverapp.map.Step;
 
 public class CommonMethod {
     public static final String TYPE_DATA = "commonMethodUserType";
+    public static final String MARKER_CLICKED = "0";
 
     private static final String TAG = "CommonMethod";
 
@@ -63,6 +65,9 @@ public class CommonMethod {
     public static final String NOTIFICATION_MODEL = "MyNotificationModel";
     public static final String DND = "DoNotDisturb";
     public static final String ACTION_START_STATIC_NOTIFICATION = getPackageName()+"_ACTION_START_STATIC_NOTIFICATION";
+    public static String CHILD_CLICKED="1";
+
+    public static SimpleDateFormat formatServerSend = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault());
 
     public static String getPackageName(){
         return MyApplication.getInstance().getPackageName();
@@ -233,4 +238,28 @@ public class CommonMethod {
         return Prefs.contains(CommonMethod.TOKEN);
     }
 
+
+    public static Date convertStringDate(String startDate) {
+
+        Date date = null;
+        try {
+         date = formatServerSend.parse(startDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        return date;
+    }
+
+    public static String convertDateString(Date startDate) {
+
+        String date = " ";
+
+           date = formatServerSend.format(startDate);
+
+
+
+        return date;
+    }
 }

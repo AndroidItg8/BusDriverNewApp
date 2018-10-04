@@ -1,6 +1,7 @@
 package itg8.com.busdriverapp.bus.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -67,7 +68,8 @@ public class BusFragment extends Fragment implements BusAdapter.OnBusItemClicked
     private String mParam1;
     private String mParam2;
     private BusModel busModel;
-
+    HideBottomSheetListener  listener;
+    private Context context;
 
 
     public BusFragment() {
@@ -118,6 +120,13 @@ public class BusFragment extends Fragment implements BusAdapter.OnBusItemClicked
 
 
     }
+@Override
+public void onAttach(Context context) {
+    super.onAttach(context);
+    this.context = context;
+listener = (HideBottomSheetListener) context;
+listener.onHideBottomSheet();
+}
 
     private void callRecyclerView(List<Buses> users) {
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
@@ -223,6 +232,18 @@ public class BusFragment extends Fragment implements BusAdapter.OnBusItemClicked
         intent.putExtra( "sms_body", message );
         startActivity(intent);
 
+    }
+
+    @Override
+    public void onDetach() {
+        listener.onHideBottomSheet();
+        super.onDetach();
+
+    }
+
+    public interface HideBottomSheetListener{
+
+        void onHideBottomSheet();
     }
 }
 

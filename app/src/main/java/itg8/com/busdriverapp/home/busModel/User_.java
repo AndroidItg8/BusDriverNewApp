@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class User_ implements Parcelable
 {
 
@@ -18,26 +20,17 @@ public class User_ implements Parcelable
     @SerializedName("InBus")
     @Expose
     private String InBus;
-    public final static Parcelable.Creator<User_> CREATOR = new Creator<User_>() {
 
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public User_ createFromParcel(Parcel in) {
-            User_ instance = new User_();
-            instance.userID = ((String) in.readValue((String.class.getClassLoader())));
-            instance.fullName = ((String) in.readValue((String.class.getClassLoader())));
-            instance.InBus = ((String) in.readValue((String.class.getClassLoader())));
-            return instance;
-        }
-
-        public User_[] newArray(int size) {
-            return (new User_[size]);
-        }
-
+    public String getAddress() {
+        return address;
     }
-    ;
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    private String address;
+
 
     /**
      * 
@@ -93,14 +86,38 @@ public class User_ implements Parcelable
         this.InBus = InBus;
     }
 
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(userID);
-        dest.writeValue(fullName);
-        dest.writeValue(InBus);
+    public User_() {
     }
 
+    @Override
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.userID);
+        dest.writeString(this.fullName);
+        dest.writeString(this.InBus);
+        dest.writeString(this.address);
+    }
+
+    protected User_(Parcel in) {
+        this.userID = in.readString();
+        this.fullName = in.readString();
+        this.InBus = in.readString();
+        this.address = in.readString();
+    }
+
+    public static final Creator<User_> CREATOR = new Creator<User_>() {
+        @Override
+        public User_ createFromParcel(Parcel source) {
+            return new User_(source);
+        }
+
+        @Override
+        public User_[] newArray(int size) {
+            return new User_[size];
+        }
+    };
 }

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_16"
+    tools:context=".bus.fragment.RequestFragment">
+
+
+    <RadioGroup
+        android:id="@+id/rdDayGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <RadioButton
+            android:id="@+id/rd_oneDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/radio_selector"
+            android:button="@null"
+            android:checked="false"
+            android:padding="@dimen/margin_8"
+            android:text="One  Day" />
+
+        <RadioButton
+            android:id="@+id/rd_halfDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/radio_selector"
+            android:button="@null"
+            android:checked="true"
+            android:padding="@dimen/margin_8"
+            android:text="Half Day" />
+        <RadioButton
+            android:id="@+id/rd_multipleDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/radio_selector"
+            android:button="@null"
+            android:checked="false"
+            android:padding="@dimen/margin_8"
+            android:text="Multiple Day" />
+
+    </RadioGroup>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rdDayGroup"
+        android:id="@+id/frame"
+        android:layout_margin="@dimen/margin_8">
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/custom_text_back"
+            android:layout_margin="@dimen/margin_8"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto"
+            android:id="@+id/lbl_oneDay_date"
+            android:maxLines="1"
+            android:padding="12dp"
+            android:visibility="gone"
+            android:textAllCaps="false"
+            android:hint="@string/select_date"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textSize_12"
+            android:textColorHint="@color/colorGray"
+            android:textStyle="normal" />
+
+        <LinearLayout
+            android:id="@+id/ll_multipleDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:visibility="visible"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/custom_text_back"
+                android:layout_margin="@dimen/margin_8"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto"
+                android:id="@+id/lbl_start_Date"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:textAllCaps="false"
+                android:hint="@string/start_Date"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/textSize_12"
+                android:textColorHint="@color/colorGray"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/custom_text_back"
+                android:layout_margin="@dimen/margin_8"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto"
+                android:id="@+id/lbl_end_Date"
+                android:maxLines="1"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:textAllCaps="true"
+                android:hint="@string/end_Date"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/textSize_12"
+                android:textColorHint="@color/colorGray"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+
+    <EditText
+        android:id="@+id/txt_message"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/frame"
+        android:layout_margin="@dimen/margin_8"
+        android:backgroundTint="@color/colorPrimary"
+        android:ellipsize="end"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:fontFamily="@font/roboto"
+        android:gravity="top|left"
+        android:hint="Message"
+        android:maxLines="5"
+        android:textAllCaps="false"
+
+
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGray"
+        android:textSize="@dimen/textSize_12"
+        android:textStyle="normal" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="Save"
+            android:textColor="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorWhite_400"
+            android:text="Clear"
+            android:textColor="@color/colorGray" />
+    </LinearLayout>
+
+
+</RelativeLayout>

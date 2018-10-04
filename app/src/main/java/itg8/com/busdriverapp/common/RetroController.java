@@ -1,6 +1,7 @@
 package itg8.com.busdriverapp.common;
 
 import com.google.gson.JsonObject;
+import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONObject;
 
@@ -41,4 +42,14 @@ public interface RetroController {
 
     @POST("WS.ashx?op=GetBusAdmin")
     Observable<ResponseBody> getBus(@Body JsonObject object);
+
+    @POST("WS.ashx?op=UserLeave")
+    Observable<ResponseBody> sendRequestServer(
+                                               @Field("userid")
+                                               String userId,
+                                               @Field("fulldayleave") int checkedItem,
+                                               @Field("startdate") String startDate,
+                                               @Field("enddate") String endDate,
+                                               @Field("description") String message,
+                                               @Field("type") int type);
 }
