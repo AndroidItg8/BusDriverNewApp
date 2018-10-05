@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import org.json.JSONObject;
 
 import io.reactivex.Observable;
+import itg8.com.busdriverapp.leave_request.model.LeaveRequestModel;
 import itg8.com.busdriverapp.login.LoginModel;
 import itg8.com.busdriverapp.notification.model.NotificationModel;
 import okhttp3.ResponseBody;
@@ -45,11 +46,9 @@ public interface RetroController {
 
     @POST("WS.ashx?op=UserLeave")
     Observable<ResponseBody> sendRequestServer(
-                                               @Field("userid")
-                                               String userId,
-                                               @Field("fulldayleave") int checkedItem,
-                                               @Field("startdate") String startDate,
-                                               @Field("enddate") String endDate,
-                                               @Field("description") String message,
-                                               @Field("type") int type);
+            @Body LeaveRequestModel model);
+
+    @POST("WS.ashx?op=DashboardData")
+    Observable<ResponseBody> getCategoryFRomSever(
+            @Body JsonObject  model);
 }

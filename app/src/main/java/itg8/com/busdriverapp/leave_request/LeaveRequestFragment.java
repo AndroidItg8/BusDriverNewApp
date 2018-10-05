@@ -19,22 +19,16 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import itg8.com.busdriverapp.R;
 import itg8.com.busdriverapp.common.CommonMethod;
-import itg8.com.busdriverapp.common.Prefs;
 import itg8.com.busdriverapp.common.UtilSnackbar;
 import itg8.com.busdriverapp.leave_request.mvp.RequestMVP;
 import itg8.com.busdriverapp.leave_request.mvp.RequestPresenterImp;
-import itg8.com.busdriverapp.login.mvp.LoginMVP;
 
 import static itg8.com.busdriverapp.home.HomeFragment.TAG;
 
@@ -48,6 +42,11 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final int ONE_DAY = 0;
+    public static final int HALF_DAY = 1;
+    public static final int MULTI_DAY = 2;
+    private static final int START = 5;
+    private static final int END= 6;
     @BindView(R.id.rd_oneDay)
     RadioButton mRdOneDay;
     @BindView(R.id.rd_halfDay)
@@ -74,6 +73,9 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
     Button mBtnClear;
     Unbinder unbinder;
 
+    Calendar startDate=Calendar.getInstance();
+    Calendar endDate=Calendar.getInstance();
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -83,6 +85,7 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
 
     private RequestMVP.RequestPresenter presenter;
     private int radioChecked=0;
+    private int clickedItem=-1;
 
 
     public LeaveRequestFragment() {
@@ -117,6 +120,16 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
     }
 
     @Override
+    public Calendar getStartCalenderDate() {
+        return startDate;
+    }
+
+    @Override
+    public Calendar getEndCalenderDate() {
+        return endDate;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -146,27 +159,38 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.rd_oneDay:
+                resetCalender();
                 oneDaySelection();
-                daySelected = 0;
-                radioChecked=0;
+                daySelected = ONE_DAY;
+                radioChecked=1;
                 break;
 
             case R.id.rd_halfDay:
                 clearAllTextView(mLblOneDayDate, mLblStartDate, mLblEndDate, mTxtMessage);
-
                 halfDaySelection(true);
-                daySelected = 1;
-                radioChecked = 1;
+                daySelected = HALF_DAY;
+                resetCalender();
+
+                radioChecked = 0;
                 break;
+
+
+
 
             case R.id.rd_multipleDay:
                 clearAllTextView(mLblOneDayDate, mLblStartDate, mLblEndDate, mTxtMessage);
-
                 MultipleDaySelection(false);
-                daySelected = 2;
-                radioChecked = 0;
+                daySelected = MULTI_DAY;
+                radioChecked = 1;
+                resetCalender();
+
                 break;
         }
+    }
+
+    private void resetCalender() {
+        startDate=Calendar.getInstance();
+        endDate=Calendar.getInstance();
     }
 
     private void oneDaySelection() {
@@ -176,7 +200,9 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
 
     private void halfDaySelection(boolean b) {
 
-        showHideView(mLlMultipleDay, mLblOneDayDate);
+//        showHideView(mLlMultipleDay, mLblOneDayDate);
+        mLlMultipleDay.setVisibility(View.VISIBLE);
+        mLblOneDayDate.setVisibility(View.VISIBLE);
         isFromHalfDay = b;
         setLabelHint(isFromHalfDay);
     }
@@ -193,6 +219,8 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
         if (isFromHalfDay) {
             mLblEndDate.setHint(getString(R.string.start_time));
             mLblStartDate.setHint(getString(R.string.end_time));
+            mLblOneDayDate.setHint(getString(R.string.select_date));
+
         } else {
             mLblEndDate.setHint(getString(R.string.start_Date));
             mLblStartDate.setHint(getString(R.string.end_Date));
@@ -212,19 +240,25 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.lbl_oneDay_date:
-                openCalender(mLblOneDayDate);
+                mLblOneDayDate.setTag(START);
+                clickedItem = START;
+                openCalender(mLblOneDayDate, clickedItem);
                 break;
                 case R.id.lbl_start_Date:
-                lableClicked(mLblStartDate);
+                 mLblOneDayDate.setTag(START);
+                    clickedItem = START;
+                lableClicked(mLblStartDate,clickedItem);
                 break;
                 case R.id.lbl_end_Date:
-                lableClicked(mLblEndDate);
+                    mLblEndDate.setTag(END);
+                    clickedItem = END;
+                lableClicked(mLblEndDate, clickedItem);
                 break;
                 case R.id.btnClear:
                 clearAllTextView(mLblOneDayDate, mLblStartDate, mLblEndDate, mTxtMessage);
                 break;
                 case R.id.btnSave:
-                    presenter.onSaveClicked(v,daySelected);
+                    presenter.onSaveClicked(v,daySelected,radioChecked);
                 break;
 
         }
@@ -233,11 +267,11 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
 
 
 
-    private void lableClicked(TextView mLblEndDate) {
+    private void lableClicked(TextView mLblEndDate, int clickedItem) {
         if (isFromHalfDay)
-            openTimeCalender(mLblEndDate);
+            openTimeCalender(mLblEndDate, clickedItem);
         else
-            openCalender(mLblEndDate);
+            openCalender(mLblEndDate, clickedItem);
 
 
     }
@@ -251,11 +285,11 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
         mTxtMessage.setText(null);
     }
 
-    private void openTimeCalender(final TextView mLblStartTime) {
+    private void openTimeCalender(final TextView mLblStartTime, final int clickedItem) {
 
         final Calendar c = Calendar.getInstance();
-         int mHour = c.get(Calendar.HOUR_OF_DAY);
-        int mMinute = c.get(Calendar.MINUTE);
+         final int mHour = c.get(Calendar.HOUR_OF_DAY);
+        final int mMinute = c.get(Calendar.MINUTE);
         final int mYear = c.get(Calendar.YEAR);
         final int mMonth = c.get(Calendar.MONTH);
         final int mDay = c.get(Calendar.DAY_OF_MONTH);
@@ -275,6 +309,7 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
                         c.set(Calendar.MINUTE,minute);
 
 
+
                         String[]  entireDate = CommonMethod.formatServerSend.format(c.getTime()).split(" ");
                         String date = entireDate[0];
                         String time = entireDate[1];
@@ -282,20 +317,21 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
 
 
 
-        mLblStartTime.setText(time);
+                        setTimeAccordingly(c,clickedItem);
+                        mLblStartTime.setText(CommonMethod.getApPmTime(c));
                     }
                 }, mHour, mMinute, false);
         timePickerDialog.show();
 
     }
 
-    private void openCalender(final TextView mLblOneDate) {
+    private void openCalender(final TextView mLblOneDate, final int clickedItem) {
         final Calendar c = Calendar.getInstance();
-        final int mYear = c.get(Calendar.YEAR);
-        final int mMonth = c.get(Calendar.MONTH);
-        final int mDay = c.get(Calendar.DAY_OF_MONTH);
-        final int mHour = c.get(Calendar.HOUR_OF_DAY);
-        final int mMinute = c.get(Calendar.MINUTE);
+//        final int mYear = c.get(Calendar.YEAR);
+//        final int mMonth = c.get(Calendar.MONTH);
+//        final int mDay = c.get(Calendar.DAY_OF_MONTH);
+//        final int mHour = c.get(Calendar.HOUR_OF_DAY);
+//        final int mMinute = c.get(Calendar.MINUTE);
 
 
 
@@ -309,19 +345,39 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
                         c.set(Calendar.YEAR,year);
                         c.set(Calendar.MONTH, monthOfYear);
                         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        c.set(Calendar.HOUR_OF_DAY, mHour);
-                        c.set(Calendar.MINUTE,mMinute);
-                       String[]  entireDate = CommonMethod.formatServerSend.format(c.getTime()).split(" ");
-                        String date = entireDate[0];
-                        String time = entireDate[1];
+//                        c.set(Calendar.HOUR_OF_DAY, mHour);
+//                        c.set(Calendar.MINUTE,mMinute);
+//                       String[]  entireDate = CommonMethod.formatServerSend.format(c.getTime()).split(" ");
+//                        String date = entireDate[0];
+//                        String time = entireDate[1];
 
-
-                        mLblOneDate.setText(date);
+                        setDateAccordingly(c,clickedItem);
+                        mLblOneDate.setText(CommonMethod.getDDMMMYYYYfromDate(c));
 
 
                     }
-                }, mYear, mMonth, mDay);
+                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
+    }
+
+    private void setDateAccordingly(Calendar c, int tag) {
+
+        if(daySelected==ONE_DAY || daySelected==HALF_DAY){
+            startDate.setTime(c.getTime());
+            endDate.setTime(c.getTime());
+        }else if(daySelected==MULTI_DAY){
+            if(tag==START)
+                startDate.setTime(c.getTime());
+            else
+                endDate.setTime(c.getTime());
+        }
+    }
+
+    private void setTimeAccordingly(Calendar c, int tag) {
+        Calendar selectedDate=tag==START?startDate:endDate;
+            selectedDate.set(Calendar.HOUR_OF_DAY,c.get(Calendar.HOUR_OF_DAY));
+            selectedDate.set(Calendar.MINUTE,c.get(Calendar.MINUTE));
+            selectedDate.set(Calendar.SECOND,c.get(Calendar.SECOND));
     }
 
 
@@ -355,7 +411,8 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(String response) {
+        UtilSnackbar.showSnakbarTypeTwo(mBtnSave, "response");
 
     }
 
@@ -367,7 +424,9 @@ public class LeaveRequestFragment extends Fragment implements RadioGroup.OnCheck
     @Override
     public void onError(Object t) {
 
+        UtilSnackbar.showSnakbarTypeTwo(mBtnSave, t.toString());
     }
+
 
     @Override
     public void onStartDateInvalid(String err) {

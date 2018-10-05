@@ -4,6 +4,7 @@ package itg8.com.busdriverapp.common;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.google.android.gms.common.util.CrashUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -36,9 +38,13 @@ import itg8.com.busdriverapp.home.busModel.WSResponse;
 import itg8.com.busdriverapp.home.model.Checkpoint;
 import itg8.com.busdriverapp.home.model.CheckpointData;
 import itg8.com.busdriverapp.home.model.RouteModel;
+import itg8.com.busdriverapp.leave_request.model.LeaveRequestModel;
 import itg8.com.busdriverapp.login.LoginModel;
 import itg8.com.busdriverapp.login.LoginModelLoginInfo;
 import itg8.com.busdriverapp.notification.model.NotificationModel;
+import itg8.com.busdriverapp.request.model.AttendanceAdmin;
+import itg8.com.busdriverapp.request.model.Role;
+import itg8.com.busdriverapp.request.model.UserRequestModel;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -103,12 +109,12 @@ public class NetworkUtility {
             if (object.has("WSResponse") && !object.isNull("WSResponse")) {
                 return object.getJSONObject("WSResponse");
             } else if (object.has("WSError")) {
-                return new JSONObject();
+                return null;
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return new JSONObject();
+        return null;
     }
 
     private JSONObject getResponse(String json) {
@@ -604,18 +610,18 @@ public class NetworkUtility {
 
     }
 
-    public void sendLeaveRequest(String url, String userId , int checkedItem, String startDate, String endDate, String message, int type, final ResponseListener responseListener) {
+    public void sendLeaveRequest(LeaveRequestModel model,  final ResponseListener responseListener) {
 
         if (responseListener == null) {
             throwNullPointer();
             return;
         }
-        Observable<ResponseBody> responseBodyObservable = controller.sendRequestServer( userId,checkedItem, startDate, endDate, message,type);
+        Observable<ResponseBody> responseBodyObservable = controller.sendRequestServer( model);
         responseBodyObservable.subscribeOn(Schedulers.io())
                 .map(new Function<ResponseBody, Boolean>() {
                     @Override
                     public Boolean apply(ResponseBody responseBody) throws Exception {
-                        return getResponse(responseBody.string()) != null;
+                        return getResponseOnly(responseBody.string()) != null;
                     }
                 }).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Boolean>() {
@@ -646,6 +652,61 @@ public class NetworkUtility {
                 });
 
 
+
+    }
+
+    public void getCategory(final ResponseListener responseListener) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("type",9);
+        Observable<ResponseBody> responseBodyObservable = controller.getCategoryFRomSever(jsonObject);
+        responseBodyObservable.flatMap(new Function<ResponseBody, Observable<UserRequestModel>>() {
+            @Override
+            public Observable<UserRequestModel> apply(ResponseBody responseBody) throws Exception {
+                String response = responseBody.string();
+                Log.d(TAG, "apply: response"+response);
+                UserRequestModel model = null;
+                Log.d(TAG, "apply outer: " + response);
+                if (response.contains("WSResponse")) {
+                    model = new Gson().fromJson(response, UserRequestModel.class);
+                    if (model != null) {
+                        Log.d(TAG, "apply inner : " + new Gson().toJson(model));
+                    }
+                }
+                return Observable.just(model);
+            }
+        }).flatMap(new Function<UserRequestModel, Observable<AttendanceAdmin>>() {
+            @Override
+            public Observable<AttendanceAdmin> apply(UserRequestModel userRequestModel) throws Exception {
+
+
+            return Observable.just(userRequestModel.getWSResponse().getAttendanceAdmin());
+            }
+
+
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+             .subscribe(new Observer<AttendanceAdmin>() {
+                 @Override
+                 public void onSubscribe(Disposable d) {
+
+                 }
+
+                 @Override
+                 public void onNext(AttendanceAdmin responseBody) {
+
+                     responseListener.onSuccess("");
+                 }
+
+                 @Override
+                 public void onError(Throwable e) {
+
+                 }
+
+                 @Override
+                 public void onComplete() {
+
+                 }
+             });
 
     }
 
