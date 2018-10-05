@@ -1,4 +1,4 @@
-package itg8.com.busdriverapp.bus.fragment;
+package itg8.com.busdriverapp.request;
 
 
 import android.app.AlertDialog;
@@ -17,13 +17,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import itg8.com.busdriverapp.R;
+import itg8.com.busdriverapp.leave_request.mvp.RequestMVP;
+import itg8.com.busdriverapp.leave_request.mvp.RequestPresenterImp;
+import itg8.com.busdriverapp.request.mvp.RequestOtherMVP;
+import itg8.com.busdriverapp.request.mvp.RequestOtherPresenterImp;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link RequestFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RequestFragment extends Fragment implements View.OnClickListener {
+public class RequestFragment extends Fragment implements View.OnClickListener , RequestOtherMVP.RequestView{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -43,6 +47,7 @@ public class RequestFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RequestOtherMVP.RequestPresenter presenter;
 
 
     public RequestFragment() {
@@ -82,6 +87,8 @@ public class RequestFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_request, container, false);
         unbinder = ButterKnife.bind(this, view);
+presenter = new RequestOtherPresenterImp(this);
+presenter.getCategory();
         setClickListener();
         return view;
 
@@ -112,10 +119,12 @@ public class RequestFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btnSave:
+
                 break;
 
             case R.id.btnClear:
                 break;
+
         }
 
     }
@@ -141,6 +150,74 @@ public class RequestFragment extends Fragment implements View.OnClickListener {
                 .setPositiveButton("Ok", null)
                 .setNegativeButton("Cancel", null)
                 .show();
+
+    }
+
+    @Override
+    public String getCategory() {
+        return mLblCategory.getText().toString();
+    }
+
+    @Override
+    public String getUser() {
+        return mLblCategory.getText().toString();
+    }
+
+    @Override
+    public String getMessage() {
+        return mTxtMessage.getText().toString();
+    }
+
+    @Override
+    public void onCategoryInvalid(String err) {
+        mLblCategory.setError(err);
+    }
+
+    @Override
+    public void onUserInvalid(String err) {
+        mLblUser.setError(err);
+
+    }
+
+    @Override
+    public void onMessageInvalid(String err) {
+        mTxtMessage.setError(err);
+
+
+    }
+
+    @Override
+    public void onSuccess(String response) {
+
+    }
+
+    @Override
+    public void onFail(String message) {
+
+    }
+
+    @Override
+    public void onError(Object t) {
+
+    }
+
+    @Override
+    public void onNoInternet() {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void onRetroError(Object obj) {
 
     }
 }

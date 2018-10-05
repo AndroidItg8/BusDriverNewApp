@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/margin_16"
-    tools:context=".bus.fragment.RequestFragment">
+    tools:context=".request.RequestFragment">
 
 
     <RadioGroup
@@ -21,7 +21,7 @@
             android:layout_weight="1"
             android:background="@drawable/radio_selector"
             android:button="@null"
-            android:checked="false"
+            android:checked="true"
             android:padding="@dimen/margin_8"
             android:text="One  Day" />
 
@@ -32,7 +32,7 @@
             android:layout_weight="1"
             android:background="@drawable/radio_selector"
             android:button="@null"
-            android:checked="true"
+            android:checked="false"
             android:padding="@dimen/margin_8"
             android:text="Half Day" />
         <RadioButton
@@ -54,6 +54,9 @@
         android:layout_below="@+id/rdDayGroup"
         android:id="@+id/frame"
         android:layout_margin="@dimen/margin_8">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
 
@@ -68,7 +71,7 @@
             android:id="@+id/lbl_oneDay_date"
             android:maxLines="1"
             android:padding="12dp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:textAllCaps="false"
             android:hint="@string/select_date"
             android:textColor="@color/colorBlack"
@@ -80,8 +83,11 @@
             android:id="@+id/ll_multipleDay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/lbl_oneDay_date"
+
+
             android:weightSum="2"
-            android:visibility="visible"
+            android:visibility="gone"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="0dp"
@@ -122,7 +128,7 @@
                 android:textStyle="normal" />
 
         </LinearLayout>
-
+        </RelativeLayout>
 
     </FrameLayout>
 

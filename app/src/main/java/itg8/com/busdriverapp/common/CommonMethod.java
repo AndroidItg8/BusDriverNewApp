@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -83,6 +84,12 @@ public class CommonMethod {
             strings[i]=checkpoints.get(i).getLatitude()+","+checkpoints.get(i).getLongitude();
         }
         return strings;
+    }
+
+
+    public static String getApPmTime(Calendar c){
+        SimpleDateFormat dateFormat=new SimpleDateFormat("hh:mm a",Locale.getDefault());
+        return dateFormat.format(c.getTime());
     }
 
 
@@ -261,5 +268,30 @@ public class CommonMethod {
 
 
         return date;
+    }
+
+    public static String getServerStringDateByDate(Date date){
+        return formatServerSend.format(date);
+    }
+
+    public static String getDDMMMYYYYfromDate(Calendar c) {
+
+
+
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MMM-yyyy",Locale.getDefault());
+        return simpleDateFormat.format(c.getTime());
+    }
+
+    public static String getStringServerDateFromStringDateOnly(String oneDayDate) {
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MMM-yyyy",Locale.getDefault());
+        Calendar calendar=Calendar.getInstance();
+        try {
+            calendar.setTime(simpleDateFormat.parse(oneDayDate));
+            return getServerStringDateByDate(calendar.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

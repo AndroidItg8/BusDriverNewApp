@@ -78,7 +78,7 @@ import itg8.com.busdriverapp.admin_map.ChildCheckinDialogFragment;
 import itg8.com.busdriverapp.admin_map.Type;
 import itg8.com.busdriverapp.bus.adapter.ChildListAdapter;
 import itg8.com.busdriverapp.bus.fragment.BusFragment;
-import itg8.com.busdriverapp.bus.fragment.RequestFragment;
+import itg8.com.busdriverapp.request.RequestFragment;
 import itg8.com.busdriverapp.bus.fragment.RouteFragment;
 import itg8.com.busdriverapp.bus.fragment.RouteMapFragment;
 import itg8.com.busdriverapp.common.BaseActivity;
@@ -94,7 +94,6 @@ import itg8.com.busdriverapp.home.model.RouteModel;
 import itg8.com.busdriverapp.home.model.User;
 import itg8.com.busdriverapp.home.mvp.HomeMvp;
 import itg8.com.busdriverapp.home.mvp.HomePresenterImp;
-import itg8.com.busdriverapp.leave_request.LeaveRequestFragment;
 import itg8.com.busdriverapp.login.LoginActivity;
 import itg8.com.busdriverapp.map.GeocodedWaypoint;
 import itg8.com.busdriverapp.map.MapDirectionModel;
@@ -179,7 +178,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     return true;
                 case R.id.nav_bottom_request:
                     title = "Request";
-                    callFragment(LeaveRequestFragment.newInstance("", ""));
+                    callFragment(RequestFragment.newInstance("", ""));
 
                     return true;
                 case R.id.nav_bottom_track:
