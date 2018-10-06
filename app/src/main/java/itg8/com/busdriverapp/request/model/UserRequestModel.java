@@ -1,34 +1,35 @@
-
 package itg8.com.busdriverapp.request.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserRequestModel implements Parcelable
-{
+public class UserRequestModel implements Parcelable {
 
-    @SerializedName("WSResponse")
-    @Expose
-    private WSResponse wSResponse;
     public final static Creator<UserRequestModel> CREATOR = new Creator<UserRequestModel>() {
 
 
-        @SuppressWarnings({
-            "unchecked"
+     @SuppressWarnings({
+                "unchecked"
         })
         public UserRequestModel createFromParcel(Parcel in) {
-            return new UserRequestModel(in);
+            UserRequestModel instance = new UserRequestModel();
+            instance.wSResponse = ((itg8.com.busdriverapp.request.model.WSResponse) in.readValue((itg8.com.busdriverapp.request.model.WSResponse.class.getClassLoader())));
+            return instance;
+//            return new UserRequestModel(in);
         }
 
         public UserRequestModel[] newArray(int size) {
             return (new UserRequestModel[size]);
         }
 
-    }
-    ;
+    };
+    @SerializedName("WSResponse")
+    @Expose
+    private WSResponse wSResponse;
+
 
     protected UserRequestModel(Parcel in) {
         this.wSResponse = ((WSResponse) in.readValue((WSResponse.class.getClassLoader())));
@@ -50,7 +51,7 @@ public class UserRequestModel implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }

@@ -74,6 +74,7 @@ import static itg8.com.busdriverapp.common.CommonMethod.getListOfLocations;
  * create an instance of this fragment.
  */
 public class AdminMapFragment extends BaseFragment implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMarkerClickListener, OnRecyclerItemClickListener {
+    public static final String TAG = "AdminMapFragment";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -81,7 +82,6 @@ public class AdminMapFragment extends BaseFragment implements OnMapReadyCallback
     private static final String ARG_PARAM3 = "param3";
     private static final String ARG_PARAM4 = "param4";
     private static final String ARG_PARAM5 = "param5";
-    public static final String TAG = "AdminMapFragment";
 
 
     Unbinder unbinder;

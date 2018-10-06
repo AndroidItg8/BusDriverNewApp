@@ -2,9 +2,12 @@ package itg8.com.busdriverapp.request.mvp;
 
 import android.view.View;
 
+import java.util.List;
+
 import itg8.com.busdriverapp.common.BaseWeakPresenter;
 
 import itg8.com.busdriverapp.leave_request.mvp.RequestMVP;
+import itg8.com.busdriverapp.request.model.Role;
 import okhttp3.ResponseBody;
 
 public class RequestOtherPresenterImp extends BaseWeakPresenter<RequestOtherMVP.RequestView> implements RequestOtherMVP.RequestListener, RequestOtherMVP.RequestPresenter  {
@@ -36,10 +39,10 @@ public class RequestOtherPresenterImp extends BaseWeakPresenter<RequestOtherMVP.
 
 
 
-    public void onSuccess(String response) {
+    public void onSuccess(Object response) {
         if (hasView()) {
             getRequestView().hideProgress();
-            getRequestView().onSuccess(response);
+            getRequestView().onSuccess((List<Role>) response);
         }
     }
 
@@ -59,10 +62,7 @@ public class RequestOtherPresenterImp extends BaseWeakPresenter<RequestOtherMVP.
         }
     }
 
-    @Override
-    public void onCategoryDownloaded(ResponseBody responseBody) {
 
-    }
 
     private RequestOtherMVP.RequestView getRequestView() {
         return getView();

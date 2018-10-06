@@ -519,8 +519,6 @@ public class NetworkUtility {
                                 List<itg8.com.busdriverapp.home.busModel.User_> users = new Gson().fromJson(jsonCheckUsers.toString(), new TypeToken<List<itg8.com.busdriverapp.home.busModel.User_>>() {
                                 }.getType());
 
-
-
                                 userList.addAll(users);
                             } else if (jsonCheckUsers instanceof JSONObject) {
                                 itg8.com.busdriverapp.home.busModel.User_ checkpoints = new Gson().fromJson(jsonCheckUsers.toString(), itg8.com.busdriverapp.home.busModel.User_.class);
@@ -664,13 +662,18 @@ public class NetworkUtility {
             public Observable<UserRequestModel> apply(ResponseBody responseBody) throws Exception {
                 String response = responseBody.string();
                 Log.d(TAG, "apply: response"+response);
-                UserRequestModel model = null;
-                Log.d(TAG, "apply outer: " + response);
+                UserRequestModel model = new UserRequestModel();
+
                 if (response.contains("WSResponse")) {
-                    model = new Gson().fromJson(response, UserRequestModel.class);
-                    if (model != null) {
-                        Log.d(TAG, "apply inner : " + new Gson().toJson(model));
-                    }
+
+                        Log.d(TAG, "apply outer: " + response);
+
+                        model = new Gson().fromJson(response, UserRequestModel.class);
+
+                        if (model != null) {
+                            Log.d(TAG, "apply inner : " + new Gson().toJson(model));
+                        }
+
                 }
                 return Observable.just(model);
             }
@@ -683,22 +686,70 @@ public class NetworkUtility {
             }
 
 
+        }).flatMap(new Function<AttendanceAdmin, Observable<List<Role>>>() {
+            @Override
+            public Observable<List<Role>> apply(AttendanceAdmin attendanceAdmin) throws Exception {
+
+                List<Role> roleList = new ArrayList<>();
+
+
+                String jsonString = new Gson().toJson(attendanceAdmin.getRoles());
+                Object json = new JSONTokener(jsonString).nextValue();
+
+                if (json instanceof JSONObject) {
+                    Role bus = new Gson().fromJson(json.toString(), Role.class);
+                    roleList.add(bus);
+
+                } else if (json instanceof JSONArray) {
+                    List<Role> bus = new Gson().fromJson(json.toString(), new TypeToken<List<Role>>() {
+                    }.getType());
+                    roleList.addAll(bus);
+                    Log.d(TAG, "apply: listBuses" + roleList.size());
+                }
+                return Observable.just(roleList);
+            }
+        }).flatMap(new Function<List<Role>, Observable<List<itg8.com.busdriverapp.request.model.Role>>>() {
+            @Override
+            public Observable<List<itg8.com.busdriverapp.request.model.Role>> apply(List<Role> roles) throws Exception {
+                for(Role role :roles) {
+                    List<itg8.com.busdriverapp.request.model.User> userList = new ArrayList<>();
+
+                    String jsonString = new Gson().toJson(role.getUsers());
+                    Object json = new JSONTokener(jsonString).nextValue();
+
+                    if (json instanceof JSONObject) {
+                        itg8.com.busdriverapp.request.model.User bus = new Gson().fromJson(json.toString(), itg8.com.busdriverapp.request.model.User.class);
+                        userList.add(bus);
+
+                    } else if (json instanceof JSONArray) {
+                        List<itg8.com.busdriverapp.request.model.User> bus = new Gson().fromJson(json.toString(), new TypeToken<List<itg8.com.busdriverapp.request.model.User>>() {
+                        }.getType());
+                        userList.addAll(bus);
+                        Log.d(TAG, "apply: listBuses" + userList.size());
+                    }
+                    role.setRoleUser(userList);
+
+                }
+                return Observable.just(roles);
+            }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-             .subscribe(new Observer<AttendanceAdmin>() {
+             .subscribe(new Observer<List<Role>>() {
                  @Override
                  public void onSubscribe(Disposable d) {
 
                  }
 
                  @Override
-                 public void onNext(AttendanceAdmin responseBody) {
+                 public void onNext(List<Role> responseBody) {
 
-                     responseListener.onSuccess("");
+                     responseListener.onSuccess(responseBody);
                  }
 
                  @Override
                  public void onError(Throwable e) {
+                     e.printStackTrace();
+
 
                  }
 

@@ -102,7 +102,7 @@ public class Buses implements Parcelable
         dest.writeTypedList(this.userList);
         dest.writeString(this.driverNumber);
         dest.writeString(this.busNumber);
-        dest.writeParcelable((Parcelable) this.user, flags);
+//        dest.((Parcelable) this.user, flags);
     }
 
     protected Buses(Parcel in) {
@@ -111,7 +111,7 @@ public class Buses implements Parcelable
         this.userList = in.createTypedArrayList(User.CREATOR);
         this.driverNumber = in.readString();
         this.busNumber = in.readString();
-        this.user = in.readParcelable(Object.class.getClassLoader());
+//        this.user = in.readParcelable(Object.class.getClassLoader());
     }
 
     public static final Creator<Buses> CREATOR = new Creator<Buses>() {

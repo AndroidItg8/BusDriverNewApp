@@ -2,7 +2,10 @@ package itg8.com.busdriverapp.request.mvp;
 
 import android.view.View;
 
+import java.util.List;
+
 import itg8.com.busdriverapp.common.BaseView;
+import itg8.com.busdriverapp.request.model.Role;
 import okhttp3.ResponseBody;
 
 public interface RequestOtherMVP {
@@ -17,7 +20,7 @@ public interface RequestOtherMVP {
 
         void onUserInvalid(String err);
         void onMessageInvalid(String err);
-        void onSuccess(String response);
+        void onSuccess(List<Role> response);
         void onFail(String message);
         void onError(Object t);
 
@@ -34,11 +37,9 @@ public interface RequestOtherMVP {
     }
 
     public interface RequestListener{
-        void onSuccess(String message);
+        void onSuccess(Object message);
         void onFail(String message);
         void onError(Object t);
-        void onCategoryDownloaded(ResponseBody responseBody);
-//        void DownloadUserType(ResponseBody responseBody);
 
 
     }

@@ -19,29 +19,18 @@ public class Role implements Parcelable
     private String roleName;
     @SerializedName("users")
     @Expose
-    private List<User> users = null;
-    public final static Creator<Role> CREATOR = new Creator<Role>() {
+    private Object users = null;
+    private List<User> roleUser;
 
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Role createFromParcel(Parcel in) {
-            return new Role(in);
-        }
-
-        public Role[] newArray(int size) {
-            return (new Role[size]);
-        }
-
+    public boolean isChecked() {
+        return isChecked;
     }
-    ;
 
-    protected Role(Parcel in) {
-        this.roleID = ((String) in.readValue((String.class.getClassLoader())));
-        this.roleName = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.users, (itg8.com.busdriverapp.request.model.User.class.getClassLoader()));
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
+
+    private boolean isChecked;
 
     public Role() {
     }
@@ -62,22 +51,52 @@ public class Role implements Parcelable
         this.roleName = roleName;
     }
 
-    public List<User> getUsers() {
+    public Object getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(Object  users) {
         this.users = users;
     }
 
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(roleID);
-        dest.writeValue(roleName);
-        dest.writeList(users);
+
+    public void setRoleUser(List<User> roleUser) {
+        this.roleUser = roleUser;
     }
 
+    public List<User> getRoleUser() {
+        return roleUser;
+    }
+
+    @Override
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.roleID);
+        dest.writeString(this.roleName);
+        dest.writeTypedList(this.roleUser);
+        dest.writeByte(this.isChecked ? (byte) 1 : (byte) 0);
+    }
+
+    protected Role(Parcel in) {
+        this.roleID = in.readString();
+        this.roleName = in.readString();
+        this.roleUser = in.createTypedArrayList(User.CREATOR);
+        this.isChecked = in.readByte() != 0;
+    }
+
+    public static final Creator<Role> CREATOR = new Creator<Role>() {
+        @Override
+        public Role createFromParcel(Parcel source) {
+            return new Role(source);
+        }
+
+        @Override
+        public Role[] newArray(int size) {
+            return new Role[size];
+        }
+    };
 }
