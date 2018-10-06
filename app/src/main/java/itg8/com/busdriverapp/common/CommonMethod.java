@@ -38,6 +38,8 @@ import itg8.com.busdriverapp.map.Step;
 public class CommonMethod {
     public static final String TYPE_DATA = "commonMethodUserType";
     public static final String MARKER_CLICKED = "0";
+    public static final String ROLE = "ROLE";
+    public static final String ROLE_USER = "ROLE_USER";
 
     private static final String TAG = "CommonMethod";
 

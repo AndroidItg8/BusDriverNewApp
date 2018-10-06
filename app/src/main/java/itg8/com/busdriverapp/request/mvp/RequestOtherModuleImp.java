@@ -9,21 +9,24 @@ public class RequestOtherModuleImp implements RequestOtherMVP.RequestModule {
     }
 
     @Override
-    public void onDownloadCategory(RequestOtherMVP.RequestListener listener) {
+    public void onDownloadCategory(final RequestOtherMVP.RequestListener listener) {
 
         new NetworkUtility.NetworkBuilder().setHeader().build().getCategory(new NetworkUtility.ResponseListener() {
             @Override
             public void onSuccess(Object message) {
+                listener.onSuccess(message);
 
             }
 
             @Override
             public void onFailure(Object err) {
+                listener.onFail(err.toString());
 
             }
 
             @Override
             public void onSomethingWrong(Object e) {
+                listener.onError(e.toString());
 
             }
         });

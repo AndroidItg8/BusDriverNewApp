@@ -26,9 +26,7 @@
         <activity
             android:name=".home.HomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
@@ -56,33 +54,32 @@
             android:name=".login.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".bus.RouteActivity"
-            android:label="@string/title_activity_route"></activity>
+            android:label="@string/title_activity_route" />
 
         <service android:name=".notification.FirebaseTokenService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-        <service
-            android:name=".notification.FCMService">
+        <service android:name=".notification.FCMService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service android:name=".notification.SignalRService" />
+
+        <activity
+            android:name=".request.RequestActivity"
+            android:label="@string/title_activity_request"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -57,7 +57,7 @@ public class Checkpoints implements Parcelable
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable((Parcelable) this.checkpoint, flags);
+//        dest.writeParcelable((Parcelable) this.checkpoint, flags);
         dest.writeTypedList(this.checkpointList);
     }
 
@@ -65,7 +65,7 @@ public class Checkpoints implements Parcelable
     }
 
     protected Checkpoints(Parcel in) {
-        this.checkpoint = in.readParcelable(Object.class.getClassLoader());
+//        this.checkpoint = in.readParcelable(Object.class.getClassLoader());
         this.checkpointList = in.createTypedArrayList(Checkpoint.CREATOR);
     }
 

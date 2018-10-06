@@ -44,11 +44,10 @@ public class WSResponse implements Parcelable
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable((Parcelable) this.Buses, flags);
+        dest.writeList((List<Buses>) this.Buses);
     }
-
     protected WSResponse(Parcel in) {
-        this.Buses = in.readParcelable(Object.class.getClassLoader());
+        this.Buses = in.readParcelableArray(Object.class.getClassLoader());
     }
 
     public static final Creator<WSResponse> CREATOR = new Creator<WSResponse>() {
