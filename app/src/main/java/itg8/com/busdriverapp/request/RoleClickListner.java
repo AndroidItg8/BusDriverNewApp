@@ -9,9 +9,14 @@ public interface RoleClickListner {
     void onRoleClicked(int position, Role role);
     void onUserClicked(int position, User user);
 
-    void onUserChecked(List<User> roleList, List<Role> list);
+    void onUserChecked(List<User> roleList, String roleID);
 
     void onRoleChecked(List<Role> roleList);
+
+    void onUserChecked(List<User> userList);
+
+    void unCheckedOnClearButton();
+
 
 
     public interface OnCheckChangedClickedListener{

@@ -67,10 +67,18 @@ public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.RoleViewHolder
         public RoleViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+           itemView.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   listener.onItemClicked(getAdapterPosition(),roleList.get(getAdapterPosition()));
+               }
+           });
             mChkStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    listener.onItemClicked(getAdapterPosition(), roleList.get(getAdapterPosition()),isChecked);
+                    if(buttonView.isPressed()) {
+                        listener.onItemClicked(getAdapterPosition(), roleList.get(getAdapterPosition()), isChecked);
+                    }
                 }
             });
         }
@@ -78,5 +86,7 @@ public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.RoleViewHolder
 
     public interface OnItemClickedListner {
         void onItemClicked(int position, Role users, Boolean b);
+
+        void onItemClicked(int adapterPosition, Role role);
     }
 }

@@ -5,14 +5,16 @@ import android.view.View;
 import java.util.List;
 
 import itg8.com.busdriverapp.common.BaseView;
+import itg8.com.busdriverapp.request.model.OtherUserRequestModel;
 import itg8.com.busdriverapp.request.model.Role;
+import itg8.com.busdriverapp.request.model.User;
 import okhttp3.ResponseBody;
 
 public interface RequestOtherMVP {
 
     public interface RequestView extends BaseView {
         String getCategory();
-                String getUser();
+                List<User> getUser();
         String getMessage();
 
 
@@ -25,6 +27,7 @@ public interface RequestOtherMVP {
         void onError(Object t);
 
 
+        void onSaveSuccessfully(Boolean message);
     }
 
     public interface RequestPresenter{
@@ -40,12 +43,11 @@ public interface RequestOtherMVP {
         void onSuccess(Object message);
         void onFail(String message);
         void onError(Object t);
-
-
+        void onSuccessSave(Boolean message);
     }
 
     public interface RequestModule{
-        void onRequestSave( String categoryId, String message, String UserId,RequestOtherMVP.RequestListener listener);
+        void onRequestSave(OtherUserRequestModel model, RequestOtherMVP.RequestListener listener);
         void onDownloadCategory( RequestOtherMVP.RequestListener listener);
         //        void onDownloadUser( RequestMVP.RequestListener listener);
         void onDestroy();

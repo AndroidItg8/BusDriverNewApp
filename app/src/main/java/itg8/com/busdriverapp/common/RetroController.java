@@ -9,6 +9,7 @@ import io.reactivex.Observable;
 import itg8.com.busdriverapp.leave_request.model.LeaveRequestModel;
 import itg8.com.busdriverapp.login.LoginModel;
 import itg8.com.busdriverapp.notification.model.NotificationModel;
+import itg8.com.busdriverapp.request.model.OtherUserRequestModel;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -51,4 +52,8 @@ public interface RetroController {
     @POST("WS.ashx?op=DashboardData")
     Observable<ResponseBody> getCategoryFRomSever(
             @Body JsonObject  model);
+
+    @POST("WS.ashx?op=DashboardOperation")
+    Observable<ResponseBody> postRequestTOServer(
+            @Body OtherUserRequestModel model);
 }

@@ -72,10 +72,13 @@ public class RoleUserAdapter extends RecyclerView.Adapter<RoleUserAdapter.RoleUs
 
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+
             checkboxStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    listner.onItemCheckedUser(getAdapterPosition(), userList.get(getAdapterPosition()),b);
+                    if(compoundButton.isPressed())
+                        listner.onItemCheckedUser(getAdapterPosition(), userList.get(getAdapterPosition()),b);
 
                 }
             });

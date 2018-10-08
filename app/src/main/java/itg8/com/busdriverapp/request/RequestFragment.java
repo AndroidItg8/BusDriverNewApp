@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -26,6 +26,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import itg8.com.busdriverapp.R;
 import itg8.com.busdriverapp.common.CommonMethod;
+import itg8.com.busdriverapp.common.UtilSnackbar;
+import itg8.com.busdriverapp.home.HomeActivity;
 import itg8.com.busdriverapp.request.model.Role;
 import itg8.com.busdriverapp.request.model.User;
 import itg8.com.busdriverapp.request.mvp.RequestOtherMVP;
@@ -112,7 +114,7 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
     }
 
     private void setClickListener() {
-        mLblCategory.setOnClickListener(this);
+//        mLblCategory.setOnClickListener(this);
         mLblUser.setOnClickListener(this);
         mBtnClear.setOnClickListener(this);
         mBtnSave.setOnClickListener(this);
@@ -140,29 +142,35 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
                 if (roleList.size() > 0) {
                     Intent intent = new Intent(getActivity(), RequestActivity.class);
                     intent.putParcelableArrayListExtra(CommonMethod.ROLE, (ArrayList<? extends Parcelable>) roleList);
-                   getActivity().startActivityForResult(intent, RC_CODE);
+                    getActivity().startActivityForResult(intent, RC_CODE);
                 }
                 break;
 
             case R.id.btnSave:
-
+                presenter.onRequestClicked(v);
                 break;
 
             case R.id.btnClear:
+                clearAllData();
                 break;
 
-                case R.id.btnSelected:
-                    if (userList.size() > 0) {
-                        Intent intents = new Intent(getActivity(), RequestActivity.class);
-                        intents.putParcelableArrayListExtra(CommonMethod.ROLE_USER, (ArrayList<? extends Parcelable>) userList);
-                        startActivity(intents);
-                    }
+            case R.id.btnSelected:
+                if (userList.size() > 0) {
+                    Intent intents = new Intent(getActivity(), RequestActivity.class);
+                    intents.putParcelableArrayListExtra(CommonMethod.ROLE_USER, (ArrayList<? extends Parcelable>) userList);
+                    getActivity().startActivityForResult(intents, RC_CODE_ROLE);
+                }
                 break;
 
         }
 
     }
 
+    private void clearAllData() {
+        mTxtMessage.setText("");
+        userList.clear();
+//        presenter.getCategory();
+    }
 
 
     @Override
@@ -174,24 +182,27 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
         if (requestCode == RC_CODE && resultCode == Activity.RESULT_OK) {
 
             String category = null;
-            List<User> userList = data.getParcelableArrayListExtra(CommonMethod.ROLE_USER);
+            List<Role> SelectedRoleList = data.getParcelableArrayListExtra(CommonMethod.ROLE);
             Log.d(TAG, "onActivityResult: userList" + userList.size());
             Log.d(TAG, "onActivityResult: userList" + new Gson().toJson(userList));
-             mLblCategory.setText("Selected User Size"+userList.size());
-             this.userList.clear();
-             this.userList.addAll(userList);
+            mLblCategory.setText("Selected User Size");
+//             this.roleList.clear();
+//             this.roleList.addAll(userList);
+            for (Role role : SelectedRoleList) {
+                userList.clear();
+                userList.addAll(role.getRoleUser());
+            }
+
 
         }
 
         if (requestCode == RC_CODE_ROLE && resultCode == Activity.RESULT_OK) {
 
-            List<Role> rolesList = data.getParcelableArrayListExtra(CommonMethod.ROLE);
-            String roleName = null;
-            for (Role role : rolesList
-                    ) {
-                roleName = role.getRoleName() + " ";
-            }
-            mLblUser.setText(roleName);
+            List<User> rolesList = data.getParcelableArrayListExtra(CommonMethod.ROLE_USER);
+            userList.clear();
+            userList.addAll(rolesList);
+
+
         }
 
     }
@@ -224,8 +235,8 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
     }
 
     @Override
-    public String getUser() {
-        return mLblCategory.getText().toString();
+    public List<User> getUser() {
+        return userList;
     }
 
     @Override
@@ -252,6 +263,16 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
     }
 
     @Override
+    public void onSaveSuccessfully(Boolean message) {
+        if(message) {
+            Toast.makeText(getActivity(), "Inserted Successfully", Toast.LENGTH_SHORT).show();
+            ((HomeActivity) getActivity()).onBackPressed();
+        }
+
+
+    }
+
+    @Override
     public void onSuccess(List<Role> response) {
         roleList.addAll(response);
         for (Role role : roleList) {
@@ -264,16 +285,29 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
 
     @Override
     public void onFail(String message) {
+        UtilSnackbar.showSnakbarRedColor(mBtnClear, message);
 
     }
 
     @Override
     public void onError(Object t) {
+        UtilSnackbar.showSnakbarTypeFail(mBtnClear, t.toString(), new UtilSnackbar.OnSnackbarActionClickListener() {
+            @Override
+            public void onRetryClicked() {
+                presenter.getCategory();
+            }
+        });
 
     }
 
     @Override
     public void onNoInternet() {
+        UtilSnackbar.showSnakbarTypeFail(mBtnClear, "No Internet Connection Try Again", new UtilSnackbar.OnSnackbarActionClickListener() {
+            @Override
+            public void onRetryClicked() {
+                presenter.getCategory();
+            }
+        });
 
     }
 
@@ -284,7 +318,7 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
 
     @Override
     public void hideProgress() {
-       mProgress.setVisibility(View.GONE);
+        mProgress.setVisibility(View.GONE);
 
     }
 

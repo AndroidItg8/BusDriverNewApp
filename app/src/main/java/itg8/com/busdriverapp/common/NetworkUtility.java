@@ -4,7 +4,6 @@ package itg8.com.busdriverapp.common;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.google.android.gms.common.util.CrashUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -23,7 +22,6 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -43,6 +41,7 @@ import itg8.com.busdriverapp.login.LoginModel;
 import itg8.com.busdriverapp.login.LoginModelLoginInfo;
 import itg8.com.busdriverapp.notification.model.NotificationModel;
 import itg8.com.busdriverapp.request.model.AttendanceAdmin;
+import itg8.com.busdriverapp.request.model.OtherUserRequestModel;
 import itg8.com.busdriverapp.request.model.Role;
 import itg8.com.busdriverapp.request.model.UserRequestModel;
 import okhttp3.OkHttpClient;
@@ -608,13 +607,13 @@ public class NetworkUtility {
 
     }
 
-    public void sendLeaveRequest(LeaveRequestModel model,  final ResponseListener responseListener) {
+    public void sendLeaveRequest(LeaveRequestModel model, final ResponseListener responseListener) {
 
         if (responseListener == null) {
             throwNullPointer();
             return;
         }
-        Observable<ResponseBody> responseBodyObservable = controller.sendRequestServer( model);
+        Observable<ResponseBody> responseBodyObservable = controller.sendRequestServer(model);
         responseBodyObservable.subscribeOn(Schedulers.io())
                 .map(new Function<ResponseBody, Boolean>() {
                     @Override
@@ -630,9 +629,9 @@ public class NetworkUtility {
 
                     @Override
                     public void onNext(Boolean aBoolean) {
-                        if(aBoolean){
+                        if (aBoolean) {
                             responseListener.onSuccess("Submit");
-                        }else
+                        } else
                             responseListener.onFailure("Failed");
 
                     }
@@ -650,29 +649,28 @@ public class NetworkUtility {
                 });
 
 
-
     }
 
     public void getCategory(final ResponseListener responseListener) {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("type",9);
+        jsonObject.addProperty("type", 9);
         Observable<ResponseBody> responseBodyObservable = controller.getCategoryFRomSever(jsonObject);
         responseBodyObservable.flatMap(new Function<ResponseBody, Observable<UserRequestModel>>() {
             @Override
             public Observable<UserRequestModel> apply(ResponseBody responseBody) throws Exception {
                 String response = responseBody.string();
-                Log.d(TAG, "apply: response"+response);
+                Log.d(TAG, "apply: response" + response);
                 UserRequestModel model = new UserRequestModel();
 
                 if (response.contains("WSResponse")) {
 
-                        Log.d(TAG, "apply outer: " + response);
+                    Log.d(TAG, "apply outer: " + response);
 
-                        model = new Gson().fromJson(response, UserRequestModel.class);
+                    model = new Gson().fromJson(response, UserRequestModel.class);
 
-                        if (model != null) {
-                            Log.d(TAG, "apply inner : " + new Gson().toJson(model));
-                        }
+                    if (model != null) {
+                        Log.d(TAG, "apply inner : " + new Gson().toJson(model));
+                    }
 
                 }
                 return Observable.just(model);
@@ -682,7 +680,7 @@ public class NetworkUtility {
             public Observable<AttendanceAdmin> apply(UserRequestModel userRequestModel) throws Exception {
 
 
-            return Observable.just(userRequestModel.getWSResponse().getAttendanceAdmin());
+                return Observable.just(userRequestModel.getWSResponse().getAttendanceAdmin());
             }
 
 
@@ -711,7 +709,7 @@ public class NetworkUtility {
         }).flatMap(new Function<List<Role>, Observable<List<itg8.com.busdriverapp.request.model.Role>>>() {
             @Override
             public Observable<List<itg8.com.busdriverapp.request.model.Role>> apply(List<Role> roles) throws Exception {
-                for(Role role :roles) {
+                for (Role role : roles) {
                     List<itg8.com.busdriverapp.request.model.User> userList = new ArrayList<>();
 
                     String jsonString = new Gson().toJson(role.getUsers());
@@ -734,31 +732,81 @@ public class NetworkUtility {
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-             .subscribe(new Observer<List<Role>>() {
-                 @Override
-                 public void onSubscribe(Disposable d) {
+                .subscribe(new Observer<List<Role>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-                 }
+                    }
 
-                 @Override
-                 public void onNext(List<Role> responseBody) {
+                    @Override
+                    public void onNext(List<Role> responseBody) {
 
-                     responseListener.onSuccess(responseBody);
-                 }
+                        responseListener.onSuccess(responseBody);
+                    }
 
-                 @Override
-                 public void onError(Throwable e) {
-                     e.printStackTrace();
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
 
 
-                 }
+                    }
 
-                 @Override
-                 public void onComplete() {
+                    @Override
+                    public void onComplete() {
 
-                 }
-             });
+                    }
+                });
 
+    }
+
+    public void sendOtherRequest(OtherUserRequestModel model, final ResponseListener responseListener) {
+        Observable<ResponseBody> observable = controller.postRequestTOServer(model);
+        observable.flatMap(new Function<ResponseBody, Observable<Boolean>>() {
+            @Override
+            public Observable<Boolean> apply(ResponseBody responseBody) throws Exception {
+                String resp = responseBody.string();
+                boolean isSaveSuccess = false;
+                Log.d(TAG, "apply:  sendOtherRequest ->  " + resp);
+                JSONObject object = new JSONObject(resp);
+                if (object.has("WSResponse") && !object.isNull("WSResponse")) {
+                    JSONObject wsResponse = object.getJSONObject("WSResponse");
+                    String dataTemp = wsResponse.getString("status");
+
+                    if (dataTemp.equals("200"))
+                        isSaveSuccess = true;
+                    else
+                        isSaveSuccess = false;
+
+                }
+
+                return Observable.just(isSaveSuccess);
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Boolean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        responseListener.onSuccess(aBoolean);
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        responseListener.onFailure(e);
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
 

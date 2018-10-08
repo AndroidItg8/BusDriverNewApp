@@ -37,15 +37,20 @@ public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedL
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1_1 = "ARG_PARAM1_1";
+    private static final String ARG_PARAM1_2 = "ARG_PARAM1_2";
+    private static final String ARG_PARAM2_1 = "ARG_PARAM2_1";
+    private static final String FROM_CHECK_USER = "FROM_CHECK_USER";
+
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
-    Unbinder unbinder;
     @BindView(R.id.btnDone)
     Button btnDone;
     @BindView(R.id.btnClear)
     Button btnClear;
-    @BindView(R.id.ll_btton)
-    LinearLayout llBtton;
+    Unbinder unbinder;
+
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -56,6 +61,8 @@ public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedL
     RoleClickListner mHomeListner;
     private Context context;
     private RoleUserAdapter userAdapter;
+    private String roleID;
+    private String fromCheckUser;
 
     public RoleFragment() {
         // Required empty public constructor
@@ -77,16 +84,38 @@ public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedL
         return fragment;
     }
 
+
+    public static RoleFragment newInstance(Role role, List<User> roleUser) {
+        RoleFragment fragment = new RoleFragment();
+        Bundle args = new Bundle();
+        args.putParcelableArrayList(ARG_PARAM1_1, (ArrayList<? extends Parcelable>) roleUser);
+        args.putString(ARG_PARAM1_2, role.getRoleID());
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static RoleFragment newInstance(List<User> userList, String value) {
+        RoleFragment fragment = new RoleFragment();
+        Bundle args = new Bundle();
+        args.putParcelableArrayList(ARG_PARAM1_1, (ArrayList<? extends Parcelable>) userList);
+        args.putString(ARG_PARAM2_1, value);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            roleList = getArguments().getParcelableArrayList(ARG_PARAM1);
-            userList = getArguments().getParcelableArrayList(CommonMethod.ROLE_USER);
-
+                roleList = getArguments().getParcelableArrayList(ARG_PARAM1);
+                userList = getArguments().getParcelableArrayList(ARG_PARAM1_1);
+                roleID=getArguments().getString(ARG_PARAM1_2);
+            fromCheckUser =getArguments().getString(ARG_PARAM2_1);
         }
 
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -147,16 +176,22 @@ public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedL
 
     @Override
     public void onItemClicked(int position, Role users, Boolean b) {
-        roleList.remove(position);
         users.setChecked(b);
-        users.setRoleName(users.getRoleName());
-        users.setRoleID(users.getRoleID());
-        users.setRoleUser(users.getRoleUser());
-        roleList.add(position, users);
+        for (User user :
+                users.getRoleUser()) {
+            user.setChecked(b);
+        }
+
+        adapter.notifyItemChanged(position);
         mHomeListner.onRoleClicked(position, users);
         //        adapter.notifyItemChanged(position);
 
 
+    }
+
+    @Override
+    public void onItemClicked(int adapterPosition, Role role) {
+        mHomeListner.onRoleClicked(adapterPosition,role);
     }
 
     @Override
@@ -186,9 +221,15 @@ public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedL
     @Override
     public void onClick(View view) {
         if (view == btnDone) {
-            if (userList != null) {
-                mHomeListner.onUserChecked(userList, roleList);
+            if (userList != null ) {
+                if(fromCheckUser!=null)
+                         mHomeListner.onUserChecked(userList);
+                else
+                    mHomeListner.onUserChecked(userList,roleID);
+
+
             } else {
+
                 mHomeListner.onRoleChecked(roleList);
             }
         } else if (view == btnClear) {
@@ -205,26 +246,25 @@ public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedL
                 for (Role user : roleList
                         ) {
                     user.setChecked(false);
-
-                }
+                    }
 
                 adapter.notifyDataSetChanged();
             }
+            mHomeListner.unCheckedOnClearButton();
+
         }
     }
 
 
     @Override
     public void onItemCheckedUser(int position, User users, Boolean b) {
-        if (userList != null)
 //            userList.remove(position);
             users.setChecked(b);
-        users.setFullName(users.getFullName());
-        users.setUserID(users.getUserID());
+            userAdapter.notifyItemChanged(position);
 //        userList.add(position,users);
 
 
-        mHomeListner.onUserClicked(position, users);
+//        mHomeListner.onUserClicked(position, users);
 
 
     }
@@ -236,8 +276,8 @@ public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedL
         for (User user : list
                 ) {
             user.setChecked(b);
-            user.setFullName(user.getFullName());
-            user.setUserID(user.getUserID());
+//            user.setFullName(user.getFullName());
+//            user.setUserID(user.getUserID());
             userList.add(user);
 
         }
@@ -247,33 +287,35 @@ public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedL
 
     @Override
     public void onCheckBoxClickedRole(boolean b, List<Role> list) {
-        List<Role> roleList = new ArrayList<>();
         List<User> userList1 = new ArrayList<>();
-        List<User> userList = null;
         for (Role user : list
                 ) {
-            user.setChecked(b);
-            user.setRoleID(user.getRoleID());
-            user.setRoleName(user.getRoleName());
-            user.setRoleUser(user.getRoleUser());
-            userList = new ArrayList<>();
-            for (User user1 : user.getRoleUser()) {
+            user.setChecked(b) ;
 
 
-                user1.setChecked(b);
-                user1.setFullName(user1.getFullName());
-                user1.setUserID(user1.getUserID());
-                userList.add(user1);
+//            user.setRoleID(user.getRoleID());
+//            user.setRoleName(user.getRoleName());
+//            user.setRoleUser(user.getRoleUser());
 
-            }
-            userList1.addAll(userList);
-            roleList.add(user);
+                for (User user1 : user.getRoleUser()) {
+
+
+                    user1.setChecked(b);
+//                    user1.setFullName(user1.getFullName());
+//                    user1.setUserID(user1.getUserID());
+                    userList1.add(user1);
+
+                }
+
+//            userList1.addAll(userList);
+//            roleList.add(user);
         }
 
 //        this.userList.addAll(userList);
 //        this.userList= new ArrayList<>();
 //        this.userList.addAll(userList1);
-        setRecyclerViewa(userList1);
+        if(userList1.size()>0)
+             setRecyclerViewa(userList1);
 
     }
 

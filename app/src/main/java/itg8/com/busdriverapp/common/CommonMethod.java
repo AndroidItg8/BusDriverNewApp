@@ -40,6 +40,8 @@ public class CommonMethod {
     public static final String MARKER_CLICKED = "0";
     public static final String ROLE = "ROLE";
     public static final String ROLE_USER = "ROLE_USER";
+    public static final String FROM_CHECK_USER = "FROM_CHECK_USER";
+    public static final String NOTIFICATION_TYPE = "11";
 
     private static final String TAG = "CommonMethod";
 

@@ -10,10 +10,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +41,12 @@ public class RequestActivity extends AppCompatActivity implements CompoundButton
     FrameLayout mFrameContainer;
     @BindView(R.id.fab)
     FloatingActionButton mFab;
+    RoleClickListner.OnCheckChangedClickedListener listener;
     private FragmentManager fm;
     private List<Role> roleList;
-    RoleClickListner.OnCheckChangedClickedListener listener;
     private List<User> userList;
+    private List<User> selectedAllUser = new ArrayList<>();
+    private boolean isRoledClicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,19 +74,7 @@ public class RequestActivity extends AppCompatActivity implements CompoundButton
         }
         if (getIntent().hasExtra(CommonMethod.ROLE_USER)) {
             userList = getIntent().getParcelableArrayListExtra(CommonMethod.ROLE_USER);
-            RoleFragment fragment = new RoleFragment();
-            Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList(CommonMethod.ROLE_USER, (ArrayList<? extends Parcelable>) userList);
-            fragment.setArguments(bundle);
-            if (fm == null)
-                fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm
-                    .beginTransaction();
-            ft.remove(fragment);
-            ft.add(R.id.frame_container, fragment, fragment.getClass().getSimpleName());
-            ft.addToBackStack(fragment.getClass().getSimpleName());
-            ft.commit();
-
+            callFragment(RoleFragment.newInstance(userList, CommonMethod.FROM_CHECK_USER));
         }
 
 
@@ -93,48 +86,83 @@ public class RequestActivity extends AppCompatActivity implements CompoundButton
         FragmentTransaction ft = fm
                 .beginTransaction();
         ft.replace(R.id.frame_container, fragment, fragment.getClass().getSimpleName());
-        ft.addToBackStack(fragment.getClass().getSimpleName());
+//        ft.addToBackStack(fragment.getClass().getSimpleName());
         ft.commit();
 
     }
 
     @Override
     public void onUserClicked(int position, User user) {
-        mLblSelectRole.setText(user.getFullName() +" ");
+        mLblSelectRole.setText(user.getFullName() + " ");
         List<User> userList = new ArrayList<>();
         userList.add(user);
-        listener.onCheckedUpdateList(position, userList);
+        listener.onCheckedUpdateList(userList);
 
     }
 
     @Override
     public void onRoleClicked(int position, Role role) {
         mLblSelectRole.setText(role.getRoleName() + "   " + role.getRoleUser().size());
-//        userList.addAll(role.getRoleUser());
-        roleList.clear();
-        roleList.add(role);
-        RoleFragment fragment = new RoleFragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(CommonMethod.ROLE_USER, (ArrayList<? extends Parcelable>) role.getRoleUser());
-        fragment.setArguments(bundle);
-        callFragment(fragment);
+        selectedAllUser.clear();
+        selectedAllUser.addAll(role.getRoleUser());
+        isRoledClicked = true;
+
+        callFragment(RoleFragment.newInstance(role, role.getRoleUser()));
+//        roleList.clear();
+//        roleList.add(role)
     }
 
 
     @Override
-    public void onUserChecked(List<User> userList, List<Role> list) {
-//        Intent returnIntent = new Intent();
-//        returnIntent.putParcelableArrayListExtra(CommonMethod.ROLE_USER, (ArrayList<? extends Parcelable>) userList);
-//        setResult(Activity.RESULT_OK, returnIntent);
-//        this.finish();
-        listener.onCheckedUpdateList(userList, roleList);
+    public void onUserChecked(List<User> userList) {
+        Intent returnIntent = new Intent();
 
+
+        returnIntent.putParcelableArrayListExtra(CommonMethod.ROLE_USER, (ArrayList<? extends Parcelable>) userList);
+
+        setResult(Activity.RESULT_OK, returnIntent);
+        this.finish();
+    }
+
+    @Override
+    public void onUserChecked(List<User> userList, String roleID) {
+        Role tempRole = null;
+        Log.d(this.getClass().getSimpleName(), "onUserChecked: " + new Gson().toJson(roleList));
+        for (Role r :
+                roleList) {
+            if (r.getRoleID().equalsIgnoreCase(roleID)) {
+                r.setRoleUser(userList);
+                tempRole = r;
+            }
+        }
+        Log.d(this.getClass().getSimpleName(), "onUserChecked: after " + new Gson().toJson(roleList));
+
+        if (tempRole != null) {
+            callFragment(RoleFragment.newInstance(roleList));
+        }
+
+
+    }
+
+    @Override
+    public void unCheckedOnClearButton() {
+        mCheckbox.setChecked(false);
     }
 
     @Override
     public void onRoleChecked(List<Role> roleList) {
+        List<Role> TempRole = new ArrayList<>();
+        for (Role role : roleList) {
+            if (role.isChecked()) {
+                TempRole.add(role);
+            }
+
+
+        }
         Intent returnIntent = new Intent();
-        returnIntent.putParcelableArrayListExtra(CommonMethod.ROLE, (ArrayList<? extends Parcelable>) roleList);
+
+
+        returnIntent.putParcelableArrayListExtra(CommonMethod.ROLE, (ArrayList<? extends Parcelable>) TempRole);
 
         setResult(Activity.RESULT_OK, returnIntent);
         this.finish();
@@ -143,13 +171,22 @@ public class RequestActivity extends AppCompatActivity implements CompoundButton
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        if (listener != null) {
-            if (roleList != null && roleList.size() > 0) {
+        if (b) {
+            if (listener != null) {
 
-                listener.onCheckBoxClickedRole(b, roleList);
-            } else if (userList != null && userList.size() > 0) {
-                listener.onCheckBoxClickedUser(b, userList);
+                if (isRoledClicked) {
+                    if (selectedAllUser != null && selectedAllUser.size() > 0) {
+                        listener.onCheckBoxClickedUser(b, selectedAllUser);
+                    }
+                } else if (roleList != null && roleList.size() > 0) {
+                    listener.onCheckBoxClickedRole(b, roleList);
+                }
+                isRoledClicked = !isRoledClicked;
             }
+
+
+        } else {
+            callFragment(RoleFragment.newInstance(roleList));
         }
 
     }
