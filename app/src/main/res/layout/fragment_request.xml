@@ -6,29 +6,12 @@
     android:layout_margin="@dimen/margin_16"
     tools:context=".request.RequestFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/custom_text_back"
-        android:layout_margin="@dimen/margin_8"
-        android:ellipsize="end"
-        android:fontFamily="@font/roboto"
-        android:id="@+id/lbl_category"
-        android:maxLines="1"
-        android:padding="12dp"
-        android:textAllCaps="false"
-        android:hint="@string/select_category"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/textSize_12"
-        android:textColorHint="@color/colorGray"
-        android:textStyle="normal" />
+
 
     <TextView
         android:id="@+id/lbl_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lbl_category"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:background="@drawable/custom_text_back"
@@ -43,16 +26,48 @@
         android:textSize="@dimen/textSize_12"
         android:textColorHint="@color/colorGray"
         android:textStyle="normal" />
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/custom_text_back"
+        android:layout_margin="@dimen/margin_8"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto"
+        android:id="@+id/lbl_category"
+        android:maxLines="1"
+        android:padding="12dp"
+        android:layout_below="@+id/lbl_user"
+        android:textAllCaps="false"
+        android:hint="@string/select_category"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/textSize_12"
+        android:layout_toStartOf="@+id/btnSelected"
+        android:textColorHint="@color/colorGray"
+        android:textStyle="normal"
+        android:layout_toLeftOf="@+id/btnSelected" />
+    <Button
+        android:layout_width="wrap_content"
+        android:id="@+id/btnSelected"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/lbl_user"
+        android:layout_alignBaseline="@+id/lbl_category"
+        android:layout_margin="@dimen/margin_8"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:text=" User"
+        android:layout_alignParentRight="true" />
     <EditText
         android:id="@+id/txt_message"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_below="@+id/lbl_user"
+        android:layout_below="@+id/lbl_category"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:gravity="top|left"
         android:layout_margin="@dimen/margin_8"
+
         android:ellipsize="end"
         android:fontFamily="@font/roboto"
         android:hint="Message"

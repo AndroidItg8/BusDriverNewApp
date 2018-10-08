@@ -1,9 +1,11 @@
 package itg8.com.busdriverapp.request;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,11 +17,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +24,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 import itg8.com.busdriverapp.R;
 import itg8.com.busdriverapp.common.CommonMethod;
 import itg8.com.busdriverapp.request.model.Role;
@@ -52,7 +42,8 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static final int RC_CODE = 23;
+    private static final int RC_CODE = 231;
+    private static final int RC_CODE_ROLE = 321;
     @BindView(R.id.lbl_category)
     TextView mLblCategory;
     @BindView(R.id.lbl_user)
@@ -68,6 +59,8 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
     List<User> userList = new ArrayList<>();
     @BindView(R.id.progress)
     ProgressBar mProgress;
+    @BindView(R.id.btnSelected)
+    Button btnSelected;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -123,6 +116,7 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
         mLblUser.setOnClickListener(this);
         mBtnClear.setOnClickListener(this);
         mBtnSave.setOnClickListener(this);
+        btnSelected.setOnClickListener(this);
     }
 
     @Override
@@ -138,7 +132,7 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
                 if (userList.size() > 0) {
                     Intent intents = new Intent(getActivity(), RequestActivity.class);
                     intents.putParcelableArrayListExtra(CommonMethod.ROLE_USER, (ArrayList<? extends Parcelable>) userList);
-                    startActivity(intents);
+                    getActivity().startActivityForResult(intents, RC_CODE_ROLE);
                 }
                 break;
 
@@ -146,7 +140,7 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
                 if (roleList.size() > 0) {
                     Intent intent = new Intent(getActivity(), RequestActivity.class);
                     intent.putParcelableArrayListExtra(CommonMethod.ROLE, (ArrayList<? extends Parcelable>) roleList);
-                    startActivityForResult(intent, RC_CODE);
+                   getActivity().startActivityForResult(intent, RC_CODE);
                 }
                 break;
 
@@ -157,13 +151,48 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
             case R.id.btnClear:
                 break;
 
+                case R.id.btnSelected:
+                    if (userList.size() > 0) {
+                        Intent intents = new Intent(getActivity(), RequestActivity.class);
+                        intents.putParcelableArrayListExtra(CommonMethod.ROLE_USER, (ArrayList<? extends Parcelable>) userList);
+                        startActivity(intents);
+                    }
+                break;
+
         }
 
     }
 
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        //super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: resquestCode" + requestCode);
+
+
+        if (requestCode == RC_CODE && resultCode == Activity.RESULT_OK) {
+
+            String category = null;
+            List<User> userList = data.getParcelableArrayListExtra(CommonMethod.ROLE_USER);
+            Log.d(TAG, "onActivityResult: userList" + userList.size());
+            Log.d(TAG, "onActivityResult: userList" + new Gson().toJson(userList));
+             mLblCategory.setText("Selected User Size"+userList.size());
+             this.userList.clear();
+             this.userList.addAll(userList);
+
+        }
+
+        if (requestCode == RC_CODE_ROLE && resultCode == Activity.RESULT_OK) {
+
+            List<Role> rolesList = data.getParcelableArrayListExtra(CommonMethod.ROLE);
+            String roleName = null;
+            for (Role role : rolesList
+                    ) {
+                roleName = role.getRoleName() + " ";
+            }
+            mLblUser.setText(roleName);
+        }
 
     }
 
@@ -225,71 +254,13 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
     @Override
     public void onSuccess(List<Role> response) {
         roleList.addAll(response);
-        for (Role role :roleList){
+        for (Role role : roleList) {
             userList.addAll(role.getRoleUser());
         }
 
 
     }
 
-
-
-
-
-    private void convertObjectToModel(List<Role> response) {
-        Observable.just(response).flatMap(new Function<List<Role>, ObservableSource<List<User>>>() {
-            @Override
-            public ObservableSource<List<User>> apply(List<Role> attendanceAdmin) throws Exception {
-
-                for (Role role : attendanceAdmin) {
-
-
-                    String jsonString = new Gson().toJson(role.getUsers());
-                    Object json = new JSONTokener(jsonString).nextValue();
-
-                    if (json instanceof JSONObject) {
-                        User bus = new Gson().fromJson(json.toString(), User.class);
-                        userList.add(bus);
-
-                    } else if (json instanceof JSONArray) {
-                        List<User> bus = new Gson().fromJson(json.toString(), new TypeToken<List<User>>() {
-                        }.getType());
-                        userList.addAll(bus);
-                        Log.d(TAG, "apply: listBuses" + roleList.size());
-                    }
-                }
-
-                return Observable.just(userList);
-            }
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<User>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(List<User> roles) {
-                        userList.addAll(roles);
-
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-
-
-    }
 
     @Override
     public void onFail(String message) {
@@ -313,7 +284,7 @@ public class RequestFragment extends Fragment implements View.OnClickListener, R
 
     @Override
     public void hideProgress() {
-        mProgress.setVisibility(View.GONE);
+       mProgress.setVisibility(View.GONE);
 
     }
 

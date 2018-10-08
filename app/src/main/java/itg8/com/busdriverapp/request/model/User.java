@@ -16,27 +16,7 @@ public class User implements Parcelable
     @SerializedName("fullName")
     @Expose
     private String fullName;
-    public final static Creator<User> CREATOR = new Creator<User>() {
-
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        public User[] newArray(int size) {
-            return (new User[size]);
-        }
-
-    }
-    ;
-
-    protected User(Parcel in) {
-        this.userID = ((String) in.readValue((String.class.getClassLoader())));
-        this.fullName = ((String) in.readValue((String.class.getClassLoader())));
-    }
+    private Boolean isChecked;
 
     public User() {
     }
@@ -57,13 +37,41 @@ public class User implements Parcelable
         this.fullName = fullName;
     }
 
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(userID);
-        dest.writeValue(fullName);
+    public Boolean getChecked() {
+        return isChecked;
     }
 
+    public void setChecked(Boolean checked) {
+        isChecked = checked;
+    }
+
+    @Override
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.userID);
+        dest.writeString(this.fullName);
+        dest.writeValue(this.isChecked);
+    }
+
+    protected User(Parcel in) {
+        this.userID = in.readString();
+        this.fullName = in.readString();
+        this.isChecked = (Boolean) in.readValue(Boolean.class.getClassLoader());
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

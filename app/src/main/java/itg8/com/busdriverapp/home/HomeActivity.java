@@ -862,6 +862,18 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     }
 
+    public void setActivityListener() {
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
 
     public interface MarkerAvailableListener {
         void onAllLatlangAvail(MapLatLngAddressModel model);

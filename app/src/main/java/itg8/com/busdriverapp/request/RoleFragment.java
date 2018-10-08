@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import itg8.com.busdriverapp.R;
+import itg8.com.busdriverapp.common.CommonMethod;
 import itg8.com.busdriverapp.request.adpter.RoleAdapter;
 import itg8.com.busdriverapp.request.adpter.RoleUserAdapter;
 import itg8.com.busdriverapp.request.model.Role;
@@ -28,7 +31,8 @@ import itg8.com.busdriverapp.request.model.User;
  * Use the {@link RoleFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedListner{
+public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedListner, View.OnClickListener,
+        RoleUserAdapter.OnItemCheckedUserListner, RequestActivity.OnCheckChangedClickedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,6 +40,12 @@ public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedL
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     Unbinder unbinder;
+    @BindView(R.id.btnDone)
+    Button btnDone;
+    @BindView(R.id.btnClear)
+    Button btnClear;
+    @BindView(R.id.ll_btton)
+    LinearLayout llBtton;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -43,9 +53,9 @@ public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedL
     private List<Role> roleList;
     private List<User> userList = new ArrayList<>();
     private RoleAdapter adapter;
-    RoleClickListner listner;
+    RoleClickListner mHomeListner;
     private Context context;
-
+    private RoleUserAdapter userAdapter;
 
     public RoleFragment() {
         // Required empty public constructor
@@ -72,8 +82,10 @@ public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedL
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             roleList = getArguments().getParcelableArrayList(ARG_PARAM1);
+            userList = getArguments().getParcelableArrayList(CommonMethod.ROLE_USER);
 
         }
+
     }
 
     @Override
@@ -82,19 +94,30 @@ public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedL
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_role, container, false);
         unbinder = ButterKnife.bind(this, view);
+        init();
+        ((RequestActivity) getActivity()).setActivityListener(this);
 
-        setRecyclerView();
         return view;
+    }
+
+    private void init() {
+        btnClear.setOnClickListener(this);
+        btnDone.setOnClickListener(this);
+        if (userList != null) {
+            setRecyclerViewa(userList);
+        } else {
+            setRecyclerView(roleList);
+        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-         this.context = context;
-        listner = (RoleClickListner) context;
+        this.context = context;
+        mHomeListner = (RoleClickListner) context;
     }
 
-    private void setRecyclerView() {
+    private void setRecyclerView(List<Role> roleList) {
         if (roleList.size() > 0) {
             LinearLayoutManager manager = new LinearLayoutManager(getActivity());
             mRecyclerView.setLayoutManager(manager);
@@ -106,11 +129,12 @@ public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedL
     }
 
 
-    private void setRecyclerViewa() {
+    private void setRecyclerViewa(List<User> userList) {
         if (userList.size() > 0) {
             LinearLayoutManager manager = new LinearLayoutManager(getActivity());
             mRecyclerView.setLayoutManager(manager);
-            mRecyclerView.setAdapter(new RoleUserAdapter(getActivity(), userList));
+            userAdapter = new RoleUserAdapter(getActivity(), userList, this);
+            mRecyclerView.setAdapter(userAdapter);
         }
 
     }
@@ -122,18 +146,137 @@ public class RoleFragment extends Fragment implements RoleAdapter.OnItemClickedL
     }
 
     @Override
-    public void onItemClicked(int position, Role users) {
-        users.setChecked(true);
-//        adapter.notifyItemChanged(position);
-        roleList.set(position, users);
-        listner.onRoleClicked(position, users);
+    public void onItemClicked(int position, Role users, Boolean b) {
+        roleList.remove(position);
+        users.setChecked(b);
+        users.setRoleName(users.getRoleName());
+        users.setRoleID(users.getRoleID());
+        users.setRoleUser(users.getRoleUser());
+        roleList.add(position, users);
+        mHomeListner.onRoleClicked(position, users);
+        //        adapter.notifyItemChanged(position);
+
+
+    }
+
+    @Override
+    public void onCheckedUpdateList(List<User> userList) {
+//        for (User user : userList
+//                ) {
+//            if (user.getChecked() != null) {
+//                if (user.getChecked()) {
+//                    users.add(user);
+//                }
+//            }
+
+
+//        }
+
+//        setRecyclerView(roles);
+
+
+    }
+
+    @Override
+    public void onCheckedUpdateList(List<User> b, List<Role> userList) {
+
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == btnDone) {
+            if (userList != null) {
+                mHomeListner.onUserChecked(userList, roleList);
+            } else {
+                mHomeListner.onRoleChecked(roleList);
+            }
+        } else if (view == btnClear) {
+            if (userList != null) {
+                for (User user : userList
+                        ) {
+                    user.setChecked(false);
+
+
+                }
+                userAdapter.notifyDataSetChanged();
+            }
+            if (roleList != null) {
+                for (Role user : roleList
+                        ) {
+                    user.setChecked(false);
+
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+
+    @Override
+    public void onItemCheckedUser(int position, User users, Boolean b) {
+        if (userList != null)
+//            userList.remove(position);
+            users.setChecked(b);
+        users.setFullName(users.getFullName());
+        users.setUserID(users.getUserID());
+//        userList.add(position,users);
+
+
+        mHomeListner.onUserClicked(position, users);
+
+
+    }
+
+    @Override
+    public void onCheckBoxClickedUser(boolean b, List<User> list) {
+
+        List<User> userList = new ArrayList<>();
+        for (User user : list
+                ) {
+            user.setChecked(b);
+            user.setFullName(user.getFullName());
+            user.setUserID(user.getUserID());
+            userList.add(user);
+
+        }
+        setRecyclerViewa(userList);
+
+    }
+
+    @Override
+    public void onCheckBoxClickedRole(boolean b, List<Role> list) {
+        List<Role> roleList = new ArrayList<>();
+        List<User> userList1 = new ArrayList<>();
+        List<User> userList = null;
+        for (Role user : list
+                ) {
+            user.setChecked(b);
+            user.setRoleID(user.getRoleID());
+            user.setRoleName(user.getRoleName());
+            user.setRoleUser(user.getRoleUser());
+            userList = new ArrayList<>();
+            for (User user1 : user.getRoleUser()) {
+
+
+                user1.setChecked(b);
+                user1.setFullName(user1.getFullName());
+                user1.setUserID(user1.getUserID());
+                userList.add(user1);
+
+            }
+            userList1.addAll(userList);
+            roleList.add(user);
+        }
+
+//        this.userList.addAll(userList);
+//        this.userList= new ArrayList<>();
+//        this.userList.addAll(userList1);
+        setRecyclerViewa(userList1);
 
     }
 
 
-
-    public interface  RoleClickListner{
-        void  onRoleClicked(int position, Role role);
-    }
 }
 

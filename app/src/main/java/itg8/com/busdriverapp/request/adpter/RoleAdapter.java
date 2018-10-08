@@ -70,13 +70,13 @@ public class RoleAdapter extends RecyclerView.Adapter<RoleAdapter.RoleViewHolder
             mChkStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    listener.onItemClicked(getAdapterPosition(), roleList.get(getAdapterPosition()));
+                    listener.onItemClicked(getAdapterPosition(), roleList.get(getAdapterPosition()),isChecked);
                 }
             });
         }
     }
 
     public interface OnItemClickedListner {
-        void onItemClicked(int position, Role users);
+        void onItemClicked(int position, Role users, Boolean b);
     }
 }
